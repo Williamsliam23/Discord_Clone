@@ -13,7 +13,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by([:id])
+    # @user = User.find_by([:id])
   end
 
   def index
@@ -32,6 +32,7 @@ class Api::UsersController < ApplicationController
       render :show
     else
       render json: "That user does not seem to exist"
+    end
   end
 
   private
