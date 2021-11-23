@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   helper_method :current_user, :logged_in?
 
@@ -31,4 +31,16 @@ class ApplicationController < ActionController::Base
       render json: { base: ['invalid credentials'] }, status: 401
     end
   end
+  def require_logged_out
+    if current_user
+      render json: { base: ['invalid'] }, status: 401
+    end
+  end
+
+  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
+  def bad_token
+    flash[:warning] = "Session expired"
+    redirect_to root_path
+  end
+
 end
