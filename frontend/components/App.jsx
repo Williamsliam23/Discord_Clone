@@ -5,11 +5,13 @@ import LoginFormContainer from './session_form/login_form_container';
 import { AuthRoute } from "../util/route_util";
 import {HashRouter} from "react-router-dom"
 import Greet from "./greeting"
+import topNav from "./landing/top_nav";
 
 const App = () => (
   <div>
     <HashRouter>
-    <AuthRoute path="/" component={Greet}/>
+    <AuthRoute path="/" component={topNav}/>
+    {/* <AuthRoute path="/" component={Greet}/> */}
     <AuthRoute path="/signup" component={SignupFormContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
     </HashRouter>
