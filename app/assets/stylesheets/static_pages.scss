@@ -1,3 +1,30 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// text styles needed "Ginto Normal","Whitney","Helvetica Neue","Helvetica","Arial",sans-serif;
+* {
+  // trade off load speed for precision of text sizing
+  text-rendering: geometricPrecision;
+}
+
+body {
+  background: #fff;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.top-nav, .footer {
+  background: #5865f2;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+p {
+  font-family: "Whitney";
+}
