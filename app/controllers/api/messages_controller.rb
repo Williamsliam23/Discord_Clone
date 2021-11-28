@@ -2,7 +2,7 @@ class Api::MessagesController < ApplicationController
 
   def index
 
-    @messages = Message.allow_nil
+    @messages = Message.all
 
     render :index
 
