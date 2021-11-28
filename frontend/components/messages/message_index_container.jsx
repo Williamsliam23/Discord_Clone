@@ -11,4 +11,4 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-export default connect(mSTP, mDTP)(MessagesIndex)
+export default connect(mapDispatchToProps, mountStateToProps)(MessagesIndex)
