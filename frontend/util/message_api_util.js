@@ -18,14 +18,14 @@ export const createMessage = (message) => (
     data: {message: message}
   })
 )
-export const updateMessages = (message) => (
+export const updateMessage = (message) => (
   $.ajax({
     method: "PATCH",
     url: `api/messages/${message.id}`,
     data: {message: message}
   })
 )
-export const deleteMessages = (id) => (
+export const deleteMessage = (id) => (
   $.ajax({
     method: "DELETE",
     url: `api/messages/${id}`
