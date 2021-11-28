@@ -86,7 +86,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var _landing_greeting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./landing/greeting */ "./frontend/components/landing/greeting.jsx");
+/* harmony import */ var _greeting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./greeting */ "./frontend/components/greeting.jsx");
 /* harmony import */ var _landing_top_nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./landing/top_nav */ "./frontend/components/landing/top_nav.jsx");
 
 
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
     path: "/",
-    component: _landing_top_nav__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _greeting__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -118,10 +118,10 @@ var App = function App() {
 
 /***/ }),
 
-/***/ "./frontend/components/landing/greeting.jsx":
-/*!**************************************************!*\
-  !*** ./frontend/components/landing/greeting.jsx ***!
-  \**************************************************/
+/***/ "./frontend/components/greeting.jsx":
+/*!******************************************!*\
+  !*** ./frontend/components/greeting.jsx ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
