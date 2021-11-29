@@ -7,11 +7,11 @@ class MessageIndexItem extends React.Component {
 
   render() {
     return (
-      <>
+      <li>
         {this.props.author.username}
         <br></br>
         {this.props.message.body}
-      </>
+      </li>
     )
   }
 }
