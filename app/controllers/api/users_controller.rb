@@ -13,7 +13,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    # @user = User.find_by([:id])
+    @user = User.find_by( id: params[:id])
   end
 
   def index
@@ -25,13 +25,13 @@ class Api::UsersController < ApplicationController
     @user = current_user
 
     if !@user
-      render json: "Sign in to edit your user profile"
+      render json: ["Sign in to edit your user profile"]
     end
 
     if @user.update(user_params)
       render :show
     else
-      render json: "That user does not seem to exist"
+      render json: ["That user does not seem to exist"]
     end
   end
 
