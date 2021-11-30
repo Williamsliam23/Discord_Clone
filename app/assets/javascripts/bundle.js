@@ -38587,7 +38587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/message_api_util */ "./frontend/util/message_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -38626,7 +38626,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.login;
   window.logout = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.logout;
   window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.signup;
-  window.fetchMessages = _actions_message_actions__WEBPACK_IMPORTED_MODULE_5__.fetchMessages;
+  window.fetchMessage = _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__.fetchMessage;
+  window.createMessage = _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__.createMessage;
   react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_4__["default"], {
     store: store
   }), root);

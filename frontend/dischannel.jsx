@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { login, signup, logout } from "./util/session_api_util";
 import configureStore from "./store/store"
 import Root from "./components/root"
-import { fetchMessages } from "./actions/message_actions";
+import { createMessage, fetchMessage } from "./util/message_api_util";
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
@@ -36,7 +36,8 @@ window.getState = store.getState
   window.login = login
   window.logout = logout
   window.signup = signup
-  window.fetchMessages = fetchMessages
+  window.fetchMessage = fetchMessage
+  window.createMessage = createMessage
 
   ReactDOM.render(<Root store={store} />, root);
 });
