@@ -25,14 +25,14 @@ export const fetchMessage = id => dispatch => (
   APIUtil.fetchMessage(id).then(message => dispatch(recieveMessage(message)))
 )
 
-export const updateMessage = (message) => dispatch => (
+export const updateMessage = message => dispatch => (
   APIUtil.updateMessage(message).then(message => dispatch(updateMessage(message)))
 )
 
-export const createMessage = (message) => dispatch => (
+export const createMessage = message => dispatch => (
   APIUtil.createMessage(message).then(message => dispatch(createMessage(message)))
 )
 
-export const deleteMessage = (id) => dispatch => (
+export const deleteMessage = id => dispatch => (
   APIUtil.deleteMessage(id).then(message => dispatch(deleteMessage(message)))
 )
