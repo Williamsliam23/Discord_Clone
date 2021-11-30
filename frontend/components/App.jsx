@@ -6,6 +6,8 @@ import { AuthRoute } from "../util/route_util";
 import {HashRouter} from "react-router-dom"
 import Greet from "./greeting"
 import topNav from "./landing/top_nav";
+import Chat from "./messages/chat";
+import LandingPage from "./landing/landing_page";
 
 const App = () => (
   <div>
@@ -14,6 +16,7 @@ const App = () => (
     <AuthRoute path="/" component={Greet}/>
     <AuthRoute path="/signup" component={SignupFormContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
+    <AuthRoute path="/app" component={LandingPage} />
     </HashRouter>
     <h1>Dischannel new entry</h1>
     <input type='submit' value='logout' className='logout'></input>

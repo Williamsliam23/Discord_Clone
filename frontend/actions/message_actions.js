@@ -1,15 +1,15 @@
 import * as APIUtil from '../util/message_api_util'
 
-export const RECIEVE_MESSAGES = "RECIEVE_MESSAGES"
-export const RECIEVE_MESSAGE = "RECIEVE_MESSAGE"
+export const RECEIVE_MESSAGES = "RECEIVE_MESSAGES"
+export const RECEIVE_MESSAGE = "RECEIVE_MESSAGE"
 export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
 
-export const recieveMessages = messages => ({
-  type: RECIEVE_MESSAGES,
+export const receiveMessages = messages => ({
+  type: RECEIVE_MESSAGES,
   messages
 })
-export const recieveMessage = message => ({
-  type: RECIEVE_MESSAGE,
+export const receiveMessage = message => ({
+  type: RECEIVE_MESSAGE,
   message
 })
 export const removeMessage = messageId => ({
@@ -18,11 +18,11 @@ export const removeMessage = messageId => ({
 })
 
 export const fetchMessages = () => dispatch => (
-  APIUtil.fetchMessages().then(messages => dispatch(recieveMessages(messages)))
+  APIUtil.fetchMessages().then(messages => dispatch(receive(messages)))
 )
 
 export const fetchMessage = id => dispatch => (
-  APIUtil.fetchMessage(id).then(message => dispatch(recieveMessage(message)))
+  APIUtil.fetchMessage(id).then(message => dispatch(receiveMessage(message)))
 )
 
 export const updateMessage = message => dispatch => (

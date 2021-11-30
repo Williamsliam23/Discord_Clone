@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    processCreate: message => dispatch(updateMessage(message))
+    processUpdate: message => dispatch(updateMessage(message))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessageForm)
