@@ -5,11 +5,8 @@ class MessageForm extends React.Component {
     constructor(props) {
 
         super(props)
-        this.state = {
-            id: this.props.message ? this.props.message.id : null,
-            body: this.props.formType === "update" ? this.props.message.body : "",
-            author_id: message ? message.authorId : currentUser.id
-        }
+        let setId
+        this.state
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
