@@ -7,7 +7,7 @@ class MessageForm extends React.Component {
         super(props)
         this.state = {
             id: this.props.message ? this.props.message.id : null,
-            content: this.props.formType === "update" ? this.props.message.body : "",
+            body: this.props.formType === "update" ? this.props.message.body : "",
             author_id: message ? message.authorId : currentUser.id
         }
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,7 +30,7 @@ class MessageForm extends React.Component {
     render () {
         return(
             <form onSubmit={this.handleSubmit}>
-                <textarea onChange={} value={this.state.body}></textarea>
+                <textarea  value={this.state.body}></textarea>
                 <input type="submit" value="Submit"/>
             </form>
         )
