@@ -33,15 +33,15 @@ class MessageForm extends React.Component {
 
     handleSubmit(e) {
       e.preventDefault()
-      this.props.submitForm(this.state)
+      this.props.processCreate(this.state)
       
       if (this.props.formType === 'create') {
-          this.setState({
-              body: "",
-              author_id: this.props.currentUser.id
-          })
+        this.setState({
+          body: "",
+          author_id: this.props.currentUser.id
+        })
       } else {
-          this.props.processUpdate()
+        this.props.processUpdate()
       }
     }
 

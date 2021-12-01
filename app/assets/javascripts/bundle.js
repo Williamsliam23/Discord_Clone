@@ -444,7 +444,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.submitForm(this.state);
+      this.props.processCreate(this.state);
 
       if (this.props.formType === 'create') {
         this.setState({
