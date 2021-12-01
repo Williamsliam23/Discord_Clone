@@ -3,8 +3,8 @@ import { receiveMessages } from "../../actions/message_actions";
 import Chat from "../messages/chat";
 
 class LandingPage extends React.Component {
-  constructor() {
-
+  constructor(props) {
+    super(props)
   }
   render() {
     console.log("does it render")
@@ -12,7 +12,6 @@ class LandingPage extends React.Component {
       <div>
 
         <Chat />
-        {receiveMessages()}
       </div>
     )
   }

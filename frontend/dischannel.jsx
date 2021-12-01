@@ -30,7 +30,7 @@ if (window.currentUser) {
   store = configureStore();
 }
 
-//testing state and actions
+//testing state and actions/util
 window.getState = store.getState
   window.dispatch = store.dispatch
   window.login = login

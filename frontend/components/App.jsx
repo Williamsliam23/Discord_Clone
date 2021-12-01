@@ -11,13 +11,12 @@ import LandingPage from "./landing/landing_page";
 
 const App = () => (
   <div>
-    <HashRouter>
-    {/* <AuthRoute path="/" component={topNav}/> */}
+  
     <AuthRoute path="/" component={Greet}/>
     <AuthRoute path="/signup" component={SignupFormContainer} />
     <AuthRoute path="/login" component={LoginFormContainer} />
-    <AuthRoute path="/app" component={LandingPage} />
-    </HashRouter>
+    <Route path="/app" component={LandingPage} />
+    
     <h1>Dischannel new entry</h1>
     <input type='submit' value='logout' className='logout'></input>
   </div>

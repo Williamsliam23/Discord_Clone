@@ -12,9 +12,9 @@ class SessionForm extends React.Component {
   }
 
   render () {
-    let allowEmail = <label>Email:
-    <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
-  </label>
+  //   let allowEmail = <label>Email:
+  //   <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
+  // </label>
     return (
       <div className='login-form-container'>
         <form onSubmit={this.handleSubmit} className='login-form-box'>
@@ -27,9 +27,9 @@ class SessionForm extends React.Component {
             <label>Username:
               <input type='text' value={this.state.username} onChange={this.update('username')} className='login-username'></input>
             </label>
-            {/* {if (this.props.formType === 'login'){
-              allowEmail
-            }} */}
+            <label>Email:
+              <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
+             </label>
             <br/>
             <label>Password:
               <input type='password' value={this.state.password} onChange={this.update('password')} className='login-password'></input>

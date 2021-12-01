@@ -19,7 +19,7 @@ class MessageForm extends React.Component {
         if (this.props.message) {
           setAuthor = this.props.message.authorId;
         } else {
-          setAuthor = this.props.currentUser.id;
+          setAuthor = this.props.currentUser;
         }
         this.state = {
             id: setId,
@@ -27,6 +27,8 @@ class MessageForm extends React.Component {
             authorId: setAuthor
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+        this.updateMessage = this.updateMessage.bind(this)
+
     }
 
     handleSubmit(e) {
@@ -43,10 +45,14 @@ class MessageForm extends React.Component {
       }
     }
 
+    updateMessage(e) {
+      this.setState({ body: e.currentTarget.value })
+    }
+
     render () {
       return(
         <form onSubmit={this.handleSubmit}>
-            <textarea  value={this.state.body}></textarea>
+            <textarea onChange={this.updateMessage} value={this.state.body}></textarea>
             <input type="submit" value="Submit"/>
         </form>
       )  

@@ -164,10 +164,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./session_form/signup_form_container */ "./frontend/components/session_form/signup_form_container.jsx");
 /* harmony import */ var _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./session_form/login_form_container */ "./frontend/components/session_form/login_form_container.jsx");
 /* harmony import */ var _util_route_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../util/route_util */ "./frontend/util/route_util.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _greeting__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./greeting */ "./frontend/components/greeting.jsx");
 /* harmony import */ var _landing_top_nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./landing/top_nav */ "./frontend/components/landing/top_nav.jsx");
 /* harmony import */ var _messages_chat__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./messages/chat */ "./frontend/components/messages/chat.jsx");
@@ -184,7 +184,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var App = function App() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.HashRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
     path: "/",
     component: _greeting__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
@@ -193,10 +193,10 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router__WEBPACK_IMPORTED_MODULE_8__.Route, {
     path: "/app",
     component: _landing_landing_page__WEBPACK_IMPORTED_MODULE_7__["default"]
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Dischannel new entry"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Dischannel new entry"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
     type: "submit",
     value: "logout",
     className: "logout"
@@ -276,19 +276,17 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(LandingPage);
 
-  function LandingPage() {
-    var _this;
-
+  function LandingPage(props) {
     _classCallCheck(this, LandingPage);
 
-    return _possibleConstructorReturn(_this);
+    return _super.call(this, props);
   }
 
   _createClass(LandingPage, [{
     key: "render",
     value: function render() {
       console.log("does it render");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null), (0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.receiveMessages)());
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -356,8 +354,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Chat = function Chat() {
-  /*#__PURE__*/
-  react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "dischat"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_form__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
@@ -430,7 +427,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     if (_this.props.message) {
       setAuthor = _this.props.message.authorId;
     } else {
-      setAuthor = _this.props.currentUser.id;
+      setAuthor = _this.props.currentUser;
     }
 
     _this.state = {
@@ -439,6 +436,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       authorId: setAuthor
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -458,11 +456,19 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
+    key: "updateMessage",
+    value: function updateMessage(e) {
+      this.setState({
+        body: e.currentTarget.value
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        onChange: this.updateMessage,
         value: this.state.body
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
@@ -491,21 +497,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
-var _this = undefined;
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
 
-var MessageIndex = function MessageIndex() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-    className: "message-list"
-  }, _this.props.messages.map(function (message) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
-      key: message.id,
-      message: message
-    });
-  })));
-};
+var MessageIndex = /*#__PURE__*/function (_React$Component) {
+  _inherits(MessageIndex, _React$Component);
+
+  var _super = _createSuper(MessageIndex);
+
+  function MessageIndex(props) {
+    _classCallCheck(this, MessageIndex);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(MessageIndex, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "message-list"
+      }, this.props.messages.map(function (message) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: message.id,
+          message: message
+        });
+      })));
+    }
+  }]);
+
+  return MessageIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageIndex);
 
@@ -531,7 +574,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    messages: state.entities.messages,
+    messages: Object.values(state.entities.messages),
     currentUser: state.entities.users
   };
 };
@@ -547,7 +590,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapDispatchToProps, mapStateToProps)(_message_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_message_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -749,12 +792,9 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   _createClass(SessionForm, [{
     key: "render",
     value: function render() {
-      var allowEmail = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        value: this.state.email,
-        onChange: this.update('email'),
-        className: "login-email"
-      }));
+      //   let allowEmail = <label>Email:
+      //   <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
+      // </label>
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-form-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -767,6 +807,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
         value: this.state.username,
         onChange: this.update('username'),
         className: "login-username"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Email:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        value: this.state.email,
+        onChange: this.update('email'),
+        className: "login-email"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Password:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "password",
         value: this.state.password,
@@ -38618,7 +38663,7 @@ document.addEventListener("DOMContentLoaded", function () {
     delete window.currentUser;
   } else {
     store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
-  } //testing state and actions
+  } //testing state and actions/util
 
 
   window.getState = store.getState;
