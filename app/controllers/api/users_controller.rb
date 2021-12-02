@@ -34,6 +34,17 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  # def destroy
+  #   @user = current_user
+  #   debugger
+  #   if @user
+  #     logout
+  #     render "api/users/show"
+  #   else
+  #     render json: ["You are not signed in currently!"], status: 404
+  #   end
+  # end
+
   private
 
   def user_params

@@ -4,7 +4,7 @@ import ChannelList from "../channels/channel_list";
 import Chat from "../messages/chat";
 import ServerList from "../servers/server_list";
 import UserList from "../users/users_list";
-import TopNav from "./top_nav";
+import TopNav from "./top_nav_container";
 
 class LandingPage extends React.Component {
   constructor(props) {
