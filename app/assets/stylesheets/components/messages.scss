@@ -1,25 +1,27 @@
 // Place all the styles related to the Messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-* {
-  border-style: solid;
-  border-color: pink;
-  border-width: 3px;
-}
+// * {
+//   border-style: solid;
+//   border-color: pink;
+//   border-width: 3px;
+// }
 
 .chat-wrap {
-  background: blue;
+  background: #424549;
   // position: absolute;
   display: flex;
   justify-self: flex-end;
   justify-content: flex-end;
   bottom: 0;
-  height: 80%;
+  height: 80vh;
+  color: white;
+  overflow: scroll;
 }
 .dischat {
   display: flex;
   width: 100%;
-
+  flex-direction: column;
   // resize: none;
 }
 
@@ -28,4 +30,5 @@
   height: 5em;
   width: 35em;
   resize: none;
+  position: relative;
 }
