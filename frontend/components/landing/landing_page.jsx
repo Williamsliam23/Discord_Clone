@@ -11,8 +11,12 @@ class LandingPage extends React.Component {
     return (
       <div>
         <input type='submit' value='logout' className='logout'></input>
-
+        <div className='side-bar'>
+          <div className='server-wrap'></div>
+          <div className='channel-wrap'></div>
+        </div>
         <Chat />
+        <div className='user-holder'></div>
       </div>
     )
   }

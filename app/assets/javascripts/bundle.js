@@ -288,7 +288,15 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
         type: "submit",
         value: "logout",
         className: "logout"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "side-bar"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "server-wrap"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "channel-wrap"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "user-holder"
+      }));
     }
   }]);
 
