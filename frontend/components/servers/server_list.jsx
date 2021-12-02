@@ -9,7 +9,18 @@ class ServerList extends React.Component {
     return (
       
       <div className='server-wrap'>
-        <h3><a>Main</a></h3>
+        <h3>Servers</h3>
+        <ul>
+          <li>
+            Main
+          </li>
+          <li>
+            Second
+          </li>
+          <li>
+            Create Server
+          </li>
+        </ul>
       </div>
         
     )

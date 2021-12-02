@@ -14,16 +14,45 @@
   flex-grow: 2;
 }
 
-li {
-  margin-right: 10px;
+.top-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.top-nav > ul {
+  display: flex;
+}
+.top-nav > ul > li {
+  padding-left: 5vw;
+}
+
+.logout {
+  position: absolute;
+  right: 0;
+}
+
+.landing {
+  display: flex;
 }
 
 .side-bar {
   display: flex;
+  flex-grow: 1;
 }
 .server-wrap {
+  background: #1e2124;
   display: flex;
+  flex-direction: column;
 }
 .channel-wrap {
+  background: #282b30;
   display: flex;
+  flex-direction: column;
+}
+
+.user-wrap {
+  background: #1e2124;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

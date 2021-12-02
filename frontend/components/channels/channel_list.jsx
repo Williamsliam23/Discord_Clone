@@ -9,7 +9,15 @@ class ChannelList extends React.Component {
     return (
       
       <div className='channel-wrap'>
-        <h3><a>Channel 1</a></h3>
+        <h3>Channels</h3>
+        <ul>
+          <li>
+            Channel 1
+          </li>
+          <li>
+            + Add a new channel
+          </li>
+        </ul>
       </div>
         
     )

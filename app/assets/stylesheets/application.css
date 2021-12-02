@@ -26,3 +26,16 @@
    width: 100%;
    height: 100%;
  }
+
+ * {
+   color: white;
+ }
+
+ input[type=submit] {
+   background-color: #36393e;
+   cursor: auto;
+ }
+
+ button {
+  background-color: #36393e;
+ }

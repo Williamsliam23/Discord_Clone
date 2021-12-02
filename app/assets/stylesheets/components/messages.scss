@@ -8,7 +8,7 @@
 // }
 
 .chat-wrap {
-  background: #424549;
+  background: #36393e;
   // position: absolute;
   display: flex;
   justify-self: flex-end;
@@ -17,6 +17,7 @@
   height: 80vh;
   color: white;
   overflow: scroll;
+  flex-grow: 4;
 }
 .dischat {
   display: flex;
@@ -26,6 +27,7 @@
 }
 
 .box {
+  background: #424549;
   outline: none;
   height: 5em;
   width: 35em;

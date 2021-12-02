@@ -42,6 +42,7 @@ class MessageForm extends React.Component {
       
     }
   }
+  
   updateMessage(e) {
     this.setState({ body: e.currentTarget.value })
   }
