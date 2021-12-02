@@ -48,7 +48,7 @@ var removeMessage = function removeMessage(messageId) {
 var fetchMessages = function fetchMessages() {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessages().then(function (messages) {
-      return dispatch(receive(messages));
+      return dispatch(receiveMessages(messages));
     });
   };
 };
@@ -62,21 +62,21 @@ var fetchMessage = function fetchMessage(id) {
 var updateMessage = function updateMessage(message) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.updateMessage(message).then(function (message) {
-      return dispatch(updateMessage(message));
+      return dispatch(receiveMessage(message));
     });
   };
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(message).then(function (message) {
-      return dispatch(createMessage(message));
+      return dispatch(receiveMessage(message));
     });
   };
 };
 var deleteMessage = function deleteMessage(id) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(id).then(function (message) {
-      return dispatch(deleteMessage(message));
+      return dispatch(receiveMessage(message));
     });
   };
 };
@@ -136,7 +136,8 @@ var signup = function signup(user) {
 var login = function login(user) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(user).then(function (user) {
-      return dispatch(receiveCurrentUser(user));
+      debugger;
+      dispatch(receiveCurrentUser(user));
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
@@ -196,10 +197,6 @@ var App = function App() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router__WEBPACK_IMPORTED_MODULE_8__.Route, {
     path: "/app",
     component: _landing_landing_page__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Dischannel new entry"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-    type: "submit",
-    value: "logout",
-    className: "logout"
   }));
 };
 
@@ -224,7 +221,9 @@ __webpack_require__.r(__webpack_exports__);
 var Greet = function Greet() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "greet"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to Dischannel"));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Welcome to Dischannel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+    className: "entry-options"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Login"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Sign Up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "Github"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "LinkedIn")));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Greet);
@@ -286,7 +285,11 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       console.log("does it render");
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "submit",
+        value: "logout",
+        className: "logout"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -348,18 +351,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_container */ "./frontend/components/messages/message_index_container.jsx");
-/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
+/* harmony import */ var _create_message_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create_message_container */ "./frontend/components/messages/create_message_container.jsx");
 
 
 
 
 var Chat = function Chat() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "chat-wrap"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "dischat"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_form__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_container__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Chat);
+
+/***/ }),
+
+/***/ "./frontend/components/messages/create_message_container.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/messages/create_message_container.jsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.id,
+    formType: "create"
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    processCreate: function processCreate(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.createMessage)(message));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_message_form__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -444,16 +486,15 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.processCreate(this.state);
+      var message = Object.assign({}, this.state);
+      this.props.processCreate(message);
 
       if (this.props.formType === 'create') {
         this.setState({
           body: "",
-          author_id: this.props.currentUser.id
+          author_id: this.props.currentUser
         });
-      } else {
-        this.props.processUpdate();
-      }
+      } else {}
     }
   }, {
     key: "updateMessage",
@@ -468,8 +509,12 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
+        className: "box",
+        type: "text",
         onChange: this.updateMessage,
-        value: this.state.body
+        value: this.state.body,
+        maxLength: "500",
+        placeholder: "Get to chatting!"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: "Submit"
@@ -534,6 +579,11 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchMessages();
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -567,7 +617,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+
 
 
 
@@ -586,11 +638,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     processCreate: function processCreate(message) {
       return dispatch(createMessage(message));
+    },
+    fetchMessages: function fetchMessages() {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchMessages)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_message_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_message_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -636,15 +691,24 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageIndexItem);
 
   function MessageIndexItem(props) {
+    var _this;
+
     _classCallCheck(this, MessageIndexItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(MessageIndexItem, [{
+    key: "deleteMessage",
+    value: function deleteMessage() {
+      this.props.deleteMessage(this.props.message.id);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, this.props.author.username, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.message.body);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, this.props.message.authorId, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.message.body);
     }
   }]);
 

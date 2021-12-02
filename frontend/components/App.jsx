@@ -17,8 +17,6 @@ const App = () => (
     <AuthRoute path="/login" component={LoginFormContainer} />
     <Route path="/app" component={LandingPage} />
     
-    <h1>Dischannel new entry</h1>
-    <input type='submit' value='logout' className='logout'></input>
   </div>
 
 )

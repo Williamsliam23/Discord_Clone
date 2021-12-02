@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // window.login = login
   // window.logout = logout
   // window.signup = signup
-
+  
 if (window.currentUser) {
   const preloadedState = {
     entities: {

@@ -18,7 +18,7 @@ export const removeMessage = messageId => ({
 })
 
 export const fetchMessages = () => dispatch => (
-  APIUtil.fetchMessages().then(messages => dispatch(receive(messages)))
+  APIUtil.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
 )
 
 export const fetchMessage = id => dispatch => (
@@ -26,13 +26,13 @@ export const fetchMessage = id => dispatch => (
 )
 
 export const updateMessage = message => dispatch => (
-  APIUtil.updateMessage(message).then(message => dispatch(updateMessage(message)))
+  APIUtil.updateMessage(message).then(message => dispatch(receiveMessage(message)))
 )
 
 export const createMessage = message => dispatch => (
-  APIUtil.createMessage(message).then(message => dispatch(createMessage(message)))
+  APIUtil.createMessage(message).then(message => dispatch(receiveMessage(message)))
 )
 
 export const deleteMessage = id => dispatch => (
-  APIUtil.deleteMessage(id).then(message => dispatch(deleteMessage(message)))
+  APIUtil.deleteMessage(id).then(message => dispatch(receiveMessage(message)))
 )

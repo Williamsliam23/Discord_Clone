@@ -4,7 +4,7 @@ import MessageForm from "./message_form"
 
 
 const mapStateToProps = state => ({
-    currentUser: state.session.currentUser,
+    currentUser: state.session.id,
     formType: "update"
 })
 

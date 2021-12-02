@@ -1,0 +1,20 @@
+.greet {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.entry-options {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  // width: 500px;
+  flex-grow: 1;
+}
+
+.greet h1 {
+  flex-grow: 2;
+}
+
+li {
+  margin-right: 10px;
+}

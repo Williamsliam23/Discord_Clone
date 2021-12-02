@@ -21,7 +21,7 @@ class Api::MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-
+    
     if @message.save
       render :show
     else

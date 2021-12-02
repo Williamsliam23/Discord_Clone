@@ -1,11 +1,13 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :null_session
+  # protect_from_forgery with: :null_session
 
   helper_method :current_user, :logged_in?
+  before_action :snake_case_params
 
-  private
+  # private
 
   def current_user
+    
     return nil unless session[:session_token]
     @current_user ||= User.find_by(session_token: session[:session_token])
   end
@@ -37,10 +39,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  rescue_from ActionController::InvalidAuthenticityToken, :with => :bad_token
-  def bad_token
-    flash[:warning] = "Session expired"
-    redirect_to root_path
+  def snake_case_params
+    request.parameters.deep_transform_keys!(&:underscore)
   end
 
 end

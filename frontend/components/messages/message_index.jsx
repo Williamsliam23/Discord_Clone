@@ -6,6 +6,10 @@ class MessageIndex extends React.Component {
     super(props)
   }
 
+  componentDidMount() {
+    this.props.fetchMessages()
+  }
+
   render () {
     return(
       <div>

@@ -10,6 +10,7 @@ class LandingPage extends React.Component {
     console.log("does it render")
     return (
       <div>
+        <input type='submit' value='logout' className='logout'></input>
 
         <Chat />
       </div>

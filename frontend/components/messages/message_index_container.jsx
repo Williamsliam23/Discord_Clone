@@ -1,16 +1,18 @@
 import React from "react"
 import { connect } from "react-redux"
+import { fetchMessages } from "../../actions/message_actions";
 import MessagesIndex from "./message_index"
 
 const mapStateToProps = state => ({
-    messages: Object.values(state.entities.messages),
-    currentUser: state.entities.users
+  messages: Object.values(state.entities.messages),
+  currentUser: state.entities.users
 
 })
 
 const mapDispatchToProps = dispatch => ({
   processUpdate: message => dispatch(updateMessage(message)),
-  processCreate: message => dispatch(createMessage(message))
+  processCreate: message => dispatch(createMessage(message)),
+  fetchMessages: () => dispatch(fetchMessages())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(MessagesIndex)
