@@ -11,10 +11,59 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  loginOrSignup() {
+    if (this.props.formType === 'Sign up') {
+      return (
+        <div className='login-form'>
+            <label className='log-label'><h4>Username:</h4>
+              <input type='text' value={this.state.username} onChange={this.update('username')} className='login-field'></input>
+            </label>
+            <br />
+            <br />
+            <label className='log-label'><h4>Email:</h4>
+              <input type='text' value={this.state.email} onChange={this.update('email')} className='login-field'></input>
+             </label>
+            <br/>
+            <br/>
+            <label className='log-label'><h4>Password:</h4>
+              <input type='password' value={this.state.password} onChange={this.update('password')} className='login-field'></input>
+            </label>
+            <br />
+            <br />
+            <input className="session-start" type="submit" value={this.props.formType} />
+            <br />
+            <br />
+            <span>Already have an account?</span>
+            <br />
+            {this.props.navLink}
+          </div>
+      )
+    } else if (this.props.formType === 'Login'){
+      return(
+        <div className='login-form'>
+            <label className='log-label'><h4>Username:</h4>
+              <input type='text' value={this.state.username} onChange={this.update('username')} className='login-field'></input>
+            </label>
+            <br />
+            <br />
+            
+            <label className='log-label'><h4>Password:</h4>
+              <input type='password' value={this.state.password} onChange={this.update('password')} className='login-field'></input>
+            </label>
+            <br />
+            <br />
+            <input className="session-start" type="submit" value={this.props.formType} />
+            <br />
+            <br />
+            <span>Don't have an account?</span>
+            <br />
+            {this.props.navLink}
+          </div>
+      )
+    }
+  }
+
   render () {
-  //   let allowEmail = <label>Email:
-  //   <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
-  // </label>
     return (
       <div className='sign-wrapper'>
       <div className='login-form-container'>
@@ -25,7 +74,8 @@ class SessionForm extends React.Component {
           <br/>
           
           {this.renderErrors()}
-          <div className='login-form'>
+          {this.loginOrSignup()}
+          {/* <div className='login-form'>
             <label className='log-label'><h4>Username:</h4>
               <input type='text' value={this.state.username} onChange={this.update('username')} className='login-field'></input>
             </label>
@@ -47,7 +97,7 @@ class SessionForm extends React.Component {
             <span>Don't have an account?</span>
             <br />
             {this.props.navLink}
-          </div>
+          </div> */}
         </form>
 
       </div>
