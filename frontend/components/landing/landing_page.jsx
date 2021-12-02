@@ -7,7 +7,7 @@ class LandingPage extends React.Component {
     super(props)
   }
   render() {
-    console.log("does it render")
+
     return (
       <div>
         <input type='submit' value='logout' className='logout'></input>

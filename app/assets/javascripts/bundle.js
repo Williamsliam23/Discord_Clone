@@ -284,7 +284,6 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
   _createClass(LandingPage, [{
     key: "render",
     value: function render() {
-      console.log("does it render");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "submit",
         value: "logout",
@@ -864,7 +863,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         onSubmit: this.handleSubmit,
         className: "login-form-box"
-      }, this.props.formType, console.log(this.props.formType), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.navLink, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, this.props.formType, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.navLink, this.renderErrors(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "login-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Username:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
