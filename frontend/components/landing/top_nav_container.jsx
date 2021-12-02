@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  logout: () => dispatch(logout())
+  logout
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopNav)
+export default connect(null, mapDispatchToProps)(TopNav)

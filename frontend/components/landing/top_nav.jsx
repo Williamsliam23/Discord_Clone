@@ -4,13 +4,8 @@ import { logout } from "../../util/session_api_util";
 class TopNav extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit(e){
-    e.preventDefault()
-    this.props.logout()
-  }
 
   render() {
 
@@ -18,10 +13,11 @@ class TopNav extends React.Component {
       
       <div className='top-nav'>
         <ul className="link-navigation">
-          <li className="link-item"><a>GitHub</a></li>
-          <li className="link-item"><a>LinkedIn</a></li>
-          <li className="link-item"><button onClick={this.handleSubmit} className='logout'
-          >Logout</button></li>
+          <li className="link-item">GitHub</li>
+          <li className="link-item">LinkedIn</li>
+          <li className="link-item"></li>
+          <button onClick={this.props.logout} className='logout'
+          >Logout</button>
         </ul>
       </div>
         
