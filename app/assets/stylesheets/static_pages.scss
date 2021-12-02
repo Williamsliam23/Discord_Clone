@@ -6,6 +6,7 @@
 * {
   // trade off load speed for precision of text sizing
   text-rendering: geometricPrecision;
+  border-radius: 5px;
 }
 
 body {
@@ -27,4 +28,58 @@ h3 {
 
 p {
   font-family: "Whitney";
+}
+
+.sign-wrapper {
+  background: #7289da;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-container {
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form-container > * {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-box {
+  background: #36393e;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  height: 40vh;
+}
+
+.login-form {
+  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.log-label {
+  justify-content: center;
+  align-items: center;
+}
+
+.login-field {
+  margin-top: 10px;
+  background: 	#282b30;
+  border-style: none;
+  border-radius: 5px;
+}
+.session-start {
+  background:	#6b83d8;
+  border-style: solid;
+  border-radius: 5px;
+  box-shadow: none;
+  outline: none;
 }

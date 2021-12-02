@@ -28,9 +28,8 @@ export const signup = user => dispatch => (
 
 export const login = user => dispatch => (
   APIUtil.login(user)
-  .then(user =>{
-    debugger 
-    (dispatch(receiveCurrentUser(user)))},
+  .then(user =>
+    (dispatch(receiveCurrentUser(user))),
   
   err => (dispatch(receiveErrors(err.responseJSON))))
 );

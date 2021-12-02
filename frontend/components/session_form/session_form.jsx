@@ -16,27 +16,41 @@ class SessionForm extends React.Component {
   //   <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
   // </label>
     return (
+      <div className='sign-wrapper'>
       <div className='login-form-container'>
         <form onSubmit={this.handleSubmit} className='login-form-box'>
           {this.props.formType}
           <br/>
-          {this.props.navLink}
+          <br/>
+          <br/>
+          
           {this.renderErrors()}
           <div className='login-form'>
-            <label>Username:
-              <input type='text' value={this.state.username} onChange={this.update('username')} className='login-username'></input>
+            <label className='log-label'><h4>Username:</h4>
+              <input type='text' value={this.state.username} onChange={this.update('username')} className='login-field'></input>
             </label>
-            <label>Email:
-              <input type='text' value={this.state.email} onChange={this.update('email')} className='login-email'></input>
+            <br />
+            <br />
+            <label className='log-label'><h4>Email:</h4>
+              <input type='text' value={this.state.email} onChange={this.update('email')} className='login-field'></input>
              </label>
             <br/>
-            <label>Password:
-              <input type='password' value={this.state.password} onChange={this.update('password')} className='login-password'></input>
+            <br/>
+            <label className='log-label'><h4>Password:</h4>
+              <input type='password' value={this.state.password} onChange={this.update('password')} className='login-field'></input>
             </label>
+            <br />
+            <br />
             <input className="session-start" type="submit" value={this.props.formType} />
+            <br />
+            <br />
+            <span>Don't have an account?</span>
+            <br />
+            {this.props.navLink}
           </div>
         </form>
 
+      </div>
       </div>
     )
 

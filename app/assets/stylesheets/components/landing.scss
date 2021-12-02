@@ -31,28 +31,50 @@
   right: 0;
 }
 
-.landing {
+.title {
   display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.title > h1 {
+  flex-grow: 2;
+  margin-left: 40%;
+}
+
+.landing {
+  background: #282b30;
+  display: flex;
+  padding-left: 1%;
 }
 
 .side-bar {
+  background: #282b30;
   display: flex;
   flex-grow: 1;
 }
 .server-wrap {
-  background: #1e2124;
-  display: flex;
-  flex-direction: column;
-}
-.channel-wrap {
   background: #282b30;
   display: flex;
   flex-direction: column;
+  flex-grow: 2;
+}
+.channel-wrap {
+  background: #36393e;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  margin-top: 10%;
+  padding-left: 1%;
+  padding-top: 1%;
 }
 
 .user-wrap {
-  background: #1e2124;
+  background: #36393e;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  margin-top: 2.5%;
+  padding-left: 1%;
+  padding-top: 1%;
 }
