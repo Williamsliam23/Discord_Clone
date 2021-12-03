@@ -1,8 +1,13 @@
 .greet {
-  background-image: url(../../images/Dishome.jpeg);
+  background-image: url(Dishome.jpeg);
+  height: 100vh;
+  width: 98vw;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .entry-options {
   display: flex;
