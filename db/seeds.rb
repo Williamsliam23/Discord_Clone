@@ -6,6 +6,26 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-test = User.create([username: "TestUser", email: "testemail@noweb.com", password: "Password1"])
+User.create([username: "TestUser", email: "testemail@noweb.com", password: "Password1"]) #2
+User.create([username: "Priam", email: "testemail1@noweb.com", password: "Password1"]) #7
+User.create([username: "Achilles", email: "testemail2@noweb.com", password: "Password1"]) #8
+User.create([username: "Hector", email: "testemail3@noweb.com", password: "Password1"]) #9
+User.create([username: "Paris", email: "testemail4@noweb.com", password: "Password1"]) # 10
+User.create([username: "Agamemnon", email: "testemail5@noweb.com", password: "Password1"]) # 11
 
-first_message = Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])
+Message.create([author_id: 2, body: "This is a test message for the application"])

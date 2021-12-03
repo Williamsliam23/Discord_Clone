@@ -15,7 +15,7 @@ class ServerList extends React.Component {
             Main
           </li>
           <li>
-            Second
+            Aegean Sea
           </li>
           <li>
             Create Server

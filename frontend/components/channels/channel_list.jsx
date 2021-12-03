@@ -12,7 +12,7 @@ class ChannelList extends React.Component {
         <h3>Channels</h3>
         <ul>
           <li>
-            Channel 1
+            Troy
           </li>
           <li>
             + Add a new channel
