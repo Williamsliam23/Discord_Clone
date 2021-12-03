@@ -16,9 +16,11 @@ class MessageIndexItem extends React.Component {
   render() {
     return (
       <li>
-        {this.props.message.authorId}
         <br />
+        {this.props.message.author_id} :  
+        &nbsp;&nbsp;&nbsp;&nbsp;
         {this.props.message.body}
+        <br />
       </li>
     )
   }
