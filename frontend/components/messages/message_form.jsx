@@ -48,7 +48,7 @@ class MessageForm extends React.Component {
   }
   render () {
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form className='position-chat' onSubmit={this.handleSubmit}>
           <textarea className='box' type='text' onChange={this.updateMessage} value={this.state.body} maxLength="500"
           placeholder='Get to chatting!'></textarea>
           <input type="submit" value="Submit"/>

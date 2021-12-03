@@ -32,5 +32,15 @@
   height: 5em;
   width: 35em;
   resize: none;
+  overflow: auto;
   position: relative;
+}
+
+.position-chat {
+  z-index: 1;
+  position: absolute;
+  bottom: 2vh;
+}
+.box::-webkit-scrollbar {
+  display: none;
 }
