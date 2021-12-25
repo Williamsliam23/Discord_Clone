@@ -1,10 +1,10 @@
 class Server < ApplicationRecord
 
-  validates :author_id, :title, presence: true
+  validates :creator_id, :title, presence: true
 
-  belongs_to :author,
+  belongs_to :creator,
     primary_key: :id,
-    foreign_key: :author_id,
+    foreign_key: :creator_id,
     class_name: :User
 
 end
