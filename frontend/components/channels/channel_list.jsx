@@ -12,10 +12,10 @@ class ChannelList extends React.Component {
         <h3>Channels</h3>
         <ul>
           <li>
-            Troy
+            Troy {/* embed channel title */ }
           </li>
           <li>
-            + Add a new channel
+            + Add a new channel {/* modal for new channel */}
           </li>
         </ul>
       </div>

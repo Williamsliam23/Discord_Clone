@@ -12,13 +12,13 @@ class ServerList extends React.Component {
         <h3>Servers</h3>
         <ul>
           <li>
-            Main
+            Main {/* li's for each server the user is associated with */}
           </li>
           <li>
             Aegean Sea
           </li>
           <li>
-            Create Server
+            Create Server {/* modal for server creation */}
           </li>
         </ul>
       </div>
