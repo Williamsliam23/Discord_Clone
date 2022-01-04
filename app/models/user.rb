@@ -11,6 +11,11 @@ class User < ApplicationRecord
     dependent: :destroy,
     class_name: :Message
 
+  has_many :channels,
+    foreign_key: :author_id,
+    dependent: :destroy,
+    class_name: :Channel
+
   after_initialize :ensure_session_token
 
 

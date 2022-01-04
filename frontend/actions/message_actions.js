@@ -34,5 +34,5 @@ export const createMessage = message => dispatch => (
 )
 
 export const deleteMessage = id => dispatch => (
-  APIUtil.deleteMessage(id).then(message => dispatch(receiveMessage(message)))
+  APIUtil.deleteMessage(id).then(id => dispatch(removeMessage(id)))
 )
