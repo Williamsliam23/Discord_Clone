@@ -1,6 +1,88 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./frontend/actions/channel_actions.js":
+/*!*********************************************!*\
+  !*** ./frontend/actions/channel_actions.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RECEIVE_CHANNELS": () => (/* binding */ RECEIVE_CHANNELS),
+/* harmony export */   "RECEIVE_CHANNEL": () => (/* binding */ RECEIVE_CHANNEL),
+/* harmony export */   "REMOVE_CHANNEL": () => (/* binding */ REMOVE_CHANNEL),
+/* harmony export */   "receiveChannels": () => (/* binding */ receiveChannels),
+/* harmony export */   "receiveChannel": () => (/* binding */ receiveChannel),
+/* harmony export */   "removeChannels": () => (/* binding */ removeChannels),
+/* harmony export */   "fetchChannels": () => (/* binding */ fetchChannels),
+/* harmony export */   "fetchChannel": () => (/* binding */ fetchChannel),
+/* harmony export */   "createChannel": () => (/* binding */ createChannel),
+/* harmony export */   "updateChannel": () => (/* binding */ updateChannel),
+/* harmony export */   "deleteChannel": () => (/* binding */ deleteChannel)
+/* harmony export */ });
+/* harmony import */ var _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/channel_api_util */ "./frontend/util/channel_api_util.js");
+
+var RECEIVE_CHANNELS = "RECEIVE_CHANNELS";
+var RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
+var REMOVE_CHANNEL = "REMOVE_CHANNEL";
+var receiveChannels = function receiveChannels(channels) {
+  return {
+    type: RECEIVE_CHANNELS,
+    channels: channels
+  };
+};
+var receiveChannel = function receiveChannel(channel) {
+  return {
+    type: RECEIVE_CHANNEL,
+    channel: channel
+  };
+};
+var removeChannels = function removeChannels(channelId) {
+  return {
+    type: REMOVE_CHANNEL,
+    channelId: channelId
+  };
+};
+var fetchChannels = function fetchChannels() {
+  return function (dispatch) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchChannels().then(function (channels) {
+      return dispatch(receiveChannels(channels));
+    });
+  };
+};
+var fetchChannel = function fetchChannel(id) {
+  return function (dispatch) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchChannel(id).then(function (channel) {
+      return dispatch(receiveChannel(channel));
+    });
+  };
+};
+var createChannel = function createChannel(channel) {
+  return function (dispatch) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannel(channel).then(function (channel) {
+      return dispatch(receiveChannel(channel));
+    });
+  };
+};
+var updateChannel = function updateChannel(channel) {
+  return function (dispatch) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.updateChannel(channel).then(function (channel) {
+      return dispatch(receiveChannel(channel));
+    });
+  };
+};
+var deleteChannel = function deleteChannel(id) {
+  return function (dispatch) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteChannel(id).then(function (id) {
+      return dispatch(removeChannel(id));
+    });
+  };
+};
+
+/***/ }),
+
 /***/ "./frontend/actions/message_actions.js":
 /*!*********************************************!*\
   !*** ./frontend/actions/message_actions.js ***!
@@ -75,8 +157,8 @@ var createMessage = function createMessage(message) {
 };
 var deleteMessage = function deleteMessage(id) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(id).then(function (message) {
-      return dispatch(receiveMessage(message));
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(id).then(function (id) {
+      return dispatch(removeMessage(id));
     });
   };
 };
@@ -1308,6 +1390,47 @@ var UserList = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./frontend/reducers/channels_reducer.js":
+/*!***********************************************!*\
+  !*** ./frontend/reducers/channels_reducer.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+
+
+var channelsReducer = function channelsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+  Object.freeze(stdate);
+  var nextState = Object.assign({}, state);
+
+  switch (action.type) {
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CHANNELS:
+      return action.channels;
+
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CHANNEL:
+      nextState[action.channel.id] = action.channel;
+      return nextState;
+
+    case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_CHANNEL:
+      delete nextState[action.channelId];
+      return nextState;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (channelsReducer);
+
+/***/ }),
+
 /***/ "./frontend/reducers/entities_reducer.js":
 /*!***********************************************!*\
   !*** ./frontend/reducers/entities_reducer.js ***!
@@ -1319,15 +1442,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/messages_reducer.js");
-/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var _channels_reducer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./channels_reducer */ "./frontend/reducers/channels_reducer.js");
+/* harmony import */ var _messages_reducer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./messages_reducer */ "./frontend/reducers/messages_reducer.js");
+/* harmony import */ var _users_reducer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./users_reducer */ "./frontend/reducers/users_reducer.js");
 
 
 
-var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_2__.combineReducers)({
-  users: _users_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
-  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_0__["default"]
+
+var entitiesReducer = (0,redux__WEBPACK_IMPORTED_MODULE_3__.combineReducers)({
+  users: _users_reducer__WEBPACK_IMPORTED_MODULE_2__["default"],
+  messages: _messages_reducer__WEBPACK_IMPORTED_MODULE_1__["default"],
+  channels: _channels_reducer__WEBPACK_IMPORTED_MODULE_0__["default"]
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (entitiesReducer);
 
@@ -1564,6 +1690,60 @@ var configureStore = function configureStore() {
 
 /***/ }),
 
+/***/ "./frontend/util/channel_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/channel_api_util.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchChannels": () => (/* binding */ fetchChannels),
+/* harmony export */   "fetchChannel": () => (/* binding */ fetchChannel),
+/* harmony export */   "createChannel": () => (/* binding */ createChannel),
+/* harmony export */   "updateChannel": () => (/* binding */ updateChannel),
+/* harmony export */   "deleteChannel": () => (/* binding */ deleteChannel)
+/* harmony export */ });
+var fetchChannels = function fetchChannels() {
+  return $.ajax({
+    method: "GET",
+    url: "api/channels"
+  });
+};
+var fetchChannel = function fetchChannel(id) {
+  return $.ajax({
+    method: "GET",
+    url: "api/channel/".concat(id)
+  });
+};
+var createChannel = function createChannel(channel) {
+  return $.ajax({
+    method: "POST",
+    url: "api/channels",
+    data: {
+      channel: channel
+    }
+  });
+};
+var updateChannel = function updateChannel(channel) {
+  return $.ajax({
+    method: "PATCH",
+    url: "api/channels".concat(channel.id),
+    data: {
+      channel: channel
+    }
+  });
+};
+var deleteChannel = function deleteChannel(id) {
+  return $.ajax({
+    method: "DELETE",
+    url: "api/channels/".concat(id)
+  });
+};
+
+/***/ }),
+
 /***/ "./frontend/util/message_api_util.js":
 /*!*******************************************!*\
   !*** ./frontend/util/message_api_util.js ***!
@@ -1577,8 +1757,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "createMessage": () => (/* binding */ createMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
-/* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage)
+/* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
+/* harmony export */   "fetchChannelMessages": () => (/* binding */ fetchChannelMessages),
+/* harmony export */   "createChannelMessage": () => (/* binding */ createChannelMessage)
 /* harmony export */ });
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var fetchMessages = function fetchMessages() {
   return $.ajax({
     method: "GET",
@@ -1613,6 +1799,52 @@ var deleteMessage = function deleteMessage(id) {
   return $.ajax({
     method: "DELETE",
     url: "api/messages/".concat(id)
+  });
+};
+var fetchChannelMessages = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(channelId) {
+    var messages;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (!channelId) {
+              _context.next = 7;
+              break;
+            }
+
+            _context.next = 3;
+            return $.ajax({
+              method: "GET",
+              url: "api/channels/".concat(channelId, "/messages")
+            });
+
+          case 3:
+            messages = _context.sent;
+            return _context.abrupt("return", Object.values(messages));
+
+          case 7:
+            return _context.abrupt("return", []);
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function fetchChannelMessages(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var createChannelMessage = function createChannelMessage(message) {
+  return $.ajax({
+    method: "POST",
+    url: "api/channels/".concat(message.channel_id, "/messages"),
+    data: {
+      message: message
+    }
   });
 };
 

@@ -31,3 +31,21 @@ export const deleteMessage = (id) => (
     url: `api/messages/${id}`
   })
 )
+export const fetchChannelMessages = async (channelId) => {
+  if (channelId) {
+    let messages = await $.ajax({
+      method: "GET",
+      url: `api/channels/${channelId}/messages`
+    })
+    return Object.values(messages)
+  } else {
+    return []
+  }
+}
+export const createChannelMessage = (message) => (
+  $.ajax({
+    method: "POST",
+    url: `api/channels/${message.channel_id}/messages`,
+    data: {message: message}
+  })
+)
