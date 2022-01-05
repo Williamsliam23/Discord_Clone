@@ -1,4 +1,5 @@
 import regeneratorRuntime from "regenerator-runtime";
+
 export const fetchMessages = () => (
   $.ajax({
     method: "GET",
