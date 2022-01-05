@@ -1,6 +1,6 @@
 import React from "react";
 import { receiveMessages } from "../../actions/message_actions";
-import ChannelList from "../channels/channel_list";
+import ChannelIndex from "../channels/channel_index";
 import Chat from "../messages/chat";
 import ServerList from "../servers/server_list";
 import UserList from "../users/users_list";
@@ -21,7 +21,7 @@ class LandingPage extends React.Component {
         <div className='landing'>
           <div className='side-bar'>
             <ServerList />
-            <ChannelList />
+            <ChannelIndex />
           </div>
           <Chat />
           <UserList />

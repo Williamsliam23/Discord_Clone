@@ -1,4 +1,4 @@
-
+import regeneratorRuntime from "regenerator-runtime";
 export const fetchMessages = () => (
   $.ajax({
     method: "GET",
@@ -32,15 +32,15 @@ export const deleteMessage = (id) => (
   })
 )
 export const fetchChannelMessages = async (channelId) => {
-  if (channelId) {
-    let messages = await $.ajax({
+  if (!channelId) {
+    return []
+  }
+    const messages = await $.ajax({
       method: "GET",
       url: `api/channels/${channelId}/messages`
     })
     return Object.values(messages)
-  } else {
-    return []
-  }
+    
 }
 export const createChannelMessage = (message) => (
   $.ajax({

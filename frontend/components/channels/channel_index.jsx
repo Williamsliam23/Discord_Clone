@@ -1,6 +1,6 @@
 import React from "react";
 
-class ChannelList extends React.Component {
+class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -12,10 +12,10 @@ class ChannelList extends React.Component {
         <h3>Channels</h3>
         <ul>
           <li>
-            Troy {/* embed channel title */ }
+            Troy {/* <ChannelIndexItem> */ }
           </li>
           <li>
-            + Add a new channel {/* modal for new channel */}
+            + Add a new channel {/* <ChannelForm */}
           </li>
         </ul>
       </div>
@@ -24,4 +24,4 @@ class ChannelList extends React.Component {
   }
 }
 
-export default ChannelList
+export default ChannelIndex

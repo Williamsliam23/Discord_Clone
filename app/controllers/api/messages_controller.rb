@@ -1,8 +1,9 @@
 class Api::MessagesController < ApplicationController
+  before_action :find_channel
 
   def index
-
-    @messages = Message.all
+    @messages = @channel.messages
+    # @messages = Message.all
 
     render :index
 
@@ -14,16 +15,18 @@ class Api::MessagesController < ApplicationController
     if @message
       render :show
     else
-      render json: ["There does not seem to be any message"]
+      render json: ["There does not seem to be a message"]
     end
 
   end
 
   def create
+    
     @message = Message.new(message_params)
     
     if @message.save
       render :show
+      # action cable code here
     else
       render @message.errors.full_messages
     end
@@ -40,6 +43,7 @@ class Api::MessagesController < ApplicationController
 
     if message.update(message_params)
       render :show
+      # action cable code here
     else
       render @message.errors.full_messages
     end
@@ -57,7 +61,11 @@ class Api::MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:body, :author_id)
+    params.require(:message).permit(:body, :author_id, :channel_id)
+  end
+
+  def find_channel
+    @channel = Channel.find_by(id: params[:channel_id])
   end
 
 end
