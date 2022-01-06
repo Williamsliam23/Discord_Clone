@@ -6,8 +6,15 @@ class MessageIndex extends React.Component {
     super(props)
   }
 
+  componentDidUpdate() {
+    if (this.props.activeChannel.id) {
+    this.props.fetchMessages(this.props.activeChannel)}
+  }
+
   componentDidMount() {
-    this.props.fetchMessages()
+    console.log(this.props)
+    if (this.props.activeChannel.id) {
+    this.props.fetchMessages(this.props.activeChannel)}
   }
 
   render () {
