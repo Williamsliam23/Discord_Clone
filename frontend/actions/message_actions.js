@@ -21,9 +21,9 @@ export const fetchChannelMessages = (channelId) => dispatch => (
   APIUtil.fetchChannelMessages(channelId).then(messages => dispatch(receiveMessages(messages)))
 )
 
-export const fetchMessages = () => dispatch => (
-  APIUtil.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
-)
+// export const fetchMessages = () => dispatch => (
+//   APIUtil.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
+// )
 
 export const fetchMessage = id => dispatch => (
   APIUtil.fetchMessage(id).then(message => dispatch(receiveMessage(message)))
@@ -34,7 +34,7 @@ export const updateMessage = message => dispatch => (
 )
 
 export const createMessage = message => dispatch => (
-  APIUtil.createMessage(message).then(message => dispatch(receiveMessage(message)))
+  APIUtil.createChannelMessage(message).then(message => dispatch(receiveMessage(message)))
 )
 
 export const deleteMessage = id => dispatch => (

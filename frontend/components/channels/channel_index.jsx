@@ -4,25 +4,29 @@ import ChannelIndexItem from "./channel_index_item";
 class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
-    // this.state = {activeChannel: null}
+    this.state = {
+      activeChannel: null
+    };
     this.setActiveChannel = this.setActiveChannel.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchChannels()
   }
-
-  componentDidUpdate() {
-    this.props.fetchMessages(this.state.activeChannel)
-    console.log(this.state)
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextState.activeChannel !== this.state.activeChannel
   }
 
+  componentDidUpdate() {
+      this.props.fetchMessages(this.state.activeChannel)
+  }
+  
   setActiveChannel(e) {
     this.props.setActiveChannel(e.target.value)
+    this.setState({activeChannel: e.target.value})
   }
 
   render() {
-
     return (
       
       <div className='channel-wrap'>
@@ -33,7 +37,7 @@ class ChannelIndex extends React.Component {
           {/* {this.props.channels.map((channel) => (
             <ChannelIndexItem />  
           ))}*/}</li> 
-          <li>
+          <li value={2} onClick={this.setActiveChannel}>
             + Add a new channel {/* <ChannelForm */}
           </li>
         </ul>

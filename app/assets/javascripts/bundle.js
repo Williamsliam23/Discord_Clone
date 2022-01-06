@@ -99,7 +99,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
 /* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
 /* harmony export */   "fetchChannelMessages": () => (/* binding */ fetchChannelMessages),
-/* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
 /* harmony export */   "createMessage": () => (/* binding */ createMessage),
@@ -134,14 +133,10 @@ var fetchChannelMessages = function fetchChannelMessages(channelId) {
       return dispatch(receiveMessages(messages));
     });
   };
-};
-var fetchMessages = function fetchMessages() {
-  return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessages().then(function (messages) {
-      return dispatch(receiveMessages(messages));
-    });
-  };
-};
+}; // export const fetchMessages = () => dispatch => (
+//   APIUtil.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
+// )
+
 var fetchMessage = function fetchMessage(id) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id).then(function (message) {
@@ -158,7 +153,7 @@ var updateMessage = function updateMessage(message) {
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createMessage(message).then(function (message) {
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannelMessage(message).then(function (message) {
       return dispatch(receiveMessage(message));
     });
   };
@@ -365,8 +360,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, ChannelIndex);
 
-    _this = _super.call(this, props); // this.state = {activeChannel: null}
-
+    _this = _super.call(this, props);
+    _this.state = {
+      activeChannel: null
+    };
     _this.setActiveChannel = _this.setActiveChannel.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -377,15 +374,22 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchChannels();
     }
   }, {
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextState.activeChannel !== this.state.activeChannel;
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       this.props.fetchMessages(this.state.activeChannel);
-      console.log(this.state);
     }
   }, {
     key: "setActiveChannel",
     value: function setActiveChannel(e) {
       this.props.setActiveChannel(e.target.value);
+      this.setState({
+        activeChannel: e.target.value
+      });
     }
   }, {
     key: "render",
@@ -395,7 +399,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: 1,
         onClick: this.setActiveChannel
-      }, "ah"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, "+ Add a new channel ")));
+      }, "ah"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        value: 2,
+        onClick: this.setActiveChannel
+      }, "+ Add a new channel ")));
     }
   }]);
 
@@ -447,9 +454,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchMessages: function fetchMessages(id) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.fetchChannelMessages)(id));
-    },
-    getAllMessages: function getAllMessages() {
-      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.fetchMessages)());
     },
     fetchChannels: function fetchChannels() {
       return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__.fetchChannels)());
@@ -827,6 +831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    activeChannel: Object.values(state.entities.activeChannel),
     currentUser: state.session.id,
     formType: "create"
   };
@@ -891,7 +896,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageForm);
 
     _this = _super.call(this, props);
-    var setId, setBody, setAuthor;
+    var count = 0;
+    var setId, setBody, setAuthor, setChannel;
 
     if (_this.props.message) {
       setId = _this.props.message.id;
@@ -911,10 +917,17 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       setAuthor = _this.props.currentUser;
     }
 
+    if (_this.props.activeChannel) {
+      setChannel = _this.props.activeChannel["id"];
+    } else {
+      setChannel = undefined;
+    }
+
     _this.state = {
       id: setId,
       body: setBody,
-      authorId: setAuthor
+      authorId: setAuthor,
+      channelId: setChannel
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
@@ -925,16 +938,35 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var message = Object.assign({}, this.state);
-      this.props.processCreate(message);
 
-      if (this.props.formType === 'create') {
+      if (this.props.activeChannel) {
+        console.log(this.state);
+        console.log(this.props.activeChannel["0"].id);
+        var dumb = this.props.activeChannel["0"].id;
         this.setState({
-          body: "",
-          author_id: this.props.currentUser
+          channelId: dumb
         });
-      } else {}
-    }
+        console.log(this.state);
+        var message = Object.assign({}, this.state);
+        this.props.processCreate(message);
+
+        if (this.props.formType === 'create') {
+          this.setState({
+            body: "",
+            authorId: this.props.currentUser,
+            channelId: this.props.activeChannel
+          });
+        } else {}
+      }
+    } // componentDidUpdate() {
+    //   if (this.props.activeChannel) {
+    //     setChannel = this.props.activeChannel["id"]
+    //   } else {
+    //     setChannel = undefined;
+    //   }
+    //   this.setState({activeChannel = setChannel})
+    // }
+
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
@@ -1019,22 +1051,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageIndex, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (this.props.activeChannel.id) {
-        this.props.fetchMessages(this.props.activeChannel);
-      }
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      console.log(this.props);
-
-      if (this.props.activeChannel.id) {
-        this.props.fetchMessages(this.props.activeChannel);
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -1079,7 +1095,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
-    activeChannel: state.entities.activeChannel,
+    activeChannel: state.entities.activeChannel[0],
     channels: state.entities.channels
   };
 };
@@ -1601,7 +1617,7 @@ var activeChannelReducer = function activeChannelReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var action = arguments.length > 1 ? arguments[1] : undefined;
   Object.freeze(state);
-  var nextState = Object.assign({}, state);
+  var nextState = Object.assign({});
 
   switch (action.type) {
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CHANNEL:
@@ -1979,7 +1995,6 @@ var deleteChannel = function deleteChannel(id) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchMessages": () => (/* binding */ fetchMessages),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "createMessage": () => (/* binding */ createMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
@@ -1993,13 +2008,13 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+ // export const fetchMessages = () => (
+//   $.ajax({
+//     method: "GET",
+//     url: "api/messages"
+//   })
+// )
 
-var fetchMessages = function fetchMessages() {
-  return $.ajax({
-    method: "GET",
-    url: "api/messages"
-  });
-};
 var fetchMessage = function fetchMessage(id) {
   return $.ajax({
     method: "GET",
@@ -2068,9 +2083,10 @@ var fetchChannelMessages = /*#__PURE__*/function () {
   };
 }();
 var createChannelMessage = function createChannelMessage(message) {
+  console.log(message);
   return $.ajax({
     method: "POST",
-    url: "api/channels/".concat(message.channel_id, "/messages"),
+    url: "api/channels/".concat(message["channel_id"], "/messages"),
     data: {
       message: message
     }

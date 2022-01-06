@@ -43,7 +43,7 @@ class Api::MessagesController < ApplicationController
 
     if message.update(message_params)
       render :show
-      # action cable code here
+      # action cable code
     else
       render @message.errors.full_messages
     end

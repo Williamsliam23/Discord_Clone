@@ -4,7 +4,8 @@ class MessageForm extends React.Component {
 
   constructor(props) {
       super(props)
-      let setId, setBody, setAuthor;
+      let count = 0
+      let setId, setBody, setAuthor, setChannel;
       if (this.props.message) {
         setId = this.props.message.id;
       } else {
@@ -20,28 +21,50 @@ class MessageForm extends React.Component {
       } else {
         setAuthor = this.props.currentUser;
       }
+      if (this.props.activeChannel) {
+        setChannel = this.props.activeChannel["id"]
+      } else {
+        setChannel = undefined;
+      }
       this.state = {
           id: setId,
           body: setBody,
-          authorId: setAuthor
+          authorId: setAuthor,
+          channelId: setChannel
       }
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateMessage = this.updateMessage.bind(this)
   }
   handleSubmit(e) {
     e.preventDefault()
-    const message = Object.assign({}, this.state);
-    this.props.processCreate(message)
-    
-    if (this.props.formType === 'create') {
-      this.setState({
-        body: "",
-        author_id: this.props.currentUser
-      })
-    } else {
+    if(this.props.activeChannel){
+      console.log(this.state)
+      console.log(this.props.activeChannel["0"].id)
+      let dumb = this.props.activeChannel["0"].id
+      this.setState({channelId: dumb})
+      console.log(this.state)
+      const message = Object.assign({}, this.state);
+      this.props.processCreate(message)
       
-    }
+      if (this.props.formType === 'create') {
+        this.setState({
+          body: "",
+          authorId: this.props.currentUser,
+          channelId: this.props.activeChannel
+        })
+      } else {
+
+    }}
   }
+
+  // componentDidUpdate() {
+  //   if (this.props.activeChannel) {
+  //     setChannel = this.props.activeChannel["id"]
+  //   } else {
+  //     setChannel = undefined;
+  //   }
+  //   this.setState({activeChannel = setChannel})
+  // }
   
   updateMessage(e) {
     this.setState({ body: e.currentTarget.value })
