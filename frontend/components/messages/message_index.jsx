@@ -15,7 +15,6 @@ class MessageIndex extends React.Component {
               key={message.id}
               message={message}
             />
-  
           ))}
         </ul>
       </div>

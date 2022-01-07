@@ -1,4 +1,5 @@
 import React from "react";
+import UserListItem from "./users_list_item";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -6,22 +7,24 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.receiveCurrentUser()
+    console.log(this.props)
+    this.props.fetchUsers()
   }
 
-  render() {
-
-    return (
-      
-      <div className='user-wrap'>
-        <h3><a>Users</a></h3>
-        <ul>
-          <li>
-            TestUser
-          </li>
+  render () {
+    // this.props.fetchUsers()
+    return(
+      <div>
+        <ul className='user-wrap'>
+        ?
+          {/* {this.props.members.map((user) => (
+            <UserListItem
+              key={user.id}
+              message={user}
+            />
+          ))} */}
         </ul>
       </div>
-        
     )
   }
 }

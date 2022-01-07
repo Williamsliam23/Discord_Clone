@@ -6,6 +6,7 @@ import Channel from "../channels/Channel"
 import ServerList from "../servers/server_list";
 import UserList from "../users/users_list";
 import TopNav from "./top_nav_container";
+import Members from "../users/User";
 
 class LandingPage extends React.Component {
   constructor(props) {
@@ -26,7 +27,9 @@ class LandingPage extends React.Component {
             <Channel />
           </div>
           <Chat />
-          <UserList />
+          <div >
+          <Members />
+          </div>
         </div>
       </>
     )

@@ -1,3 +1,7 @@
 json.key_format! camelize: :lower
-json.extract! user, :username, :email, :id
+@users.each do |user|
+  json.set! user.id do
+      json.extract! user, :id, :username, :email
+  end
+end
 
