@@ -1,10 +1,21 @@
 import React from "react";
+import AlwaysScrollToBottom from "./ChatScroll";
+
+
 
 
 class MessageIndexItem extends React.Component {
   constructor(props) {
     super(props);
     this.deleteMessage = this.deleteMessage.bind(this)
+  }
+
+  scrollToBottom(el) {
+    el.current.scrollIntoView()
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom()
   }
 
   deleteMessage() {
@@ -14,6 +25,7 @@ class MessageIndexItem extends React.Component {
 
 
   render() {
+    
     return (
       <li>
         <br />
@@ -21,6 +33,7 @@ class MessageIndexItem extends React.Component {
         &nbsp;&nbsp;&nbsp;&nbsp;
         {this.props.message.body}
         <br />
+        <AlwaysScrollToBottom />
       </li>
     )
   }

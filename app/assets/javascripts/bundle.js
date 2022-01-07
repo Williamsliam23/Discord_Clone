@@ -811,6 +811,34 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 /***/ }),
 
+/***/ "./frontend/components/messages/ChatScroll.jsx":
+/*!*****************************************************!*\
+  !*** ./frontend/components/messages/ChatScroll.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+var AlwaysScrollToBottom = function AlwaysScrollToBottom() {
+  var elementRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    return elementRef.current.scrollIntoView();
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    ref: elementRef
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (AlwaysScrollToBottom);
+
+/***/ }),
+
 /***/ "./frontend/components/messages/chat.jsx":
 /*!***********************************************!*\
   !*** ./frontend/components/messages/chat.jsx ***!
@@ -1168,6 +1196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ChatScroll__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChatScroll */ "./frontend/components/messages/ChatScroll.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1192,6 +1221,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndexItem, _React$Component);
 
@@ -1208,6 +1238,16 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(MessageIndexItem, [{
+    key: "scrollToBottom",
+    value: function scrollToBottom(el) {
+      el.current.scrollIntoView();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      this.scrollToBottom();
+    }
+  }, {
     key: "deleteMessage",
     value: function deleteMessage() {
       this.props.deleteMessage(this.props.message.id);
@@ -1215,7 +1255,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.message.author_id, " : \xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.message.author_id, " : \xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_1__["default"], null));
     }
   }]);
 
