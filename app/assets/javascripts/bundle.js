@@ -831,7 +831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    activeChannel: Object.values(state.entities.activeChannel),
+    activeChannel: state.entities.activeChannel,
     currentUser: state.session.id,
     formType: "create"
   };
@@ -938,41 +938,49 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
+      var dumb = Object.keys(this.props.activeChannel)[0];
+      console.log(dumb);
+      console.log(this.state);
+      var message = Object.assign({}, this.state);
+      this.props.processCreate(message);
 
-      if (this.props.activeChannel) {
-        console.log(this.state);
-        console.log(this.props.activeChannel["0"].id);
-        var dumb = this.props.activeChannel["0"].id;
+      if (this.props.formType === 'create') {
         this.setState({
-          channelId: dumb
+          body: "",
+          authorId: this.props.currentUser
         });
-        console.log(this.state);
-        var message = Object.assign({}, this.state);
-        this.props.processCreate(message);
-
-        if (this.props.formType === 'create') {
-          this.setState({
-            body: "",
-            authorId: this.props.currentUser,
-            channelId: this.props.activeChannel
-          });
-        } else {}
-      }
+      } else {}
     } // componentDidUpdate() {
-    //   if (this.props.activeChannel) {
+    //   let setChannel
+    //   if(this.props.activeChannel === undefined) {
     //     setChannel = this.props.activeChannel["id"]
+    //     this.setState({activeChannel: setChannel})
     //   } else {
     //     setChannel = undefined;
+    //     this.setState({activeChannel: setChannel})
     //   }
-    //   this.setState({activeChannel = setChannel})
     // }
 
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
-      this.setState({
-        body: e.currentTarget.value
-      });
+      var setChannel;
+      console.log(this.props.activeChannel);
+
+      if (Object.keys(this.props.activeChannel).length !== 0) {
+        setChannel = Object.keys(this.props.activeChannel)[0];
+        console.log(setChannel);
+        this.setState({
+          body: e.currentTarget.value,
+          channelId: setChannel
+        });
+      } else {
+        setChannel = undefined;
+        this.setState({
+          body: "",
+          channelId: setChannel
+        });
+      }
     }
   }, {
     key: "render",

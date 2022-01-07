@@ -37,11 +37,8 @@ class MessageForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-    if(this.props.activeChannel){
-      console.log(this.state)
-      console.log(this.props.activeChannel["0"].id)
-      let dumb = this.props.activeChannel["0"].id
-      this.setState({channelId: dumb})
+      let dumb = Object.keys(this.props.activeChannel)[0]
+      console.log(dumb)
       console.log(this.state)
       const message = Object.assign({}, this.state);
       this.props.processCreate(message)
@@ -49,26 +46,39 @@ class MessageForm extends React.Component {
       if (this.props.formType === 'create') {
         this.setState({
           body: "",
-          authorId: this.props.currentUser,
-          channelId: this.props.activeChannel
+          authorId: this.props.currentUser
         })
       } else {
 
-    }}
+    }
   }
 
   // componentDidUpdate() {
-  //   if (this.props.activeChannel) {
+  //   let setChannel
+  //   if(this.props.activeChannel === undefined) {
   //     setChannel = this.props.activeChannel["id"]
+  //     this.setState({activeChannel: setChannel})
   //   } else {
   //     setChannel = undefined;
+  //     this.setState({activeChannel: setChannel})
   //   }
-  //   this.setState({activeChannel = setChannel})
   // }
   
   updateMessage(e) {
-    this.setState({ body: e.currentTarget.value })
+    let setChannel
+    console.log(this.props.activeChannel)
+    if(Object.keys(this.props.activeChannel).length !== 0) {
+      setChannel = Object.keys(this.props.activeChannel)[0]
+      console.log(setChannel)
+      this.setState({body: e.currentTarget.value,
+        channelId: setChannel})
+    } else {
+      setChannel = undefined;
+      this.setState({body: "",
+        channelId: setChannel})
+    }
   }
+  
   render () {
     return(
       <form className='position-chat' onSubmit={this.handleSubmit}>
@@ -76,7 +86,7 @@ class MessageForm extends React.Component {
           placeholder='Get to chatting!'></textarea>
           <input type="submit" value="Submit"/>
       </form>
-    )  
+    )
   }
 }
 
