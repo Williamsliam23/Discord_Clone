@@ -1646,16 +1646,19 @@ var UserList = /*#__PURE__*/function (_React$Component) {
   _createClass(UserList, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log(this.props);
       this.props.fetchUsers();
     }
   }, {
     key: "render",
     value: function render() {
-      // this.props.fetchUsers()
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "user-wrap"
-      }, "?"));
+      }, "?", this.props.members.map(function (user) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: user.id,
+          user: user
+        });
+      })));
     }
   }]);
 

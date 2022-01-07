@@ -7,22 +7,20 @@ class UserList extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     this.props.fetchUsers()
   }
 
   render () {
-    // this.props.fetchUsers()
     return(
       <div>
         <ul className='user-wrap'>
         ?
-          {/* {this.props.members.map((user) => (
+          {this.props.members.map((user) => (
             <UserListItem
               key={user.id}
-              message={user}
+              user={user}
             />
-          ))} */}
+          ))}
         </ul>
       </div>
     )
