@@ -1,22 +1,18 @@
 import React from "react";
-import AlwaysScrollToBottom from "./ChatScroll";
+
 
 
 
 
 class MessageIndexItem extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
+    this.state = {
+      author: this.props.author[this.props.message.author_id].username
+    }
     this.deleteMessage = this.deleteMessage.bind(this)
   }
 
-  scrollToBottom(el) {
-    el.current.scrollIntoView()
-  }
-
-  componentDidUpdate() {
-    this.scrollToBottom()
-  }
 
   deleteMessage() {
     this.props.deleteMessage(this.props.message.id)
@@ -29,11 +25,10 @@ class MessageIndexItem extends React.Component {
     return (
       <li>
         <br />
-        {this.props.message.author_id} :  
+        {this.state.author} :
         &nbsp;&nbsp;&nbsp;&nbsp;
         {this.props.message.body}
         <br />
-        <AlwaysScrollToBottom />
       </li>
     )
   }

@@ -996,9 +996,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var dumb = Object.keys(this.props.activeChannel)[0];
-      console.log(dumb);
-      console.log(this.state);
       var message = Object.assign({}, this.state);
       this.props.processCreate(message);
 
@@ -1023,11 +1020,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     key: "updateMessage",
     value: function updateMessage(e) {
       var setChannel;
-      console.log(this.props.activeChannel);
 
       if (Object.keys(this.props.activeChannel).length !== 0) {
         setChannel = Object.keys(this.props.activeChannel)[0];
-        console.log(setChannel);
         this.setState({
           body: e.currentTarget.value,
           channelId: setChannel
@@ -1080,6 +1075,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
+/* harmony import */ var _ChatScroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChatScroll */ "./frontend/components/messages/ChatScroll.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1105,6 +1101,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndex, _React$Component);
 
@@ -1119,14 +1116,17 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndex, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "message-list"
       }, this.props.messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
-          message: message
+          message: message,
+          author: Object.assign({}, _this.props.members)
         });
-      })));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -1161,6 +1161,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
+    members: state.entities.members,
     activeChannel: state.entities.activeChannel[0],
     channels: state.entities.channels
   };
@@ -1196,7 +1197,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _ChatScroll__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChatScroll */ "./frontend/components/messages/ChatScroll.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1221,7 +1221,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndexItem, _React$Component);
 
@@ -1233,21 +1232,14 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageIndexItem);
 
     _this = _super.call(this, props);
+    _this.state = {
+      author: _this.props.author[_this.props.message.author_id].username
+    };
     _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageIndexItem, [{
-    key: "scrollToBottom",
-    value: function scrollToBottom(el) {
-      el.current.scrollIntoView();
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      this.scrollToBottom();
-    }
-  }, {
     key: "deleteMessage",
     value: function deleteMessage() {
       this.props.deleteMessage(this.props.message.id);
@@ -1255,7 +1247,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.props.message.author_id, " : \xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_1__["default"], null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.state.author, " : \xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
     }
   }]);
 
@@ -2351,7 +2343,6 @@ var fetchChannelMessages = /*#__PURE__*/function () {
   };
 }();
 var createChannelMessage = function createChannelMessage(message) {
-  console.log(message);
   return $.ajax({
     method: "POST",
     url: "api/channels/".concat(message["channel_id"], "/messages"),

@@ -37,9 +37,6 @@ class MessageForm extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault()
-      let dumb = Object.keys(this.props.activeChannel)[0]
-      console.log(dumb)
-      console.log(this.state)
       const message = Object.assign({}, this.state);
       this.props.processCreate(message)
       
@@ -66,10 +63,8 @@ class MessageForm extends React.Component {
   
   updateMessage(e) {
     let setChannel
-    console.log(this.props.activeChannel)
     if(Object.keys(this.props.activeChannel).length !== 0) {
       setChannel = Object.keys(this.props.activeChannel)[0]
-      console.log(setChannel)
       this.setState({body: e.currentTarget.value,
         channelId: setChannel})
     } else {
