@@ -5,16 +5,18 @@ class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeChannel: null
+      activeChannel: null,
+      activeSub: null
     };
     this.setActiveChannel = this.setActiveChannel.bind(this)
+    this.activeSubscription = this.activeSubscription.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchChannels()
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.activeChannel !== this.state.activeChannel
+    return nextProps.activeChannel !== this.props.activeChannel
   }
 
   componentDidUpdate() {
@@ -24,6 +26,7 @@ class ChannelIndex extends React.Component {
   setActiveChannel(e) {
     this.props.setActiveChannel(e.target.value)
     this.setState({activeChannel: e.target.value})
+    this.activeSubscription(e.target.value)
   }
 
   render() {
@@ -35,8 +38,12 @@ class ChannelIndex extends React.Component {
           <li value={1} onClick={this.setActiveChannel}>
           ah
           {/* {this.props.channels.map((channel) => (
-            <ChannelIndexItem />  
-          ))}*/}</li> 
+            <ChannelIndexItem 
+              key={this.channel.id}
+              channel={channel}
+            />  
+          ))} */}
+          </li> 
           <li value={2} onClick={this.setActiveChannel}>
             + Add a new channel {/* <ChannelForm */}
           </li>
@@ -44,6 +51,27 @@ class ChannelIndex extends React.Component {
       </div>
         
     )
+  }
+
+  activeSubscription(active) {
+    console.log(active)
+    this.props.fetchMessages(this.state.activeChannel)
+    const subscribe = App.cable.subscriptions.create(
+      {
+        channel: "ChatChannel",
+        id: active
+      },
+      {
+        received: (data) => {
+          this.props.fetchMessages(active)
+        }
+      }
+    )
+    this.setState({ subscribe })
+  }
+
+  unsubscribe() {
+
   }
 }
 

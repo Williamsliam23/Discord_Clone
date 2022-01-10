@@ -394,9 +394,11 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      activeChannel: null
+      activeChannel: null,
+      activeSub: null
     };
     _this.setActiveChannel = _this.setActiveChannel.bind(_assertThisInitialized(_this));
+    _this.activeSubscription = _this.activeSubscription.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -408,7 +410,7 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextState.activeChannel !== this.state.activeChannel;
+      return nextProps.activeChannel !== this.props.activeChannel;
     }
   }, {
     key: "componentDidUpdate",
@@ -422,6 +424,7 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       this.setState({
         activeChannel: e.target.value
       });
+      this.activeSubscription(e.target.value);
     }
   }, {
     key: "render",
@@ -436,6 +439,28 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
         onClick: this.setActiveChannel
       }, "+ Add a new channel ")));
     }
+  }, {
+    key: "activeSubscription",
+    value: function activeSubscription(active) {
+      var _this2 = this;
+
+      console.log(active);
+      this.props.fetchMessages(this.state.activeChannel);
+      var subscribe = App.cable.subscriptions.create({
+        channel: "ChatChannel",
+        id: active
+      }, {
+        received: function received(data) {
+          _this2.props.fetchMessages(active);
+        }
+      });
+      this.setState({
+        subscribe: subscribe
+      });
+    }
+  }, {
+    key: "unsubscribe",
+    value: function unsubscribe() {}
   }]);
 
   return ChannelIndex;
@@ -1097,23 +1122,47 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessageIndex);
 
   function MessageIndex(props) {
+    var _this;
+
     _classCallCheck(this, MessageIndex);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      activeSubscription: null
+    };
+    return _this;
   }
 
   _createClass(MessageIndex, [{
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextProps, nextState) {
+      return nextProps.activeChannel !== this.props.activeChannel;
+    }
+  }, {
+    key: "setSubscription",
+    value: function setSubscription() {
+      this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"]);
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      if (Object.values(this.props.activeChannel).length !== 0) {
+        this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"]);
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
+      console.log(this.props);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "message-list"
       }, this.props.messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message,
-          author: Object.assign({}, _this.props.members)
+          author: Object.assign({}, _this2.props.members)
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
@@ -1151,7 +1200,7 @@ var mapStateToProps = function mapStateToProps(state) {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
     members: state.entities.members,
-    activeChannel: state.entities.activeChannel[0],
+    activeChannel: state.entities.activeChannel,
     channels: state.entities.channels
   };
 };
@@ -1236,7 +1285,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), this.state.author, " : \xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, this.state.author), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "\xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
     }
   }]);
 

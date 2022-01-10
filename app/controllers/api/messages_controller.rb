@@ -25,8 +25,7 @@ class Api::MessagesController < ApplicationController
     @message = Message.new(message_params)
     
     if @message.save
-      render :show
-      # action cable code here
+      ChatChannel.broadcast_to(@channel, Api::MessagesController.render(:show), locals: {message: @message})
     else
       render @message.errors.full_messages
     end

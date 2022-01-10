@@ -5,9 +5,27 @@ import AlwaysScrollToBottom from "./ChatScroll"
 class MessageIndex extends React.Component {
   constructor(props) {
     super(props)
+    this.state={
+      activeSubscription: null
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.activeChannel !== this.props.activeChannel
+  }
+
+  setSubscription(){
+    this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"])
+  }
+
+  componentDidUpdate(){
+    if(Object.values(this.props.activeChannel).length !== 0){
+      this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"])
+    }
   }
 
   render () {
+    console.log(this.props)
     return(
       <div>
         <ul className='message-list'>

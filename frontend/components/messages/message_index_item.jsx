@@ -25,7 +25,7 @@ class MessageIndexItem extends React.Component {
     return (
       <li>
         <br />
-        {this.state.author} :
+        <b>{this.state.author}</b> <br />
         &nbsp;&nbsp;&nbsp;&nbsp;
         {this.props.message.body}
         <br />
