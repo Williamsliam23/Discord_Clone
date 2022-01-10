@@ -954,7 +954,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageForm);
 
     _this = _super.call(this, props);
-    var count = 0;
     var setId, setBody, setAuthor, setChannel;
 
     if (_this.props.message) {
@@ -1005,17 +1004,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
           authorId: this.props.currentUser
         });
       } else {}
-    } // componentDidUpdate() {
-    //   let setChannel
-    //   if(this.props.activeChannel === undefined) {
-    //     setChannel = this.props.activeChannel["id"]
-    //     this.setState({activeChannel: setChannel})
-    //   } else {
-    //     setChannel = undefined;
-    //     this.setState({activeChannel: setChannel})
-    //   }
-    // }
-
+    }
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
@@ -1685,7 +1674,7 @@ var UserList = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "user-wrap"
-      }, "?", this.props.members.map(function (user) {
+      }, "Members", this.props.members.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
           user: user

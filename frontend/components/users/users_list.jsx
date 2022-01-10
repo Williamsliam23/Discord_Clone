@@ -14,7 +14,7 @@ class UserList extends React.Component {
     return(
       <div>
         <ul className='user-wrap'>
-        ?
+        Members
           {this.props.members.map((user) => (
             <UserListItem
               key={user.id}

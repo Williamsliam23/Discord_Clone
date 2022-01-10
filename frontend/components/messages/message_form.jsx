@@ -4,7 +4,6 @@ class MessageForm extends React.Component {
 
   constructor(props) {
       super(props)
-      let count = 0
       let setId, setBody, setAuthor, setChannel;
       if (this.props.message) {
         setId = this.props.message.id;
@@ -49,17 +48,6 @@ class MessageForm extends React.Component {
 
     }
   }
-
-  // componentDidUpdate() {
-  //   let setChannel
-  //   if(this.props.activeChannel === undefined) {
-  //     setChannel = this.props.activeChannel["id"]
-  //     this.setState({activeChannel: setChannel})
-  //   } else {
-  //     setChannel = undefined;
-  //     this.setState({activeChannel: setChannel})
-  //   }
-  // }
   
   updateMessage(e) {
     let setChannel
