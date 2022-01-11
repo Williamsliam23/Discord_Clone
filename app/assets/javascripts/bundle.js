@@ -416,6 +416,7 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       this.props.fetchMessages(this.state.activeChannel);
+      this.activeSubscription(this.state.activeChannel);
     }
   }, {
     key: "setActiveChannel",
@@ -423,8 +424,7 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       this.props.setActiveChannel(e.target.value);
       this.setState({
         activeChannel: e.target.value
-      });
-      this.activeSubscription(e.target.value);
+      }); // this.activeSubscription(e.target.value)
     }
   }, {
     key: "render",
@@ -448,7 +448,7 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchMessages(this.state.activeChannel);
       var subscribe = App.cable.subscriptions.create({
         channel: "ChatChannel",
-        id: active
+        channelId: active
       }, {
         received: function received(data) {
           _this2.props.fetchMessages(active);
