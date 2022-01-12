@@ -1,0 +1,91 @@
+.greet {
+  font-family: "Nunito" "Sans";
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: black;
+}
+
+.introduction{
+  font-size: large;
+}
+
+.greet h1 {
+  font-size: 65px;
+  padding-bottom: 10px;
+}
+
+.greet h2 {
+  font-size: xx-large;
+  font-family: "Nunito" "Sans";
+  padding-bottom: 5px;
+}
+
+.flex-greet{
+  display: flex;
+  color: black;
+  z-index: 1;
+  height: 30vh;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.entry-links {
+  flex-direction: column;
+  padding-bottom: 10vh;
+  justify-content: center;
+  align-content: center;
+  z-index: 1;
+}
+.entry-options {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  color: white;
+}
+
+.welcome {
+  color: white;
+  padding-right: 5vw;
+}
+
+.front-logo{
+  position: absolute;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.front{
+  flex-direction: column;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30vh;
+  text-align: center;
+}
+
+.entry-options > li {
+  text-decoration: none;
+  font-size: x-large;
+  padding-right: 10px;
+  color: white;
+}
+
+.entry-options Link {
+  text-decoration: none;
+}
+
+.section1, .section2, .section3 {
+  justify-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.section2 {
+  background-color: whitesmoke;
+}

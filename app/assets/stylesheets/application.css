@@ -27,9 +27,9 @@
    height: 100%;
  }
 
- * {
+ /* * {
    color: white;
- }
+ } */
 
  input[type=submit] {
    background-color: #36393e;

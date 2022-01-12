@@ -1,49 +1,31 @@
-.greet {
-  background-image: url(Dishome.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-  width: 98vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.entry-options {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  flex-grow: 1;
-}
-
-.greet h1 {
-  flex-grow: 2;
-}
 
 .top-nav {
   display: flex;
   justify-content: center;
+  color: white;
 }
 
 .top-nav > ul {
   display: flex;
 }
 .top-nav > ul > li {
-  padding-left: 5vw;
+  padding-right: 5vw;
 }
 
 .logout {
   position: absolute;
-  right: 0;
+  right: 10px;
+  color:white;
+  background-color: black;
+  border: none;
+  height: 3vh;
 }
 
 .title {
   display: flex;
   justify-content: center;
   align-content: center;
+  color: white;
 }
 
 .title > h1 {
@@ -56,6 +38,7 @@
   display: flex;
   padding-left: 1%;
   padding-right: 1%;
+  color: white;
 }
 
 .side-bar {
@@ -74,9 +57,6 @@
   display: flex;
   flex-direction: column;
   flex-grow: 2;
-  margin-top: 10%;
-  padding-left: 1%;
-  padding-top: 1%;
 }
 
 .user-wrap {

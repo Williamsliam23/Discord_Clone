@@ -12,12 +12,14 @@
   display: flex;
   justify-self: flex-end;
   justify-content: flex-end;
-  bottom: 0;
+  // bottom: 2vh;
   height: 80vh;
+  width: 50vw;
   color: white;
-  overflow: scroll;
+  overflow-y: visible;
+  overflow-x: hidden;
   flex-grow: 3;
-  margin-top: 2.5%;
+  // margin-bottom: 2.5%;
 }
 .dischat {
   display: flex;
@@ -29,18 +31,18 @@
 .box {
   background: #424549;
   outline: none;
-  height: 5em;
-  width: 35em;
+  height: 3vh;
+  width: 60vw;
   resize: none;
   overflow: auto;
-  position: relative;
 }
 
 .position-chat {
   z-index: 1;
-  position: absolute;
-  bottom: 2vh;
+  position: fixed;
+  bottom: 13vh;
 }
-.box::-webkit-scrollbar {
-  display: none;
+
+.send-message {
+  color: white;
 }

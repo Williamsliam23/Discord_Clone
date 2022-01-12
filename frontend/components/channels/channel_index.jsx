@@ -27,7 +27,7 @@ class ChannelIndex extends React.Component {
   setActiveChannel(e) {
     this.props.setActiveChannel(e.target.value)
     this.setState({activeChannel: e.target.value})
-    // this.activeSubscription(e.target.value)
+    this.activeSubscription(e.target.value)
   }
 
   render() {
@@ -55,8 +55,7 @@ class ChannelIndex extends React.Component {
   }
 
   activeSubscription(active) {
-    console.log(active)
-    this.props.fetchMessages(this.state.activeChannel)
+
     const subscribe = App.cable.subscriptions.create(
       {
         channel: "ChatChannel",

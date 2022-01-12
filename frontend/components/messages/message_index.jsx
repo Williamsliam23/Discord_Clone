@@ -1,6 +1,7 @@
 import React from "react";
 import MessageIndexItem from "./message_index_item";
 import AlwaysScrollToBottom from "./ChatScroll"
+import CreateMessageContainer from "./create_message_container";
 
 class MessageIndex extends React.Component {
   constructor(props) {
@@ -40,6 +41,9 @@ class MessageIndex extends React.Component {
           ))}
         </ul>
         <AlwaysScrollToBottom />
+        <br />
+        <br />
+        <CreateMessageContainer />
       </div>
     )
   }
