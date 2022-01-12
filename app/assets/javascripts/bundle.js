@@ -435,10 +435,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: 1,
         onClick: this.setActiveChannel
-      }, "ah"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      }, "Troy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: 2,
         onClick: this.setActiveChannel
-      }, "+ Add a new channel ")));
+      }, "+ Add a new channel")));
     }
   }, {
     key: "activeSubscription",
@@ -655,7 +655,7 @@ var Greet = function Greet() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "first-graphic"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: "",
+    src: "Channelling.png",
     className: "graphic1",
     alt: "Community"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -665,18 +665,18 @@ var Greet = function Greet() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "text-holder"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Where hanging out is easy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Relax in a channel of your choice.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "Friends in you server can chat in real time,", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), " making your time worth it.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: "",
+    src: "Chatting.png",
     className: "graphic2",
-    alt: "idk"
+    alt: "Chatting"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "section3 flex-greet"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-    src: "",
+    src: "Final.png",
     className: "graphic3",
-    alt: "anotherone"
+    alt: "Final"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "text-holder"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Show off your devotion to groupThink"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "After answering questions the Ministry of Truth", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "will assign you a score based on your speed and groupThink.", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "Just remember, failure to groupThink will reflect poorly on your score."))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Come on in and have a blast!"))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Greet);

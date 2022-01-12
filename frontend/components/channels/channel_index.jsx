@@ -37,7 +37,7 @@ class ChannelIndex extends React.Component {
         <h3>Channels</h3>
         <ul>
           <li value={1} onClick={this.setActiveChannel}>
-          ah
+          Troy
           {/* {this.props.channels.map((channel) => (
             <ChannelIndexItem 
               key={this.channel.id}
@@ -45,8 +45,10 @@ class ChannelIndex extends React.Component {
             />  
           ))} */}
           </li> 
+          <br />
           <li value={2} onClick={this.setActiveChannel}>
-            + Add a new channel {/* <ChannelForm */}
+            + Add a new channel 
+            {/* <ChannelForm */}
           </li>
         </ul>
       </div>

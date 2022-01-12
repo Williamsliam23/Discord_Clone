@@ -24,7 +24,7 @@ const Greet = () => (
       </div>
     <div className="section1 flex-greet">
       <div className='first-graphic'>
-            <img src="" className="graphic1" alt="Community" />
+            <img src="Channelling.png" className="graphic1" alt="Community" />
         </div>
       <div className="text-holder">
       <h2>Create a space where you belong</h2>
@@ -39,17 +39,12 @@ const Greet = () => (
       <p>Relax in a channel of your choice.<br/>
       Friends in you server can chat in real time,<br/> making your time worth it.</p>
     </div>
-    <img src="" className="graphic2" alt="idk"/>
+    <img src="Chatting.png" className="graphic2" alt="Chatting"/>
     </div>
     <div className="section3 flex-greet">
-      <img src="" className="graphic3" alt="anotherone" />
+      <img src="Final.png" className="graphic3" alt="Final" />
       <div className="text-holder">
-      <h2>Show off your devotion to groupThink</h2>
-      <p>
-        After answering questions the Ministry of Truth<br/>
-        will assign you a score based on your speed and groupThink.<br/>
-        Just remember, failure to groupThink will reflect poorly on your score.
-      </p>
+      <h2>Come on in and have a blast!</h2>
       </div>
     </div>     
   </div>
