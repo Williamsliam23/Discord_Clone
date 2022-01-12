@@ -39,11 +39,17 @@ p {
 }
 
 .login-form-container {
+  color: white;
   display: inherit;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
+.log-label input {
+  color: white;
+}
+
 .login-form-container > * {
   display: inherit;
   justify-content: center;
@@ -77,6 +83,7 @@ p {
   border-radius: 5px;
 }
 .session-start {
+  color: white;
   background:	#6b83d8;
   border-style: solid;
   border-radius: 5px;
