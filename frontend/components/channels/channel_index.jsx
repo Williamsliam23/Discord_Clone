@@ -5,7 +5,7 @@ class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeChannel: null,
+      activeChannel: this.props.channels.first,
       activeSub: null
     };
     this.setActiveChannel = this.setActiveChannel.bind(this)
@@ -14,19 +14,23 @@ class ChannelIndex extends React.Component {
 
   componentDidMount() {
     this.props.fetchChannels()
+    this.props.fetchMessages(this.state.activeChannel)
   }
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.activeChannel !== this.props.activeChannel
+    return nextState.activeChannel !== this.state.activeChannel
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(nextProps) {
+    if(Object.values(nextProps.activeChannel).length !== 0){
       this.props.fetchMessages(this.state.activeChannel)
+    }
       this.activeSubscription(this.state.activeChannel)
   }
   
   setActiveChannel(e) {
     this.props.setActiveChannel(e.target.value)
     this.setState({activeChannel: e.target.value})
+    this.props.fetchMessages(e.target.value)
     this.activeSubscription(e.target.value)
   }
 
@@ -57,6 +61,7 @@ class ChannelIndex extends React.Component {
   }
 
   activeSubscription(active) {
+    this.props.fetchMessages(active)
 
     const subscribe = App.cable.subscriptions.create(
       {
