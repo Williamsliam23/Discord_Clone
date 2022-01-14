@@ -10,6 +10,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def show
+    debugger
     @message = Message.find_by(id: params[:id])
 
     if @message
@@ -21,7 +22,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def create
-    
+    debugger
     @message = Message.new(message_params)
     
     if @message.save
@@ -64,7 +65,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def find_channel
-    @channel = Channel.find_by(id: params[:channel_id])
+    @channel = Channel.find_by(id: message_params[:channel_id])
   end
 
 end

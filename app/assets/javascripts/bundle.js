@@ -2362,7 +2362,6 @@ var fetchUsers = function fetchUsers() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
-/* harmony export */   "createMessage": () => (/* binding */ createMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
 /* harmony export */   "deleteMessage": () => (/* binding */ deleteMessage),
 /* harmony export */   "fetchChannelMessages": () => (/* binding */ fetchChannelMessages),
@@ -2386,16 +2385,15 @@ var fetchMessage = function fetchMessage(id) {
     method: "GET",
     url: "api/messages/".concat(id)
   });
-};
-var createMessage = function createMessage(message) {
-  return $.ajax({
-    method: "POST",
-    url: "api/messages",
-    data: {
-      message: message
-    }
-  });
-};
+}; // export const createMessage = (message) => {
+//   console.log(message)
+//   return $.ajax({
+//     method: "POST",
+//     url: `api/messages`,
+//     data: message
+//   })
+// }
+
 var updateMessage = function updateMessage(message) {
   return $.ajax({
     method: "PATCH",
@@ -2449,9 +2447,10 @@ var fetchChannelMessages = /*#__PURE__*/function () {
   };
 }();
 var createChannelMessage = function createChannelMessage(message) {
+  console.log(message);
   return $.ajax({
     method: "POST",
-    url: "api/channels/".concat(message["channel_id"], "/messages"),
+    url: "api/channels/".concat(message["channelId"], "/messages"),
     data: {
       message: message
     }

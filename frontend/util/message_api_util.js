@@ -12,13 +12,14 @@ export const fetchMessage = (id) => (
     url: `api/messages/${id}`
   })
 )
-export const createMessage = (message) => (
-  $.ajax({
-    method: "POST",
-    url: `api/messages`,
-    data: {message: message}
-  })
-)
+// export const createMessage = (message) => {
+//   console.log(message)
+//   return $.ajax({
+//     method: "POST",
+//     url: `api/messages`,
+//     data: message
+//   })
+// }
 export const updateMessage = (message) => (
   $.ajax({
     method: "PATCH",
@@ -44,9 +45,10 @@ export const fetchChannelMessages = async (channelId) => {
     
 }
 export const createChannelMessage = (message) => {
+  console.log(message)
   return $.ajax({
     method: "POST",
-    url: `api/channels/${message["channel_id"]}/messages`,
+    url: `api/channels/${message["channelId"]}/messages`,
     data: {message: message}
   })
 }
