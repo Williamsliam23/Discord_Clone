@@ -1173,8 +1173,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      console.log(this.props.members);
-
       if (this.props.messages.length === 0) {
         return null;
       }
@@ -2359,7 +2357,6 @@ var fetchMessage = function fetchMessage(id) {
     url: "api/messages/".concat(id)
   });
 }; // export const createMessage = (message) => {
-//   console.log(message)
 //   return $.ajax({
 //     method: "POST",
 //     url: `api/messages`,
@@ -2420,7 +2417,6 @@ var fetchChannelMessages = /*#__PURE__*/function () {
   };
 }();
 var createChannelMessage = function createChannelMessage(message) {
-  console.log(message);
   return $.ajax({
     method: "POST",
     url: "api/channels/".concat(message.channelId, "/messages"),

@@ -46,7 +46,6 @@ class MessageIndex extends React.Component {
 
 
   render () {
-    console.log(this.props.members)
     if(this.props.messages.length === 0){
       return null
     }
