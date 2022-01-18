@@ -4,7 +4,6 @@ import MessageForm from "./message_form"
 
 
 const mapStateToProps = state => ({
-    activeChannel: state.entities.activeChannel,
     currentUser: state.session.id,
     formType: "create"
 })

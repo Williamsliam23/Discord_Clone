@@ -1,42 +1,27 @@
 import React from "react";
 import ChannelIndexItem from "./channel_index_item";
+import { withRouter } from "react-router-dom";
+import Chat from "../messages/chat"
 
 class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      activeChannel: this.props.channels.first,
-      activeSub: null
-    };
+
     this.setActiveChannel = this.setActiveChannel.bind(this)
-    this.activeSubscription = this.activeSubscription.bind(this)
   }
 
   componentDidMount() {
     this.props.fetchChannels()
-    this.props.fetchMessages(this.state.activeChannel)
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.activeChannel !== this.state.activeChannel
-  }
-
-  componentDidUpdate(nextProps) {
-    if(Object.values(nextProps.activeChannel).length !== 0){
-      this.props.fetchMessages(this.state.activeChannel)
-    }
-      this.activeSubscription(this.state.activeChannel)
+    // this.props.history.push(`/channels/1`)
   }
   
   setActiveChannel(e) {
-    this.props.setActiveChannel(e.target.value)
-    this.setState({activeChannel: e.target.value})
-    this.props.fetchMessages(e.target.value)
-    this.activeSubscription(e.target.value)
+    this.props.history.push(`/channels/${e.target.value}`)
   }
 
   render() {
     return (
-      
+      <>
       <div className='channel-wrap'>
         <h3>Channels</h3>
         <ul>
@@ -56,30 +41,10 @@ class ChannelIndex extends React.Component {
           </li>
         </ul>
       </div>
-        
+      <Chat />
+      </>
     )
-  }
-
-  activeSubscription(active) {
-    this.props.fetchMessages(active)
-
-    const subscribe = App.cable.subscriptions.create(
-      {
-        channel: "ChatChannel",
-        channelId: active
-      },
-      {
-        received: (data) => {
-          this.props.fetchMessages(active)
-        }
-      }
-    )
-    this.setState({ subscribe })
-  }
-
-  unsubscribe() {
-
   }
 }
 
-export default ChannelIndex
+export default withRouter(ChannelIndex)

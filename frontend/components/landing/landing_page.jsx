@@ -26,7 +26,7 @@ class LandingPage extends React.Component {
             <ServerList />
             <Channel />
           </div>
-          <Chat />
+          {/* <Chat /> */}
           <div >
           <Members />
           </div>

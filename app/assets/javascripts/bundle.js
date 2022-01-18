@@ -126,10 +126,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RECEIVE_MESSAGES": () => (/* binding */ RECEIVE_MESSAGES),
 /* harmony export */   "RECEIVE_MESSAGE": () => (/* binding */ RECEIVE_MESSAGE),
-/* harmony export */   "REMOVE_MESSAGE": () => (/* binding */ REMOVE_MESSAGE),
 /* harmony export */   "receiveMessages": () => (/* binding */ receiveMessages),
 /* harmony export */   "receiveMessage": () => (/* binding */ receiveMessage),
-/* harmony export */   "removeMessage": () => (/* binding */ removeMessage),
 /* harmony export */   "fetchChannelMessages": () => (/* binding */ fetchChannelMessages),
 /* harmony export */   "fetchMessage": () => (/* binding */ fetchMessage),
 /* harmony export */   "updateMessage": () => (/* binding */ updateMessage),
@@ -139,8 +137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/message_api_util */ "./frontend/util/message_api_util.js");
 
 var RECEIVE_MESSAGES = "RECEIVE_MESSAGES";
-var RECEIVE_MESSAGE = "RECEIVE_MESSAGE";
-var REMOVE_MESSAGE = "REMOVE_MESSAGE";
+var RECEIVE_MESSAGE = "RECEIVE_MESSAGE"; // export const REMOVE_MESSAGE = "REMOVE_MESSAGE"
+
 var receiveMessages = function receiveMessages(messages) {
   return {
     type: RECEIVE_MESSAGES,
@@ -152,13 +150,11 @@ var receiveMessage = function receiveMessage(message) {
     type: RECEIVE_MESSAGE,
     message: message
   };
-};
-var removeMessage = function removeMessage(messageId) {
-  return {
-    type: REMOVE_MESSAGE,
-    messageId: messageId
-  };
-};
+}; // export const removeMessage = messageId => ({
+//   type: REMOVE_MESSAGE,
+//   messageId
+// })
+
 var fetchChannelMessages = function fetchChannelMessages(channelId) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchChannelMessages(channelId).then(function (messages) {
@@ -171,30 +167,27 @@ var fetchChannelMessages = function fetchChannelMessages(channelId) {
 
 var fetchMessage = function fetchMessage(id) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id).then(function (message) {
-      return dispatch(receiveMessage(message));
-    });
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id) //.then(message => dispatch(receiveMessage(message)))
+    ;
   };
 };
 var updateMessage = function updateMessage(message) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.updateMessage(message).then(function (message) {
-      return dispatch(receiveMessage(message));
-    });
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.updateMessage(message) //.then(message => dispatch(receiveMessage(message)))
+    ;
   };
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannelMessage(message).then(function (message) {
-      return dispatch(receiveMessage(message));
-    });
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannelMessage(message) //.then(message => {
+    //dispatch(receiveMessage(message))})
+    ;
   };
 };
 var deleteMessage = function deleteMessage(id) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(id).then(function (id) {
-      return dispatch(removeMessage(id));
-    });
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.deleteMessage(id) //.then(id => dispatch(removeMessage(id)))
+    ;
   };
 };
 
@@ -304,6 +297,9 @@ var App = function App() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
     path: "/app",
     component: _landing_landing_page__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.ProtectedRoute, {
+    path: "/channels/:channelId",
+    component: _landing_landing_page__WEBPACK_IMPORTED_MODULE_7__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_3__.AuthRoute, {
     path: "/signup",
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -357,6 +353,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _channel_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channel_index_item */ "./frontend/components/channels/channel_index_item.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _messages_chat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../messages/chat */ "./frontend/components/messages/chat.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -382,6 +380,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(ChannelIndex, _React$Component);
 
@@ -393,49 +393,24 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ChannelIndex);
 
     _this = _super.call(this, props);
-    _this.state = {
-      activeChannel: _this.props.channels.first,
-      activeSub: null
-    };
     _this.setActiveChannel = _this.setActiveChannel.bind(_assertThisInitialized(_this));
-    _this.activeSubscription = _this.activeSubscription.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ChannelIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchChannels();
-      this.props.fetchMessages(this.state.activeChannel);
-    }
-  }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextState.activeChannel !== this.state.activeChannel;
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate(nextProps) {
-      if (Object.values(nextProps.activeChannel).length !== 0) {
-        this.props.fetchMessages(this.state.activeChannel);
-      }
-
-      this.activeSubscription(this.state.activeChannel);
+      this.props.fetchChannels(); // this.props.history.push(`/channels/1`)
     }
   }, {
     key: "setActiveChannel",
     value: function setActiveChannel(e) {
-      this.props.setActiveChannel(e.target.value);
-      this.setState({
-        activeChannel: e.target.value
-      });
-      this.props.fetchMessages(e.target.value);
-      this.activeSubscription(e.target.value);
+      this.props.history.push("/channels/".concat(e.target.value));
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "channel-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: 1,
@@ -443,35 +418,14 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       }, "Troy"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: 2,
         onClick: this.setActiveChannel
-      }, "+ Add a new channel")));
+      }, "+ Add a new channel"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
-  }, {
-    key: "activeSubscription",
-    value: function activeSubscription(active) {
-      var _this2 = this;
-
-      this.props.fetchMessages(active);
-      var subscribe = App.cable.subscriptions.create({
-        channel: "ChatChannel",
-        channelId: active
-      }, {
-        received: function received(data) {
-          _this2.props.fetchMessages(active);
-        }
-      });
-      this.setState({
-        subscribe: subscribe
-      });
-    }
-  }, {
-    key: "unsubscribe",
-    value: function unsubscribe() {}
   }]);
 
   return ChannelIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ChannelIndex);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_3__.withRouter)(ChannelIndex));
 
 /***/ }),
 
@@ -761,7 +715,7 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
         className: "landing"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "side-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_servers_server_list__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_Channel__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_User__WEBPACK_IMPORTED_MODULE_8__["default"], null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_servers_server_list__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_Channel__WEBPACK_IMPORTED_MODULE_4__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_User__WEBPACK_IMPORTED_MODULE_8__["default"], null))));
     }
   }]);
 
@@ -939,7 +893,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Chat = function Chat() {
+var Chat = function Chat(_ref) {
+  var activeChannel = _ref.activeChannel;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "chat-wrap"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -971,7 +926,6 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    activeChannel: state.entities.activeChannel,
     currentUser: state.session.id,
     formType: "create"
   };
@@ -1057,7 +1011,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     }
 
     if (_this.props.activeChannel) {
-      setChannel = _this.props.activeChannel["id"];
+      setChannel = _this.props.activeChannel;
     } else {
       setChannel = undefined;
     }
@@ -1090,21 +1044,15 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
-      var setChannel;
+      var setChannel; // if(Object.keys(this.props.activeChannel).length !== 0) {
 
-      if (Object.keys(this.props.activeChannel).length !== 0) {
-        setChannel = Object.keys(this.props.activeChannel)[0];
-        this.setState({
-          body: e.currentTarget.value,
-          channelId: setChannel
-        });
-      } else {
-        setChannel = undefined;
-        this.setState({
-          body: "",
-          channelId: setChannel
-        });
-      }
+      this.setState({
+        body: e.currentTarget.value
+      }); // } else {
+      //   setChannel = undefined;
+      //   this.setState({body: "",
+      //     channelId: setChannel})
+      // }
     }
   }, {
     key: "render",
@@ -1146,6 +1094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _message_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./message_index_item */ "./frontend/components/messages/message_index_item.jsx");
 /* harmony import */ var _ChatScroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChatScroll */ "./frontend/components/messages/ChatScroll.jsx");
 /* harmony import */ var _create_message_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_message_container */ "./frontend/components/messages/create_message_container.jsx");
@@ -1176,6 +1125,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndex, _React$Component);
 
@@ -1188,50 +1138,75 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      activeSubscription: null
+      activeChannel: _this.props.match.params.channelId
     };
+    _this.setSubscription = _this.setSubscription.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageIndex, [{
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      return nextProps.activeChannel !== this.props.activeChannel;
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchUsers();
+      this.props.fetchMessages(this.props.match.params.channelId);
+      this.setSubscription();
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      if (prevProps.match.params.channelId !== this.props.match.params.channelId) {
+        this.props.fetchUsers();
+        this.props.fetchMessages(this.props.match.params.channelId);
+      }
     }
   }, {
     key: "setSubscription",
     value: function setSubscription() {
-      this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"]);
-    }
-  }, {
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {
-      if (Object.values(this.props.activeChannel).length !== 0) {
-        this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"]);
-      }
+      var _this2 = this;
+
+      // this.props.fetchMessages(this.props.match.params.channelId)
+      App.cable.subscriptions.create({
+        channel: "ChatChannel",
+        id: this.props.match.params.channelId
+      }, {
+        received: function received(data) {
+          _this2.props.fetchMessages(_this2.props.match.params.channelId);
+        }
+      });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
-      console.log(this.props);
+      console.log(this.props.members);
+
+      if (this.props.messages.length === 0) {
+        return null;
+      }
+
+      if (this.props.members.length === 0) {
+        return null;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "message-list"
       }, this.props.messages.map(function (message) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message,
-          author: Object.assign({}, _this2.props.members)
+          author: Object.assign({}, _this3.props.members)
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        activeChannel: this.props.match.params.channelId
+      }));
     }
   }]);
 
   return MessageIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageIndex);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)(MessageIndex));
 
 /***/ }),
 
@@ -1249,7 +1224,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+/* harmony import */ var _actions_membership_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/membership_action */ "./frontend/actions/membership_action.js");
+/* harmony import */ var _message_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./message_index */ "./frontend/components/messages/message_index.jsx");
+
 
 
 
@@ -1260,7 +1237,7 @@ var mapStateToProps = function mapStateToProps(state) {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
     members: state.entities.members,
-    activeChannel: state.entities.activeChannel,
+    activeChannel: state.entities.activeChannel.id,
     channels: state.entities.channels
   };
 };
@@ -1271,15 +1248,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch(updateMessage(message));
     },
     processCreate: function processCreate(message) {
-      return dispatch(createMessage(message));
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.createMessage)(message));
     },
     fetchMessages: function fetchMessages(id) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_2__.fetchChannelMessages)(id));
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch((0,_actions_membership_action__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_message_index__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_message_index__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -2096,10 +2076,9 @@ var messagesReducer = function messagesReducer() {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
       nextState[action.message.id] = action.message;
       return nextState;
-
-    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
-      delete nextState[action.messageId];
-      return nextState;
+    // case REMOVE_MESSAGE:
+    //     delete nextState[action.messageId]
+    //     return nextState
 
     default:
       return state;
@@ -2450,7 +2429,7 @@ var createChannelMessage = function createChannelMessage(message) {
   console.log(message);
   return $.ajax({
     method: "POST",
-    url: "api/channels/".concat(message["channelId"], "/messages"),
+    url: "api/channels/".concat(message.channelId, "/messages"),
     data: {
       message: message
     }
@@ -40640,26 +40619,17 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
-/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
-/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
-/* harmony import */ var _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/message_api_util */ "./frontend/util/message_api_util.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
+/* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
-  var root = document.getElementById("root"); // const store = configureStore()
-
-  var store; // window.getState = store.getState
-  // window.dispatch = store.dispatch
-  // window.login = login
-  // window.logout = logout
-  // window.signup = signup
+  var root = document.getElementById("root");
+  var store;
 
   if (window.currentUser) {
     var preloadedState = {
@@ -40670,21 +40640,16 @@ document.addEventListener("DOMContentLoaded", function () {
         id: window.currentUser.id
       }
     };
-    store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])(preloadedState);
+    store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])(preloadedState);
     delete window.currentUser;
   } else {
-    store = (0,_store_store__WEBPACK_IMPORTED_MODULE_3__["default"])();
+    store = (0,_store_store__WEBPACK_IMPORTED_MODULE_2__["default"])();
   } //testing state and actions/util
 
 
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.login = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.login;
-  window.logout = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.logout;
-  window.signup = _util_session_api_util__WEBPACK_IMPORTED_MODULE_2__.signup;
-  window.fetchMessage = _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__.fetchMessage;
-  window.createMessage = _util_message_api_util__WEBPACK_IMPORTED_MODULE_5__.createMessage;
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_4__["default"], {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_root__WEBPACK_IMPORTED_MODULE_3__["default"], {
     store: store
   }), root);
 });

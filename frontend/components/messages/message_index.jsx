@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import MessageIndexItem from "./message_index_item";
 import AlwaysScrollToBottom from "./ChatScroll"
 import CreateMessageContainer from "./create_message_container";
@@ -7,26 +8,51 @@ class MessageIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      activeSubscription: null
+      activeChannel: this.props.match.params.channelId
+    }
+    this.setSubscription = this.setSubscription.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchUsers()
+    this.props.fetchMessages(this.props.match.params.channelId)
+    this.setSubscription()
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.channelId !== this.props.match.params.channelId){
+      this.props.fetchUsers()
+      this.props.fetchMessages(this.props.match.params.channelId)
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.activeChannel !== this.props.activeChannel
-  }
+
 
   setSubscription(){
-    this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"])
+
+    // this.props.fetchMessages(this.props.match.params.channelId)
+    App.cable.subscriptions.create(
+      {
+        channel: "ChatChannel",
+        id: this.props.match.params.channelId
+      },
+      {
+        received: (data) => {
+          this.props.fetchMessages(this.props.match.params.channelId)
+        }
+      }
+    )
   }
 
-  componentDidUpdate(){
-    if(Object.values(this.props.activeChannel).length !== 0){
-      this.props.fetchMessages(Object.values(this.props.activeChannel)[0]["id"])
-    }
-  }
 
   render () {
-    console.log(this.props)
+    console.log(this.props.members)
+    if(this.props.messages.length === 0){
+      return null
+    }
+    if(this.props.members.length === 0){
+      return null
+    }
     return(
       <div>
         <ul className='message-list'>
@@ -43,10 +69,10 @@ class MessageIndex extends React.Component {
         <AlwaysScrollToBottom />
         <br />
         <br />
-        <CreateMessageContainer />
+      <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
       </div>
     )
   }
 }
 
-export default MessageIndex
+export default withRouter(MessageIndex)

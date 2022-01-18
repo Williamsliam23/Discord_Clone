@@ -1,11 +1,11 @@
 import React from "react";
 import MessageIndexContainer from "./message_index_container";
 
-const Chat = () =>{
+const Chat = ({activeChannel}) =>{
   return(
     <div className='chat-wrap'>
     <div className="dischat">
-      <MessageIndexContainer/>
+      <MessageIndexContainer />
     </div>
     </div>
   )

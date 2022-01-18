@@ -4,13 +4,11 @@ class Api::MessagesController < ApplicationController
   def index
     @messages = @channel.messages
     # @messages = Message.all
-
     render :index
 
   end
 
   def show
-    debugger
     @message = Message.find_by(id: params[:id])
 
     if @message
@@ -22,15 +20,13 @@ class Api::MessagesController < ApplicationController
   end
 
   def create
-    debugger
+
     @message = Message.new(message_params)
-    
     if @message.save
-      ChatChannel.broadcast_to(@channel, Api::MessagesController.render(:show), locals: {message: @message})
+      ChatChannel.broadcast_to(@channel, Api::MessagesController.render( :show, locals: {message: @message}))
     else
       render @message.errors.full_messages
     end
-
   end
 
   def update
@@ -65,7 +61,7 @@ class Api::MessagesController < ApplicationController
   end
 
   def find_channel
-    @channel = Channel.find_by(id: message_params[:channel_id])
+    @channel = Channel.find_by(id: params[:channel_id])
   end
 
 end

@@ -21,7 +21,7 @@ class MessageForm extends React.Component {
         setAuthor = this.props.currentUser;
       }
       if (this.props.activeChannel) {
-        setChannel = this.props.activeChannel["id"]
+        setChannel = this.props.activeChannel
       } else {
         setChannel = undefined;
       }
@@ -51,15 +51,14 @@ class MessageForm extends React.Component {
   
   updateMessage(e) {
     let setChannel
-    if(Object.keys(this.props.activeChannel).length !== 0) {
-      setChannel = Object.keys(this.props.activeChannel)[0]
-      this.setState({body: e.currentTarget.value,
-        channelId: setChannel})
-    } else {
-      setChannel = undefined;
-      this.setState({body: "",
-        channelId: setChannel})
-    }
+    // if(Object.keys(this.props.activeChannel).length !== 0) {
+
+      this.setState({body: e.currentTarget.value})
+    // } else {
+    //   setChannel = undefined;
+    //   this.setState({body: "",
+    //     channelId: setChannel})
+    // }
   }
   
   render () {
