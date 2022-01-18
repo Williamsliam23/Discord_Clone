@@ -13,13 +13,11 @@ class LandingPage extends React.Component {
     super(props)
     console.log(this.props)
     this.props.fetchChannels()
-    this.state = {
-      channels: this.props.channels
-    }
   }
 
   componentDidMount() {
     this.props.fetchChannels()
+    console.log(this.state)
   }
 
   render() {
@@ -33,7 +31,7 @@ class LandingPage extends React.Component {
         <div className='landing'>
           <div className='side-bar'>
             <ServerList />
-            <Channel channels={this.state.channels}/>
+            <Channel />
           </div>
           {/* <Chat /> */}
           <div >

@@ -47,10 +47,14 @@ class MessageIndex extends React.Component {
 
   render () {
     if(this.props.messages.length === 0){
-      return null
+      return (
+        <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+      )
     }
     if(this.props.members.length === 0){
-      return null
+      return (
+        <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+      )
     }
     return(
       <div>
