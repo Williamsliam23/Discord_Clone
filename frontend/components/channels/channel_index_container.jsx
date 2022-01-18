@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchChannel, fetchChannels } from "../../actions/channel_actions";
+import { fetchChannel, fetchChannels, createChannel } from "../../actions/channel_actions";
 import { fetchChannelMessages } from "../../actions/message_actions";
 import ChannelIndex from "./channel_index"
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   messages: Object.values(state.entities.messages),
   currentUser: state.entities.users,
   activeChannel: state.entities.activeChannel,
-  channels: state.entities.channels
+  channels: Object.values(state.entities.channels)
 })
 
 const mapDispatchToProps = dispatch => ({

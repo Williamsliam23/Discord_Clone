@@ -8,20 +8,21 @@ class ChannelForm extends React.Component {
       setAuthor = this.props.currentUser;
       setTitle = ""
       this.state = {
-          title: setTitle,
-          authorId: setAuthor
+        id: null,
+        title: "",
+        authorId: setAuthor
       }
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateChannel = this.updateChannel.bind(this)
   }
   handleSubmit(e) {
     e.preventDefault()
-      const channel = Object.assign({}, this.state);
-      this.props.processCreate(channel)
-      this.setState({
-        title: "",
-        authorId: this.props.currentUser
-      })
+    const channel = Object.assign({}, this.state);
+    this.props.processCreate(channel).then(this.props.fetchChannels())
+    this.setState({
+      title: "",
+      authorId: this.props.currentUser
+    })
   }
   
   updateChannel(e) {

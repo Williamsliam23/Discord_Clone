@@ -11,13 +11,11 @@ import Members from "../users/User";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props)
-    console.log(this.props)
     this.props.fetchChannels()
   }
 
   componentDidMount() {
     this.props.fetchChannels()
-    console.log(this.state)
   }
 
   render() {

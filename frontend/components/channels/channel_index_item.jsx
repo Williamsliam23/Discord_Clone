@@ -8,7 +8,6 @@ class ChannelIndexItem extends React.Component {
   }
 
   setActiveChannel(e) {
-    console.log(e.target.value)
     this.props.history.push(`/channels/${e.target.value}`)
   }
 
