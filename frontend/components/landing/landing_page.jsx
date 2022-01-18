@@ -11,6 +11,15 @@ import Members from "../users/User";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props)
+    console.log(this.props)
+    this.props.fetchChannels()
+    this.state = {
+      channels: this.props.channels
+    }
+  }
+
+  componentDidMount() {
+    this.props.fetchChannels()
   }
 
   render() {
@@ -24,7 +33,7 @@ class LandingPage extends React.Component {
         <div className='landing'>
           <div className='side-bar'>
             <ServerList />
-            <Channel />
+            <Channel channels={this.state.channels}/>
           </div>
           {/* <Chat /> */}
           <div >

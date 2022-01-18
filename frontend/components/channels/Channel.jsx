@@ -1,10 +1,10 @@
 import React from "react";
 import ChannelIndexContainer from "./channel_index_container";
 
-const Channels = () =>{
+const Channels = ({channels}) =>{
   return(
     <>
-      <ChannelIndexContainer/>
+      <ChannelIndexContainer channels={channels}/>
     </>
   )
 }

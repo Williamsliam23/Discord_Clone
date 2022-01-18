@@ -7,13 +7,13 @@ import {HashRouter, Switch, Router} from "react-router-dom"
 import Greet from "./greeting"
 import topNav from "./landing/top_nav";
 import Chat from "./messages/chat";
-import LandingPage from "./landing/landing_page";
+import LandingPageContainer from "./landing/landing_page_container";
 
 const App = () => (
   <div>
     <Switch>
-      <ProtectedRoute path="/app" component={LandingPage} />
-      <ProtectedRoute path="/channels/:channelId" component={LandingPage}/>
+      <ProtectedRoute path="/app" component={LandingPageContainer} />
+      <ProtectedRoute path="/channels/:channelId" component={LandingPageContainer}/>
       <AuthRoute path="/signup" component={SignupFormContainer} />
       <AuthRoute path="/login" component={LoginFormContainer} />
       <Route path="/" component={Greet}/>

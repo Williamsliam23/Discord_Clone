@@ -6,13 +6,8 @@ import Chat from "../messages/chat"
 class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
-
+    console.log(this.props)
     this.setActiveChannel = this.setActiveChannel.bind(this)
-  }
-
-  componentDidMount() {
-    this.props.fetchChannels()
-    // this.props.history.push(`/channels/1`)
   }
   
   setActiveChannel(e) {
@@ -20,6 +15,9 @@ class ChannelIndex extends React.Component {
   }
 
   render() {
+    if(this.props.channels.length === 0){
+      return null
+    }
     return (
       <>
       <div className='channel-wrap'>
@@ -27,12 +25,12 @@ class ChannelIndex extends React.Component {
         <ul>
           <li value={1} onClick={this.setActiveChannel}>
           Troy
-          {/* {this.props.channels.map((channel) => (
+          {Object.values(this.props.channels).map((channel) => (
             <ChannelIndexItem 
               key={this.channel.id}
               channel={channel}
             />  
-          ))} */}
+          ))}
           </li> 
           <br />
           <li value={2} onClick={this.setActiveChannel}>
