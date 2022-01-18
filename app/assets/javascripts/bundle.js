@@ -1044,15 +1044,9 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
-      var setChannel; // if(Object.keys(this.props.activeChannel).length !== 0) {
-
       this.setState({
         body: e.currentTarget.value
-      }); // } else {
-      //   setChannel = undefined;
-      //   this.setState({body: "",
-      //     channelId: setChannel})
-      // }
+      });
     }
   }, {
     key: "render",

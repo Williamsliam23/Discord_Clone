@@ -50,15 +50,7 @@ class MessageForm extends React.Component {
   }
   
   updateMessage(e) {
-    let setChannel
-    // if(Object.keys(this.props.activeChannel).length !== 0) {
-
-      this.setState({body: e.currentTarget.value})
-    // } else {
-    //   setChannel = undefined;
-    //   this.setState({body: "",
-    //     channelId: setChannel})
-    // }
+    this.setState({body: e.currentTarget.value})
   }
   
   render () {
