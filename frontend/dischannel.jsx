@@ -20,10 +20,8 @@ if (window.currentUser) {
 } else {
   store = configureStore();
 }
-
 //testing state and actions/util
-window.getState = store.getState
+  window.getState = store.getState
   window.dispatch = store.dispatch
-
   ReactDOM.render(<Root store={store} />, root);
 });
