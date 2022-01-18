@@ -34,7 +34,7 @@ class ChannelIndex extends React.Component {
     return (
       <>
       <div className='channel-wrap'>
-        <h3>Channels</h3>
+        <h3 className="channels-header">Channels</h3>
         <ul>
           {Object.values(this.props.channels).map((channel) => {
             return <ChannelIndexItem 

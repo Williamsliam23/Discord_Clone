@@ -12,6 +12,7 @@ class UserList extends React.Component {
 
   render () {
     return(
+      <>
       <div>
         <ul className='user-wrap'>
         Members
@@ -22,7 +23,9 @@ class UserList extends React.Component {
             />
           ))}
         </ul>
+      <button onClick={this.props.logout} className='logout'>Logout</button>
       </div>
+      </>
     )
   }
 }

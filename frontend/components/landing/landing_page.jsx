@@ -22,18 +22,11 @@ class LandingPage extends React.Component {
 
     return (
       <>
-      <div className='title'>
-        <h1>Dischannel</h1>
-      <TopNav />
-      </div>
         <div className='landing'>
           <div className='side-bar'>
             <ServerList />
             <Channel />
-          </div>
-          {/* <Chat /> */}
-          <div >
-          <Members />
+            <Members />
           </div>
         </div>
       </>

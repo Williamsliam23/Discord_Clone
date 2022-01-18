@@ -13,8 +13,8 @@
   justify-self: flex-end;
   justify-content: flex-end;
   // bottom: 2vh;
-  height: 80vh;
-  width: 50vw;
+  height: 100%;
+  width: 50%;
   color: white;
   overflow-y: visible;
   overflow-x: hidden;
@@ -29,18 +29,18 @@
 }
 
 .box {
+  color: white;
   background: #424549;
   outline: none;
-  height: 3vh;
-  width: 60vw;
+  height: 30px;
+  width: 92%;
   resize: none;
   overflow: auto;
 }
 
 .position-chat {
+  margin-top: auto;
   z-index: 1;
-  position: fixed;
-  bottom: 13vh;
 }
 
 .send-message {
