@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
   currentUser: state.entities.users,
   members: state.entities.members,
   activeChannel: state.entities.activeChannel.id,
-  channels: state.entities.channels,
+  channels: state.entities.channels
 })
 
 const mapDispatchToProps = dispatch => ({

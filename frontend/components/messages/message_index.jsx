@@ -8,7 +8,8 @@ class MessageIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state={
-      activeChannel: this.props.match.params.channelId
+      activeChannel: this.props.match.params.channelId,
+      user: Object.values(this.props.currentUser)[0].id
     }
     this.setSubscription = this.setSubscription.bind(this)
   }
@@ -29,8 +30,6 @@ class MessageIndex extends React.Component {
 
 
   setSubscription(){
-
-    // this.props.fetchMessages(this.props.match.params.channelId)
     App.cable.subscriptions.create(
       {
         channel: "ChatChannel",
@@ -70,6 +69,7 @@ class MessageIndex extends React.Component {
               key={message.id}
               message={message}
               author={Object.assign({}, this.props.members)}
+              userId={this.state.user}
             />
             
           ))}

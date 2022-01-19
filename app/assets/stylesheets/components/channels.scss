@@ -1,4 +1,13 @@
 .channels-header {
+  padding: 10px 5px;
+  border-radius: 0;
+  border: 2px solid gray;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.selected-server{
   padding-bottom: 10px;
   border-radius: 0;
   border: 2px solid gray;
@@ -8,19 +17,18 @@
 }
 
 .channel-list-item{
+  font-weight: bold;
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 2px solid gray;
-  border-radius: 0;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  padding-left: 5px;
+  border-radius: 5px;
 }
 
 .channel-list-item:hover{
   background: gray;
-  transition: 0.5s;
+  transition: 0.3s;
   opacity: .9;
+  border: 2px solid gray;
 }
 
 .active{

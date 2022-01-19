@@ -29,7 +29,8 @@ class ChannelIndex extends React.Component {
     return (
       <>
       <div className='channel-wrap'>
-        <h3 className="channels-header">Channels</h3>
+      <h3 className="selected-server">Selected Server</h3>
+        <h4 className="channels-header">Text Channels</h4>
         <ul>
           {Object.values(this.props.channels).map((channel) => {
             return <ChannelIndexItem 

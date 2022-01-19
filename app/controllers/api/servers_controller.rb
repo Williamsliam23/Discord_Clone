@@ -38,10 +38,10 @@ class Api::ServersController < ApplicationController
       render json: ["There is no server"]
     end
 
-    if server.update(message_params)
+    if server.update(server_params)
       render :show
     else
-      render @message.errors.full_messages
+      render @server.errors.full_messages
     end
 
   end
@@ -57,7 +57,7 @@ class Api::ServersController < ApplicationController
   private
 
   def server_params
-    params.require(:server).permit(:body, :author_id)
+    params.require(:server).permit(:title, :author_id)
   end
 
 end

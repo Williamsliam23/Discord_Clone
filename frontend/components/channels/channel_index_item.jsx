@@ -19,8 +19,9 @@ class ChannelIndexItem extends React.Component {
       onClick={this.setActiveChannel} 
       className="channel-list-item"
       >
-        {this.props.channel.title}
+        # {this.props.channel.title}
       </li>
+      
     )
   }
 }

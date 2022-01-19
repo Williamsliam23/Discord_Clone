@@ -527,8 +527,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "channel-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        className: "selected-server"
+      }, "Selected Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
         className: "channels-header"
-      }, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.channels).map(function (channel) {
+      }, "Text Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.channels).map(function (channel) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channel_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: channel.id,
           channel: channel,
@@ -662,7 +664,7 @@ var ChannelIndexItem = /*#__PURE__*/function (_React$Component) {
         value: this.props.channel.id,
         onClick: this.setActiveChannel,
         className: "channel-list-item"
-      }, this.props.channel.title);
+      }, "# ", this.props.channel.title);
     }
   }]);
 
@@ -1356,7 +1358,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      activeChannel: _this.props.match.params.channelId
+      activeChannel: _this.props.match.params.channelId,
+      user: Object.values(_this.props.currentUser)[0].id
     };
     _this.setSubscription = _this.setSubscription.bind(_assertThisInitialized(_this));
     return _this;
@@ -1382,7 +1385,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     value: function setSubscription() {
       var _this2 = this;
 
-      // this.props.fetchMessages(this.props.match.params.channelId)
       App.cable.subscriptions.create({
         channel: "ChatChannel",
         id: this.props.match.params.channelId
@@ -1421,7 +1423,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_message_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: message.id,
           message: message,
-          author: Object.assign({}, _this3.props.members)
+          author: Object.assign({}, _this3.props.members),
+          userId: _this3.state.user
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         activeChannel: this.props.match.params.channelId
@@ -1540,10 +1543,18 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       author: _this.props.author[_this.props.message.author_id].username
     };
     _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
+    _this.allowChange = _this.allowChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageIndexItem, [{
+    key: "allowChange",
+    value: function allowChange() {
+      if (this.props.message.author_id === this.props.userId) {
+        console.log("Hello Again");
+      }
+    }
+  }, {
     key: "deleteMessage",
     value: function deleteMessage() {
       this.props.deleteMessage(this.props.message.id);
@@ -1551,7 +1562,14 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, this.state.author), " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), "\xA0\xA0\xA0\xA0", this.props.message.body, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "user-message",
+        onClick: this.allowChange
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "author"
+      }, this.state.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "body"
+      }, "\xA0\xA0\xA0\xA0", this.props.message.body));
     }
   }]);
 
