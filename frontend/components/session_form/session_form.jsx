@@ -9,6 +9,7 @@ class SessionForm extends React.Component {
       password: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.demoLogin = this.demoLogin.bind(this)
   }
 
   loginOrSignup() {
@@ -55,7 +56,11 @@ class SessionForm extends React.Component {
             <input className="session-start" type="submit" value={this.props.formType} />
             <br />
             <br />
+            <input className="session-start" type="button" value="Demo User Login" onClick={this.demoLogin} />
+            <br />
+            <br />
             <span>Don't have an account?</span>
+            <br />
             <br />
             {this.props.navLink}
           </div>
@@ -75,31 +80,7 @@ class SessionForm extends React.Component {
           
           {this.renderErrors()}
           {this.loginOrSignup()}
-          {/* <div className='login-form'>
-            <label className='log-label'><h4>Username:</h4>
-              <input type='text' value={this.state.username} onChange={this.update('username')} className='login-field'></input>
-            </label>
-            <br />
-            <br />
-            <label className='log-label'><h4>Email:</h4>
-              <input type='text' value={this.state.email} onChange={this.update('email')} className='login-field'></input>
-             </label>
-            <br/>
-            <br/>
-            <label className='log-label'><h4>Password:</h4>
-              <input type='password' value={this.state.password} onChange={this.update('password')} className='login-field'></input>
-            </label>
-            <br />
-            <br />
-            <input className="session-start" type="submit" value={this.props.formType} />
-            <br />
-            <br />
-            <span>Don't have an account?</span>
-            <br />
-            {this.props.navLink}
-          </div> */}
         </form>
-
       </div>
       </div>
     )
@@ -127,6 +108,15 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
+    this.props.processForm(user);
+  }
+
+  demoLogin(){
+    const demoUser = {
+      username: "Demo User",
+      password: "DemoProductPassword"
+    }
+    const user = Object.assign({}, demoUser);
     this.props.processForm(user);
   }
 }
