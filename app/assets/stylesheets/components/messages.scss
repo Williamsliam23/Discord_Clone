@@ -42,11 +42,11 @@
   width: 100%;
   flex-direction: column;
   resize: none;
-  scrollbar-track-color: none;
 }
 
-.message-list{
-  height: 100%;
+.message-holder{
+  margin-top: auto;
+  height: fit-content;
 }
 
 .no-messages{
@@ -64,7 +64,6 @@
 }
 
 .position-chat {
-  position: -webkit-sticky; /* Safari */
   position: sticky;
   display: flex;
   flex-wrap: nowrap;

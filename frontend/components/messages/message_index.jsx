@@ -61,7 +61,8 @@ class MessageIndex extends React.Component {
       )
     }
     return(
-      <div>
+      <>
+      <div className="message-holder">
         <ul className='message-list'>
           {this.props.messages.map((message) => (
             
@@ -74,8 +75,9 @@ class MessageIndex extends React.Component {
           ))}
         </ul>
         <AlwaysScrollToBottom />
-      <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
       </div>
+      <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+      </>
     )
   }
 }
