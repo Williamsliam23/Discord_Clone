@@ -2,7 +2,7 @@ import React from "react";
 import { receiveMessages } from "../../actions/message_actions";
 import ChannelIndex from "../channels/channel_index";
 import Channel from "../channels/Channel"
-import ServerIndex from "../servers/server_index";
+import Servers from "../servers/Server";
 import Members from "../users/User";
 
 class LandingPage extends React.Component {
@@ -21,8 +21,7 @@ class LandingPage extends React.Component {
       <>
         <div className='landing'>
           <div className='side-bar'>
-            <ServerIndex />
-            <Channel />
+            <Servers />
             <Members />
           </div>
         </div>

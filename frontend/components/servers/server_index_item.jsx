@@ -8,12 +8,12 @@ class ServerIndexItem extends React.Component {
   }
 
   setActiveServer(e){
-    this.props.history.push(`/server/${e.target.value}`)
+    this.props.history.push(`/servers/${this.props.server.id}`)
   }
 
   render(){
     return (
-      <li value={this.props.server.id} onClick={this.setActiveServer}>
+      <li onClick={this.setActiveServer} >
         {this.props.server.title}
       </li>
     )

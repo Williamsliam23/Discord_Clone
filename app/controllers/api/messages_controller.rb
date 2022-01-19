@@ -2,8 +2,9 @@ class Api::MessagesController < ApplicationController
   before_action :find_channel
 
   def index
+
     @messages = @channel.messages
-    # @messages = Message.all
+
     render :index
 
   end

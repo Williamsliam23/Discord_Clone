@@ -1,6 +1,8 @@
 import React from "react";
 import ServerIndexItem from "./server_index_item"
+import Channel from "../channels/Channel"
 import { withRouter } from "react-router-dom"
+import CreateServerContainer from "./create_server_container";
 
 class ServerIndex extends React.Component {
   constructor(props) {
@@ -8,6 +10,8 @@ class ServerIndex extends React.Component {
     this.state = {
       servers: this.props.fetchServers()
     }
+    console.log(this.props)
+    console.log(this.state)
   }
 
   componentDidMount(){
@@ -16,33 +20,29 @@ class ServerIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.servers.length !== this.props.servers.length){
-      this.props.fetchChannels()
+      this.props.fetchServers()
     }
   }
   render() {
-
+    if(this.props.servers.length === 0){
+      return null
+    }
     return (
-      
+      <>
       <div className='server-wrap'>
         <h3>Servers</h3>
         <ul>
           {Object.values(this.props.servers).map((server) => {
             return <ServerIndexItem
-
+              key={server.id}
+              server={server}
             />
           })}
-          <li>
-            Main {/* li's for each server the user is associated with */}
-          </li>
-          <li>
-            Aegean Sea
-          </li>
-          <li>
-            Create Server {/* modal for server creation */}
-          </li>
+          <CreateServerContainer />
         </ul>
       </div>
-        
+      <Channel />
+      </>
     )
   }
 }

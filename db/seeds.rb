@@ -13,6 +13,10 @@ User.create([username: "Hector", email: "testemail3@noweb.com", password: "Passw
 User.create([username: "Paris", email: "testemail4@noweb.com", password: "Password1"]) # 10
 User.create([username: "Agamemnon", email: "testemail5@noweb.com", password: "Password1"]) # 11
 
+Server.create([title: "First Server", creator_id: 1])
+Server.create([title: "Second Server", creator_id: 1])
+Server.create([title: "Third Server", creator_id: 1])
+
 Channel.create([title: "First Channel", author_id: 1])
 Channel.create([title: "Second Channel", author_id: 1])
 Channel.create([title: "Third Channel", author_id: 1])

@@ -17,7 +17,7 @@ class ServerForm extends React.Component {
     let title = this.state.title
     if (title.trim() !== ""){
     const server = Object.assign({}, this.state);
-    this.props.processCreate(server.then(this.props.fetchServers()))
+    this.props.processCreate(server)
     }
     this.setState({
       title: "",
@@ -33,7 +33,7 @@ class ServerForm extends React.Component {
     return(
       <form >
         <input className="server-name" type="text" value={this.state.title} onChange={this.updateServer}/>
-        <input className="create-server" type="submit" value="Submit"/>
+        <input className="create-server" type="submit" value="Submit" onClick={this.submitServer}/>
       </form>
     )
   }

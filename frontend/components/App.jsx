@@ -12,8 +12,8 @@ import LandingPageContainer from "./landing/landing_page_container";
 const App = () => (
   <div>
     <Switch>
-      <ProtectedRoute path="/app" component={LandingPageContainer} />
-      <ProtectedRoute path="/channels/:channelId" component={LandingPageContainer}/>
+      <ProtectedRoute path="/servers/:serverId/channels/:channelId" component={LandingPageContainer}/>
+      <ProtectedRoute path="/servers/:serverId" component={LandingPageContainer} />
       <AuthRoute path="/signup" component={SignupFormContainer} />
       <AuthRoute path="/login" component={LoginFormContainer} />
       <Route path="/" component={Greet}/>
