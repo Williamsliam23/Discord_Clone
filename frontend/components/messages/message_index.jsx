@@ -48,12 +48,16 @@ class MessageIndex extends React.Component {
   render () {
     if(this.props.messages.length === 0){
       return (
+        <div className="no-messages">
         <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+        </div>
       )
     }
     if(this.props.members.length === 0){
       return (
+        <div className="no-messages">
         <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+        </div>
       )
     }
     return(
@@ -70,8 +74,6 @@ class MessageIndex extends React.Component {
           ))}
         </ul>
         <AlwaysScrollToBottom />
-        <br />
-        <br />
       <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
       </div>
     )

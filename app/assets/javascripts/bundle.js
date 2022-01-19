@@ -502,7 +502,6 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       channels: _this.props.fetchChannels()
     };
-    _this.setActiveChannel = _this.setActiveChannel.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -519,11 +518,6 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       }
     }
   }, {
-    key: "setActiveChannel",
-    value: function setActiveChannel(e) {
-      this.props.history.push("/channels/".concat(e.target.value));
-    }
-  }, {
     key: "render",
     value: function render() {
       if (this.props.channels.length === 0) {
@@ -537,9 +531,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
       }, "Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.channels).map(function (channel) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channel_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: channel.id,
-          channel: channel
+          channel: channel,
+          className: "channel-list-item"
         });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -651,11 +646,7 @@ var ChannelIndexItem = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, ChannelIndexItem);
 
     _this = _super.call(this, props);
-    _this.state = {
-      hovering: false
-    };
     _this.setActiveChannel = _this.setActiveChannel.bind(_assertThisInitialized(_this));
-    _this.toggleHover = _this.toggleHover.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -665,21 +656,12 @@ var ChannelIndexItem = /*#__PURE__*/function (_React$Component) {
       this.props.history.push("/channels/".concat(e.target.value));
     }
   }, {
-    key: "toggleHover",
-    value: function toggleHover(e) {
-      this.setState({
-        hovering: this.state.hovering ? false : true
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         value: this.props.channel.id,
         onClick: this.setActiveChannel,
-        className: "channel-list-item",
-        onMouseEnter: this.toggleHover,
-        onMouseLeave: this.toggleHover
+        className: "channel-list-item"
       }, this.props.channel.title);
     }
   }]);
@@ -1416,15 +1398,19 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       if (this.props.messages.length === 0) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "no-messages"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           activeChannel: this.props.match.params.channelId
-        });
+        }));
       }
 
       if (this.props.members.length === 0) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "no-messages"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           activeChannel: this.props.match.params.channelId
-        });
+        }));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
@@ -1435,7 +1421,7 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           message: message,
           author: Object.assign({}, _this3.props.members)
         });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         activeChannel: this.props.match.params.channelId
       }));
     }
@@ -2007,9 +1993,9 @@ var UserList = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-wrap"
-      }, "Members", this.props.members.map(function (user) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, "Members", this.props.members.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
           user: user

@@ -22,3 +22,14 @@
   transition: 0.5s;
   opacity: .9;
 }
+
+.active{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 2px solid gray;
+  border-radius: 0;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  text-decoration: underline;
+}

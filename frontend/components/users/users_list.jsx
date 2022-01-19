@@ -13,8 +13,8 @@ class UserList extends React.Component {
   render () {
     return(
       <>
-      <div>
-        <ul className='user-wrap'>
+      <div className='user-wrap'>
+        <ul>
         Members
           {this.props.members.map((user) => (
             <UserListItem

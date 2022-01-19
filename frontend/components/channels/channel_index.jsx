@@ -10,7 +10,6 @@ class ChannelIndex extends React.Component {
     this.state = {
       channels: this.props.fetchChannels()
     }
-    this.setActiveChannel = this.setActiveChannel.bind(this)
   }
 
   componentDidMount(){
@@ -21,10 +20,6 @@ class ChannelIndex extends React.Component {
     if (prevProps.channels.length !== this.props.channels.length){
       this.props.fetchChannels()
     }
-  }
-  
-  setActiveChannel(e) {
-    this.props.history.push(`/channels/${e.target.value}`)
   }
 
   render() {
@@ -40,12 +35,13 @@ class ChannelIndex extends React.Component {
             return <ChannelIndexItem 
               key={channel.id}
               channel={channel}
+              className="channel-list-item"
             />  
           })}
           <br />
-            <CreateChannelContainer />
 
         </ul>
+        <CreateChannelContainer />
       </div>
       <Chat />
       </>
