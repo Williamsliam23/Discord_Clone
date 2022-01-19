@@ -10,9 +10,6 @@ const channelsReducer = (state={}, action) => {
     case RECEIVE_CHANNEL:
       nextState[action.channel.id] = action.channel
       return action.channel;
-    case REMOVE_CHANNEL:
-      delete nextState[action.channelId]
-      return nextState
     default:
       return state;
   }
