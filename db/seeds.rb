@@ -17,9 +17,9 @@ Server.create([title: "First Server", creator_id: 1])
 Server.create([title: "Second Server", creator_id: 1])
 Server.create([title: "Third Server", creator_id: 1])
 
-Channel.create([title: "First Channel", author_id: 1])
-Channel.create([title: "Second Channel", author_id: 1])
-Channel.create([title: "Third Channel", author_id: 1])
+Channel.create([title: "First Channel", author_id: 1, server_id: 1])
+Channel.create([title: "Second Channel", author_id: 1, server_id: 1])
+Channel.create([title: "Third Channel", author_id: 1, server_id: 1])
 
 Message.create([author_id: 6, body: "Troy will fall!", channel_id: 1])
 Message.create([author_id: 2, body: "Come at me then, we got our walls", channel_id: 1])

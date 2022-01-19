@@ -1563,9 +1563,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _createClass(MessageIndexItem, [{
     key: "allowChange",
     value: function allowChange() {
-      if (this.props.message.author_id === this.props.userId) {
-        console.log("Hello Again");
-      }
+      if (this.props.message.author_id === this.props.userId) {}
     }
   }, {
     key: "deleteMessage",
@@ -1849,8 +1847,6 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       servers: _this.props.fetchServers()
     };
-    console.log(_this.props);
-    console.log(_this.state);
     return _this;
   }
 
