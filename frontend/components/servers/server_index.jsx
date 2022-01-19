@@ -10,8 +10,6 @@ class ServerIndex extends React.Component {
     this.state = {
       servers: this.props.fetchServers()
     }
-    console.log(this.props)
-    console.log(this.state)
   }
 
   componentDidMount(){

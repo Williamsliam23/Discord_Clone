@@ -16,7 +16,6 @@ class MessageIndexItem extends React.Component {
 
   allowChange(){
     if (this.props.message.author_id === this.props.userId){
-      console.log("Hello Again")
     }
   }
 
