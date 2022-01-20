@@ -7,7 +7,6 @@ class ChannelForm extends React.Component {
       let setTitle, setAuthor;
       setAuthor = this.props.currentUser;
       setTitle = ""
-      console.log(this.props)
       this.state = {
         id: null,
         title: "",
