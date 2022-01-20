@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     processCreate: channel => dispatch(createChannel(channel)),
-    fetchChannels: () => dispatch(fetchChannels())
+    fetchChannels: serverId => dispatch(fetchServerChannels(serverId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChannelForm)

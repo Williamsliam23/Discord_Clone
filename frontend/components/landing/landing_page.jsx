@@ -8,11 +8,11 @@ import Members from "../users/User";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props)
-    this.props.fetchChannels()
+    this.props.fetchServers
   }
 
   componentDidMount() {
-    this.props.fetchChannels()
+    this.props.fetchServers()
   }
 
   render() {

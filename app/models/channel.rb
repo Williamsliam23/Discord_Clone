@@ -7,6 +7,11 @@ class Channel < ApplicationRecord
     foreign_key: :author_id,
     class_name: :User
 
+  belongs_to :server,
+    primary_key: :id,
+    foreign_key: :server_id,
+    class_name: :Server
+
   has_many :messages,
     foreign_key: :channel_id,
     dependent: :destroy,

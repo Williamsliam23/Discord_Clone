@@ -8,23 +8,32 @@ class ChannelIndex extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      channels: this.props.fetchChannels()
+      server: this.props.match.params.serverId,
+      channels: this.props.channels
     }
   }
 
   componentDidMount(){
-    this.props.fetchChannels()
+    this.props.fetchChannels(this.props.match.params.serverId)
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.channels.length !== this.props.channels.length){
-      this.props.fetchChannels()
+    if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
+      this.props.fetchChannels(this.props.match.params.serverId);
     }
   }
 
   render() {
     if(this.props.channels.length === 0){
-      return null
+      return (
+        <>
+        <div className='channel-wrap'>
+          <h3 className="selected-server">Selected Server</h3>
+          <CreateChannelContainer server={this.props.match.params.serverId}/>
+        </div>
+        <Chat />
+        </>
+      )
     }
     return (
       <>
@@ -36,13 +45,14 @@ class ChannelIndex extends React.Component {
             return <ChannelIndexItem 
               key={channel.id}
               channel={channel}
+              server={this.props.match.params.serverId}
               className="channel-list-item"
             />  
           })}
           <br />
 
         </ul>
-        <CreateChannelContainer />
+        <CreateChannelContainer server={this.props.match.params.serverId}/>
       </div>
       <Chat />
       </>
