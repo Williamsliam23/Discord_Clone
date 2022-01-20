@@ -11,8 +11,4 @@ class Server < ApplicationRecord
     foreign_key: :server_id,
     dependent: :destroy,
     class_name: :Channel
-<<<<<<< HEAD
-
-=======
->>>>>>> joining-tables
 end

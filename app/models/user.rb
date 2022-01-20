@@ -18,13 +18,8 @@ class User < ApplicationRecord
 
   has_many :servers,
     foreign_key: :creator_id,
-<<<<<<< HEAD
-    primary_key: :id,
-    dependent: :destroy
-=======
     dependent: :destroy,
     class_name: :Server
->>>>>>> joining-tables
 
   after_initialize :ensure_session_token
 
