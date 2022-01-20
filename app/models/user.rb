@@ -16,6 +16,11 @@ class User < ApplicationRecord
     dependent: :destroy,
     class_name: :Channel
 
+  has_many :servers,
+    foreign_key: :creator_id,
+    dependent: :destroy,
+    class_name: :Server
+
   after_initialize :ensure_session_token
 
 

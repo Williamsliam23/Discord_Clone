@@ -1,6 +1,6 @@
 class Channel < ApplicationRecord
 
-  validates :author_id, :title, presence: true
+  validates :author_id, :title, :server_id, presence: true
 
   belongs_to :author,
     primary_key: :id,

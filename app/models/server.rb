@@ -1,6 +1,6 @@
 class Server < ApplicationRecord
 
-  validates :creator_id, :title, :channel_id, presence: true
+  validates :creator_id, :title, presence: true
 
   belongs_to :creator,
     primary_key: :id,
