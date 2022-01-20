@@ -7,4 +7,9 @@ class Server < ApplicationRecord
     foreign_key: :creator_id,
     class_name: :User
 
+  has_many :channels,
+    foreign_key: :server_id,
+    dependent: :destroy,
+    class_name: :Channel
+
 end
