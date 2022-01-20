@@ -23,7 +23,11 @@ class ServerIndex extends React.Component {
   }
   render() {
     if(this.props.servers.length === 0){
-      return null
+      return (
+        <h1>
+          Loading...
+        </h1>
+      )
     }
     return (
       <>

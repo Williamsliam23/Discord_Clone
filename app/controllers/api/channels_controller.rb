@@ -1,8 +1,8 @@
 class Api::ChannelsController < ApplicationController
 
   def index
-
-    @channels = Channel.all
+    @server = Server.find_by(id: params[:server_id])
+    @channels = @server.channels
 
     render :index
 
@@ -57,7 +57,7 @@ class Api::ChannelsController < ApplicationController
   private
 
   def channel_params
-    params.require(:channel).permit(:title, :author_id)
+    params.require(:channel).permit(:title, :author_id, :server_id)
   end
 
 end

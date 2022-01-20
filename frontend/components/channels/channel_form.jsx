@@ -7,10 +7,12 @@ class ChannelForm extends React.Component {
       let setTitle, setAuthor;
       setAuthor = this.props.currentUser;
       setTitle = ""
+      console.log(this.props)
       this.state = {
         id: null,
         title: "",
-        authorId: setAuthor
+        authorId: setAuthor,
+        serverId: this.props.server
       }
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateChannel = this.updateChannel.bind(this)
@@ -21,7 +23,8 @@ class ChannelForm extends React.Component {
     this.props.processCreate(channel).then(this.props.fetchChannels())
     this.setState({
       title: "",
-      authorId: this.props.currentUser
+      authorId: this.props.currentUser,
+      serverId: this.props.match.params.serverId
     })
   }
   

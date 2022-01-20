@@ -16,7 +16,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "receiveChannels": () => (/* binding */ receiveChannels),
 /* harmony export */   "receiveChannel": () => (/* binding */ receiveChannel),
 /* harmony export */   "removeChannels": () => (/* binding */ removeChannels),
-/* harmony export */   "fetchChannels": () => (/* binding */ fetchChannels),
+/* harmony export */   "fetchServerChannels": () => (/* binding */ fetchServerChannels),
 /* harmony export */   "fetchChannel": () => (/* binding */ fetchChannel),
 /* harmony export */   "createChannel": () => (/* binding */ createChannel),
 /* harmony export */   "updateChannel": () => (/* binding */ updateChannel),
@@ -45,9 +45,9 @@ var removeChannels = function removeChannels(channelId) {
     channelId: channelId
   };
 };
-var fetchChannels = function fetchChannels() {
+var fetchServerChannels = function fetchServerChannels(serverId) {
   return function (dispatch) {
-    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchChannels().then(function (channels) {
+    return _util_channel_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchServerChannels(serverId).then(function (channels) {
       return dispatch(receiveChannels(channels));
     });
   };
@@ -447,10 +447,12 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
     var setTitle, setAuthor;
     setAuthor = _this.props.currentUser;
     setTitle = "";
+    console.log(_this.props);
     _this.state = {
       id: null,
       title: "",
-      authorId: setAuthor
+      authorId: setAuthor,
+      serverId: _this.props.server
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateChannel = _this.updateChannel.bind(_assertThisInitialized(_this));
@@ -465,7 +467,8 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
       this.props.processCreate(channel).then(this.props.fetchChannels());
       this.setState({
         title: "",
-        authorId: this.props.currentUser
+        authorId: this.props.currentUser,
+        serverId: this.props.match.params.serverId
       });
     }
   }, {
@@ -557,7 +560,8 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      channels: _this.props.fetchChannels()
+      server: _this.props.match.params.serverId,
+      channels: _this.props.channels
     };
     return _this;
   }
@@ -565,20 +569,28 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(ChannelIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchChannels();
+      this.props.fetchChannels(this.props.match.params.serverId);
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      if (prevProps.channels.length !== this.props.channels.length) {
-        this.props.fetchChannels();
+      if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
+        this.props.fetchChannels(this.props.match.params.serverId);
       }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.channels.length === 0) {
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "channel-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+          className: "selected-server"
+        }, "Selected Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          server: this.props.match.params.serverId
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -591,9 +603,12 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channel_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: channel.id,
           channel: channel,
+          server: _this2.props.match.params.serverId,
           className: "channel-list-item"
         });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        server: this.props.match.params.serverId
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
@@ -646,8 +661,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchMessages: function fetchMessages(id) {
       return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_3__.fetchChannelMessages)(id));
     },
-    fetchChannels: function fetchChannels() {
-      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__.fetchChannels)());
+    fetchChannels: function fetchChannels(id) {
+      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__.fetchServerChannels)(id));
     }
   };
 };
@@ -762,8 +777,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     processCreate: function processCreate(channel) {
       return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__.createChannel)(channel));
     },
-    fetchChannels: function fetchChannels() {
-      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__.fetchChannels)());
+    fetchChannels: function fetchChannels(serverId) {
+      return dispatch(fetchServerChannels(serverId));
     }
   };
 };
@@ -930,16 +945,14 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, LandingPage);
 
     _this = _super.call(this, props);
-
-    _this.props.fetchChannels();
-
+    _this.props.fetchServers;
     return _this;
   }
 
   _createClass(LandingPage, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchChannels();
+      this.props.fetchServers();
     }
   }, {
     key: "render",
@@ -972,7 +985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
 /* harmony import */ var _landing_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./landing_page */ "./frontend/components/landing/landing_page.jsx");
 
@@ -993,8 +1006,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     logout: function logout() {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.logout)());
     },
-    fetchChannels: function fetchChannels() {
-      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_2__.fetchChannels)());
+    fetchServers: function fetchServers() {
+      return dispatch((0,_actions_server_actions__WEBPACK_IMPORTED_MODULE_2__.fetchServers)());
     }
   };
 };
@@ -1866,7 +1879,7 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.props.servers.length === 0) {
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Loading...");
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1929,7 +1942,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0,_actions_server_actions__WEBPACK_IMPORTED_MODULE_2__.fetchServers)());
     },
     fetchChannels: function fetchChannels() {
-      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_3__.fetchChannels)());
+      return dispatch(fetchServerChannels());
     }
   };
 };
@@ -2949,18 +2962,62 @@ var configureStore = function configureStore() {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "fetchChannels": () => (/* binding */ fetchChannels),
+/* harmony export */   "fetchServerChannels": () => (/* binding */ fetchServerChannels),
 /* harmony export */   "fetchChannel": () => (/* binding */ fetchChannel),
 /* harmony export */   "createChannel": () => (/* binding */ createChannel),
 /* harmony export */   "updateChannel": () => (/* binding */ updateChannel),
 /* harmony export */   "deleteChannel": () => (/* binding */ deleteChannel)
 /* harmony export */ });
-var fetchChannels = function fetchChannels() {
-  return $.ajax({
-    method: "GET",
-    url: "api/channels"
-  });
-};
+/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime__WEBPACK_IMPORTED_MODULE_0__);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+// export const fetchChannels = () => (
+//   $.ajax({
+//     method: "GET",
+//     url: "api/channels"
+//   })
+// )
+
+var fetchServerChannels = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(serverId) {
+    var channels;
+    return regenerator_runtime__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (serverId) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return", []);
+
+          case 2:
+            _context.next = 4;
+            return $.ajax({
+              method: "GET",
+              url: "api/servers/".concat(serverId, "/channels")
+            });
+
+          case 4:
+            channels = _context.sent;
+            return _context.abrupt("return", Object.values(channels));
+
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function fetchServerChannels(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
 var fetchChannel = function fetchChannel(id) {
   return $.ajax({
     method: "GET",

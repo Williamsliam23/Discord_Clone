@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
   processCreate: server => dispatch(createServer(server)),
   setActiveServer: id => dispatch(fetchServer(id)),
   fetchServers: () => dispatch(fetchServers()),
-  fetchChannels: () => dispatch(fetchChannels())
+  fetchChannels: () => dispatch(fetchServerChannels())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServerIndex)
