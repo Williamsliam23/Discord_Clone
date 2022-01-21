@@ -1,6 +1,9 @@
 class Server < ApplicationRecord
 
-  validates :creator_id, :title, presence: true
+  after_initialize :create_invite
+
+  validates :creator_id, :title,  presence: true
+  validates :invite_code, uniqueness: true
 
   belongs_to :creator,
     primary_key: :id,
@@ -11,4 +14,9 @@ class Server < ApplicationRecord
     foreign_key: :server_id,
     dependent: :destroy,
     class_name: :Channel
+
+  private
+  def create_invite
+    self.invite_code ||= SecureRandom::base64(10)
+  end
 end

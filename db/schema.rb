@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_230332) do
+ActiveRecord::Schema.define(version: 2022_01_21_000903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 2022_01_19_230332) do
     t.integer "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "invite_code", null: false
+    t.index ["invite_code"], name: "index_servers_on_invite_code", unique: true
   end
 
   create_table "users", force: :cascade do |t|
