@@ -236,7 +236,7 @@ var fetchServers = function fetchServers() {
 var fetchServer = function fetchServer(id) {
   return function (dispatch) {
     return _util_server_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchServer(id).then(function (server) {
-      return dispatch(receiveServers(server));
+      return dispatch(receiveServer(server));
     });
   };
 };
@@ -1880,6 +1880,8 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       if (this.props.servers.length === 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Loading...");
       }
@@ -1889,7 +1891,8 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Servers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.servers).map(function (server) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_server_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: server.id,
-          server: server
+          server: server,
+          urlServer: _this2.props.urlServer
         });
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_server_container__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_Channel__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
@@ -1937,7 +1940,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     processCreate: function processCreate(server) {
       return dispatch((0,_actions_server_actions__WEBPACK_IMPORTED_MODULE_2__.createServer)(server));
     },
-    setActiveServer: function setActiveServer(id) {
+    urlServer: function urlServer(id) {
       return dispatch((0,_actions_server_actions__WEBPACK_IMPORTED_MODULE_2__.fetchServer)(id));
     },
     fetchServers: function fetchServers() {
@@ -2003,7 +2006,7 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.setActiveServer = _this.setActiveServer.bind(_assertThisInitialized(_this));
-    console.log(_this.server.members);
+    console.log(_this.props);
     return _this;
   }
 
@@ -2011,6 +2014,7 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
     key: "setActiveServer",
     value: function setActiveServer(e) {
       this.props.history.push("/servers/".concat(this.props.server.id));
+      this.props.urlServer(this.props.server.id);
     }
   }, {
     key: "render",
@@ -2568,7 +2572,7 @@ var activeServerReducer = function activeServerReducer() {
 
   switch (action.type) {
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SERVER:
-      nextState[action.server.id] = action.server;
+      nextState = action.server;
       return nextState;
 
     default:
@@ -2802,10 +2806,6 @@ var serversReducer = function serversReducer() {
   switch (action.type) {
     case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SERVERS:
       return action.servers;
-
-    case _actions_server_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_SERVER:
-      nextState[action.server.id] = action.server;
-      return action.server;
 
     default:
       return state;

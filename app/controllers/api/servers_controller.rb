@@ -1,21 +1,19 @@
 class Api::ServersController < ApplicationController
 
   def index
-    debugger
     @servers = Server.all
     render :index
-
   end
 
   def show
     @server = Server.find_by(id: params[:id])
-    @members = @server.members
+    @memberships = Membership.where(`server_id = #{@server.id}`)
+    @members = User.where(`user_id in (#{@memberships})`)
     if @server
       render :show
     else
       render json: ["There does not seem to be any server"]
     end
-
   end
 
   def create

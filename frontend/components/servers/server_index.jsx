@@ -38,6 +38,7 @@ class ServerIndex extends React.Component {
             return <ServerIndexItem
               key={server.id}
               server={server}
+              urlServer={this.props.urlServer}
             />
           })}
           <CreateServerContainer />

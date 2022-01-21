@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   processCreate: server => dispatch(createServer(server)),
-  setActiveServer: id => dispatch(fetchServer(id)),
+  urlServer: id => dispatch(fetchServer(id)),
   fetchServers: () => dispatch(fetchServers()),
   fetchChannels: () => dispatch(fetchServerChannels())
 })

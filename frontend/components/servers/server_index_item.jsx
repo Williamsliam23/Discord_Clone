@@ -5,11 +5,12 @@ class ServerIndexItem extends React.Component {
   constructor(props){
     super(props)
     this.setActiveServer = this.setActiveServer.bind(this)
-    console.log(this.server.members)
+    console.log(this.props)
   }
 
   setActiveServer(e){
     this.props.history.push(`/servers/${this.props.server.id}`)
+    this.props.urlServer(this.props.server.id)
   }
 
   render(){
