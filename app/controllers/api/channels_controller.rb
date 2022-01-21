@@ -2,10 +2,12 @@ class Api::ChannelsController < ApplicationController
 
   def index
     @server = Server.find_by(id: params[:server_id])
-    @channels = @server.channels
-
-    render :index
-
+    if @server 
+      @channels = @server.channels
+      render :index
+    else
+      render @server.errors.full_messages
+    end
   end
 
   def show

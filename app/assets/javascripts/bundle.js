@@ -447,7 +447,6 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
     var setTitle, setAuthor;
     setAuthor = _this.props.currentUser;
     setTitle = "";
-    console.log(_this.props);
     _this.state = {
       id: null,
       title: "",
@@ -464,11 +463,11 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var channel = Object.assign({}, this.state);
-      this.props.processCreate(channel).then(this.props.fetchChannels());
+      this.props.processCreate(channel);
       this.setState({
         title: "",
         authorId: this.props.currentUser,
-        serverId: this.props.match.params.serverId
+        serverId: this.props.server
       });
     }
   }, {
@@ -574,9 +573,12 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
+      console.log(this.props);
+
       if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
         this.props.fetchChannels(this.props.match.params.serverId);
-      }
+      } // if(prevProps.channels.length !== this.props.channels.length)
+
     }
   }, {
     key: "render",
@@ -778,7 +780,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__.createChannel)(channel));
     },
     fetchChannels: function fetchChannels(serverId) {
-      return dispatch(fetchServerChannels(serverId));
+      return dispatch((0,_actions_channel_actions__WEBPACK_IMPORTED_MODULE_1__.fetchServerChannels)(serverId));
     }
   };
 };
@@ -2603,7 +2605,7 @@ var channelsReducer = function channelsReducer() {
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CHANNEL:
       nextState[action.channel.id] = action.channel;
-      return action.channel;
+      return nextState;
 
     default:
       return state;
@@ -3142,17 +3144,25 @@ var fetchChannelMessages = /*#__PURE__*/function () {
             return _context.abrupt("return", []);
 
           case 2:
-            _context.next = 4;
+            if (!(channelId === 0)) {
+              _context.next = 4;
+              break;
+            }
+
+            return _context.abrupt("return", []);
+
+          case 4:
+            _context.next = 6;
             return $.ajax({
               method: "GET",
               url: "api/channels/".concat(channelId, "/messages")
             });
 
-          case 4:
+          case 6:
             messages = _context.sent;
             return _context.abrupt("return", Object.values(messages));
 
-          case 6:
+          case 8:
           case "end":
             return _context.stop();
         }

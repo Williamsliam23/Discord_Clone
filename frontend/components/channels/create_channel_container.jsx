@@ -1,5 +1,5 @@
 import { connect } from "react-redux"
-import { createChannel, fetchChannels } from "../../actions/channel_actions"
+import { createChannel, fetchServerChannels } from "../../actions/channel_actions"
 import ChannelForm from "./channel_form"
 
 

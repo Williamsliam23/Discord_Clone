@@ -36,6 +36,9 @@ export const fetchChannelMessages = async (channelId) => {
   if (!channelId) {
     return []
   }
+  if (channelId === 0) {
+    return []
+  }
     const messages = await $.ajax({
       method: "GET",
       url: `api/channels/${channelId}/messages`

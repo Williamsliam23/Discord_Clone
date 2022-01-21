@@ -18,9 +18,11 @@ class ChannelIndex extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log(this.props)
     if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
       this.props.fetchChannels(this.props.match.params.serverId);
     }
+    // if(prevProps.channels.length !== this.props.channels.length)
   }
 
   render() {

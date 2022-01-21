@@ -19,11 +19,11 @@ class ChannelForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const channel = Object.assign({}, this.state);
-    this.props.processCreate(channel).then(this.props.fetchChannels())
+    this.props.processCreate(channel)
     this.setState({
       title: "",
       authorId: this.props.currentUser,
-      serverId: this.props.match.params.serverId
+      serverId: this.props.server
     })
   }
   
