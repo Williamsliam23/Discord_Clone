@@ -5,6 +5,7 @@ class ServerIndexItem extends React.Component {
   constructor(props){
     super(props)
     this.setActiveServer = this.setActiveServer.bind(this)
+    console.log(this.server.members)
   }
 
   setActiveServer(e){

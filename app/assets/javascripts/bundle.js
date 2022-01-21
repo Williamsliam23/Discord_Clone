@@ -2003,6 +2003,7 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.setActiveServer = _this.setActiveServer.bind(_assertThisInitialized(_this));
+    console.log(_this.server.members);
     return _this;
   }
 

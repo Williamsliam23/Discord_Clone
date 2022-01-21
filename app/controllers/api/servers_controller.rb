@@ -1,16 +1,15 @@
 class Api::ServersController < ApplicationController
 
   def index
-
+    debugger
     @servers = Server.all
-
     render :index
 
   end
 
   def show
     @server = Server.find_by(id: params[:id])
-
+    @members = @server.members
     if @server
       render :show
     else
