@@ -17,6 +17,16 @@ Server.create([title: "First Server", creator_id: 1])
 Server.create([title: "Second Server", creator_id: 1])
 Server.create([title: "Third Server", creator_id: 1])
 
+Membership.create([
+  {user_id: 1, server_id: 1},
+  {user_id: 2, server_id: 1},
+  {user_id: 3, server_id: 1},
+  {user_id: 4, server_id: 1},
+  {user_id: 5, server_id: 1},
+  {user_id: 6, server_id: 1},
+  {user_id: 7, server_id: 1}
+  ])
+
 Channel.create([title: "First Channel", author_id: 1, server_id: 1])
 Channel.create([title: "Second Channel", author_id: 1, server_id: 1])
 Channel.create([title: "Third Channel", author_id: 1, server_id: 1])

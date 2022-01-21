@@ -15,6 +15,15 @@ class Server < ApplicationRecord
     dependent: :destroy,
     class_name: :Channel
 
+  has_many :memberships,
+    foreign_key: :server_id,
+    class_name: :Membership,
+    dependent: :destroy
+
+  has_many :members,
+    through: :memberships,
+    source: :user
+
   private
   def create_invite
     self.invite_code ||= SecureRandom::base64(10)

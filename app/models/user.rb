@@ -21,6 +21,15 @@ class User < ApplicationRecord
     dependent: :destroy,
     class_name: :Server
 
+  has_many :memberships,
+    foreign_key: :user_id,
+    class_name: :Membership,
+    dependent: :destroy
+
+  has_many :server_memberships,
+    through: :memberships,
+    source: :server
+
   after_initialize :ensure_session_token
 
 
