@@ -7,8 +7,9 @@ class Api::ServersController < ApplicationController
 
   def show
     @server = Server.find_by(id: params[:id])
-    @memberships = Membership.where(`server_id = #{@server.id}`)
-    @members = User.where(`user_id in (#{@memberships})`)
+    @memberships = Membership.where("server_id = ?", @server.id)
+    @members = User.where(id: @memberships)
+    p @members
     if @server
       render :show
     else

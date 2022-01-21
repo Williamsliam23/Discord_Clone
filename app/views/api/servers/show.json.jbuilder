@@ -1,8 +1,10 @@
 
 json.set! "members" do
-  @members.each do |user|
-    json.set! user.id do
-        json.extract! user, :id, :username, :email
+  if !@members.empty?
+    @members.each do |user|
+      json.set! user.id do
+          json.extract! user, :id, :username, :email
+      end
     end
   end
 end

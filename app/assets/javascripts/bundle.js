@@ -516,9 +516,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _channel_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./channel_index_item */ "./frontend/components/channels/channel_index_item.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _messages_chat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../messages/chat */ "./frontend/components/messages/chat.jsx");
-/* harmony import */ var _create_channel_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_channel_container */ "./frontend/components/channels/create_channel_container.jsx");
+/* harmony import */ var _users_User__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../users/User */ "./frontend/components/users/User.jsx");
+/* harmony import */ var _create_channel_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./create_channel_container */ "./frontend/components/channels/create_channel_container.jsx");
+/* harmony import */ var _users_users_list_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../users/users_list_container */ "./frontend/components/users/users_list_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -547,6 +549,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(ChannelIndex, _React$Component);
 
@@ -568,38 +572,66 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
   _createClass(ChannelIndex, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchChannels(this.props.match.params.serverId);
+      if (this.props.match.params.serverId !== ":serverId") {
+        this.props.fetchChannels(this.props.match.params.serverId);
+      }
     }
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
-      console.log(this.props);
-
       if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
         this.props.fetchChannels(this.props.match.params.serverId);
-      } // if(prevProps.channels.length !== this.props.channels.length)
+      }
 
+      if (prevProps.channels.length !== this.props.channels.length) {
+        if (this.props.match.params.serverId !== ":serverId") {
+          this.props.fetchChannels(this.props.match.params.serverId);
+        }
+      }
     }
   }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
+      if (this.props.match.params.serverId === ":serverId") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "channel-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+          className: "selected-server"
+        }, "Select a Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          server: this.props.match.params.serverId
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }
+
+      if (Object.values(this.props.activeServer).length === 0) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "channel-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+          className: "selected-server"
+        }, "Select a Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          server: this.props.match.params.serverId
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }
+
       if (this.props.channels.length === 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "channel-wrap"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
           className: "selected-server"
-        }, "Selected Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, this.props.activeServer.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
           server: this.props.match.params.serverId
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_users_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+          server: this.props.activeServer
+        }));
       }
 
+      console.log("?");
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "channel-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
         className: "selected-server"
-      }, "Selected Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+      }, this.props.activeServer.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
         className: "channels-header"
       }, "Text Channels"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.channels).map(function (channel) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channel_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -608,16 +640,18 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
           server: _this2.props.match.params.serverId,
           className: "channel-list-item"
         });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_channel_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         server: this.props.match.params.serverId
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_users_list_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        server: this.props.activeServer
+      }));
     }
   }]);
 
   return ChannelIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)(ChannelIndex));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(ChannelIndex));
 
 /***/ }),
 
@@ -647,7 +681,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
-    activeChannel: state.entities.activeChannel,
+    activeServer: state.entities.activeServer,
     channels: Object.values(state.entities.channels)
   };
 };
@@ -902,11 +936,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
-/* harmony import */ var _channels_channel_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../channels/channel_index */ "./frontend/components/channels/channel_index.jsx");
-/* harmony import */ var _channels_Channel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../channels/Channel */ "./frontend/components/channels/Channel.jsx");
-/* harmony import */ var _servers_Server__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../servers/Server */ "./frontend/components/servers/Server.jsx");
-/* harmony import */ var _users_User__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../users/User */ "./frontend/components/users/User.jsx");
+/* harmony import */ var _servers_Server__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../servers/Server */ "./frontend/components/servers/Server.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -928,10 +958,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-
 
 
 
@@ -963,7 +989,7 @@ var LandingPage = /*#__PURE__*/function (_React$Component) {
         className: "landing"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "side-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_servers_Server__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_User__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_servers_Server__WEBPACK_IMPORTED_MODULE_1__["default"], null))));
     }
   }]);
 
@@ -1818,8 +1844,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _server_index_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./server_index_item */ "./frontend/components/servers/server_index_item.jsx");
 /* harmony import */ var _channels_Channel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../channels/Channel */ "./frontend/components/channels/Channel.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _create_server_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create_server_container */ "./frontend/components/servers/create_server_container.jsx");
+/* harmony import */ var _messages_chat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../messages/chat */ "./frontend/components/messages/chat.jsx");
+/* harmony import */ var _channels_create_channel_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../channels/create_channel_container */ "./frontend/components/channels/create_channel_container.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _create_server_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create_server_container */ "./frontend/components/servers/create_server_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1848,21 +1876,17 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ServerIndex = /*#__PURE__*/function (_React$Component) {
   _inherits(ServerIndex, _React$Component);
 
   var _super = _createSuper(ServerIndex);
 
   function ServerIndex(props) {
-    var _this;
-
     _classCallCheck(this, ServerIndex);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      servers: _this.props.fetchServers()
-    };
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(ServerIndex, [{
@@ -1880,10 +1904,33 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
       if (this.props.servers.length === 0) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "Loading...");
+      }
+
+      if (this.props.match.params.serverId === ":serverId") {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "server-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Servers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, Object.values(this.props.servers).map(function (server) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_server_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: server.id,
+            server: server,
+            urlServer: _this.props.urlServer
+          });
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_server_container__WEBPACK_IMPORTED_MODULE_5__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "channel-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+          className: "selected-server"
+        }, "Select a Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_create_channel_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          server: this.props.match.params.serverId
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "user-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Welcome to Dischannel!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Select a Server to get chatting!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: this.props.logout,
+          className: "logout"
+        }, "Logout")));
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -1892,16 +1939,16 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_server_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: server.id,
           server: server,
-          urlServer: _this2.props.urlServer
+          urlServer: _this.props.urlServer
         });
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_server_container__WEBPACK_IMPORTED_MODULE_3__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_Channel__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_server_container__WEBPACK_IMPORTED_MODULE_5__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_channels_Channel__WEBPACK_IMPORTED_MODULE_2__["default"], null));
     }
   }]);
 
   return ServerIndex;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)(ServerIndex));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)(ServerIndex));
 
 /***/ }),
 
@@ -1921,6 +1968,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
 /* harmony import */ var _actions_channel_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/channel_actions */ "./frontend/actions/channel_actions.js");
 /* harmony import */ var _server_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./server_index */ "./frontend/components/servers/server_index.jsx");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+
 
 
 
@@ -1948,6 +1997,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchChannels: function fetchChannels() {
       return dispatch(fetchServerChannels());
+    },
+    logout: function logout() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_5__.logout)());
     }
   };
 };
@@ -2006,7 +2058,6 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.setActiveServer = _this.setActiveServer.bind(_assertThisInitialized(_this));
-    console.log(_this.props);
     return _this;
   }
 
@@ -2380,16 +2431,26 @@ var UserList = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(UserList, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.props.fetchUsers();
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate() {
+      return Object.values(this.props.server).length !== 0;
     }
   }, {
     key: "render",
     value: function render() {
+      if (Object.values(this.props.server).length === 4) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "user-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Members"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: this.props.logout,
+          className: "logout"
+        }, "Logout")));
+      }
+
+      var mem = Object.values(this.props.server.members);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-wrap"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, "Members", this.props.members.map(function (user) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Members"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, mem.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
           user: user
@@ -2434,7 +2495,7 @@ var mapStateToProps = function mapStateToProps(state) {
   return {
     messages: Object.values(state.entities.messages),
     currentUser: state.entities.users,
-    activeChannel: state.entities.activeChannel,
+    activeServer: state.entities.activeServer,
     channels: Object.values(state.entities.channels),
     members: Object.values(state.entities.members)
   };

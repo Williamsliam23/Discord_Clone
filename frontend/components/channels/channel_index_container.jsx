@@ -7,7 +7,7 @@ import ChannelIndex from "./channel_index"
 const mapStateToProps = state => ({
   messages: Object.values(state.entities.messages),
   currentUser: state.entities.users,
-  activeChannel: state.entities.activeChannel,
+  activeServer: state.entities.activeServer,
   channels: Object.values(state.entities.channels)
 })
 

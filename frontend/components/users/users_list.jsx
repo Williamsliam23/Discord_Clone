@@ -6,17 +6,31 @@ class UserList extends React.Component {
     super(props)
   }
 
-  componentDidMount() {
-    this.props.fetchUsers()
+  shouldComponentUpdate(){
+    return (Object.values(this.props.server).length !== 0)
   }
 
   render () {
+    if (Object.values(this.props.server).length === 4){
+      return(
+        <>
+        <div className='user-wrap'>
+          <h3>Members</h3>
+          <ul>
+            
+          </ul>
+        <button onClick={this.props.logout} className='logout'>Logout</button>
+        </div>
+        </>
+      )
+    }
+    const mem = Object.values(this.props.server.members)
     return(
       <>
       <div className='user-wrap'>
+        <h3>Members</h3>
         <ul>
-        Members
-          {this.props.members.map((user) => (
+          {mem.map((user) => (
             <UserListItem
               key={user.id}
               user={user}

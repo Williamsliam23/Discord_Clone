@@ -7,7 +7,7 @@ import UserList from "./users_list";
 const mapStateToProps = state => ({
   messages: Object.values(state.entities.messages),
   currentUser: state.entities.users,
-  activeChannel: state.entities.activeChannel,
+  activeServer: state.entities.activeServer,
   channels: Object.values(state.entities.channels),
   members: Object.values(state.entities.members)
 })

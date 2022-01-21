@@ -2,7 +2,9 @@ import React from "react";
 import ChannelIndexItem from "./channel_index_item";
 import { withRouter } from "react-router-dom";
 import Chat from "../messages/chat"
+import Members from "../users/User";
 import CreateChannelContainer from "./create_channel_container";
+import UsersListContainer from "../users/users_list_container"
 
 class ChannelIndex extends React.Component {
   constructor(props) {
@@ -14,33 +16,62 @@ class ChannelIndex extends React.Component {
   }
 
   componentDidMount(){
+    if(this.props.match.params.serverId !== ":serverId"){
     this.props.fetchChannels(this.props.match.params.serverId)
+    }
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props)
     if (prevProps.match.params.serverId !== this.props.match.params.serverId) {
       this.props.fetchChannels(this.props.match.params.serverId);
     }
-    // if(prevProps.channels.length !== this.props.channels.length)
+    if(prevProps.channels.length !== this.props.channels.length){
+      if(this.props.match.params.serverId !== ":serverId"){
+      this.props.fetchChannels(this.props.match.params.serverId);
+      }
+    }
   }
 
   render() {
-    if(this.props.channels.length === 0){
+    if(this.props.match.params.serverId === ":serverId"){
       return (
         <>
         <div className='channel-wrap'>
-          <h3 className="selected-server">Selected Server</h3>
+          <h3 className="selected-server">Select a Server</h3>
           <CreateChannelContainer server={this.props.match.params.serverId}/>
         </div>
         <Chat />
         </>
       )
     }
+    if(Object.values(this.props.activeServer).length === 0){
+      return (
+        <>
+        <div className='channel-wrap'>
+          <h3 className="selected-server">Select a Server</h3>
+          <CreateChannelContainer server={this.props.match.params.serverId}/>
+        </div>
+        <Chat />
+        </>
+      )
+    }
+    if(this.props.channels.length === 0){
+      return (
+        <>
+        <div className='channel-wrap'>
+          <h3 className="selected-server">{this.props.activeServer.title}</h3>
+          <CreateChannelContainer server={this.props.match.params.serverId}/>
+        </div>
+        <Chat />
+        <UsersListContainer server={this.props.activeServer}/>
+        </>
+      )
+    }
+    console.log("?")
     return (
       <>
       <div className='channel-wrap'>
-      <h3 className="selected-server">Selected Server</h3>
+      <h3 className="selected-server">{this.props.activeServer.title}</h3>
         <h4 className="channels-header">Text Channels</h4>
         <ul>
           {Object.values(this.props.channels).map((channel) => {
@@ -57,6 +88,7 @@ class ChannelIndex extends React.Component {
         <CreateChannelContainer server={this.props.match.params.serverId}/>
       </div>
       <Chat />
+      <UsersListContainer server={this.props.activeServer}/>
       </>
     )
   }
