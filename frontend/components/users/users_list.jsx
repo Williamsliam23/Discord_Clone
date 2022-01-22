@@ -4,6 +4,26 @@ import UserListItem from "./users_list_item";
 class UserList extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      inviting: false
+    }
+    this.toggleInvite = this.toggleInvite.bind(this)
+  }
+
+  invite(){
+    if(this.state.inviting === true){
+    return (
+      <span className="code" onClick={this.toggleInvite}>Invite Code Copied! <br/> {this.props.server.invite_code}</span>
+    )
+    }
+    return (
+      <button className="code" onClick={this.toggleInvite}>Invite your friends</button>
+    )
+  }
+
+  toggleInvite(){
+    navigator.clipboard.writeText(this.props.server.invite_code)
+    this.setState({ inviting: this.state.inviting ? false : true })
   }
 
   shouldComponentUpdate(){
@@ -17,8 +37,11 @@ class UserList extends React.Component {
         <div className='user-wrap'>
           <h3>Members</h3>
           <ul>
-            
+          <li>
+            Don't show
+          </li>
           </ul>
+          {this.invite()}
         <button onClick={this.props.logout} className='logout'>Logout</button>
         </div>
         </>
@@ -37,7 +60,8 @@ class UserList extends React.Component {
             />
           ))}
         </ul>
-      <button onClick={this.props.logout} className='logout'>Logout</button>
+        {this.invite()}
+        <button onClick={this.props.logout} className='logout'>Logout</button>
       </div>
       </>
     )

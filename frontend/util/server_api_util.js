@@ -1,9 +1,17 @@
-export const fetchServers = () => (
-  $.ajax({
+export const fetchServers = async (user_id) => {
+  if (user_id){
+  const list = await $.ajax({
+    method: "GET",
+    url: "api/servers",
+    data: {user_id: user_id}
+  })
+  return list}
+  const noUser = await $.ajax({
     method: "GET",
     url: "api/servers"
   })
-)
+  return noUser
+}
 
 export const fetchServer = (id) => (
   $.ajax({
@@ -12,12 +20,14 @@ export const fetchServer = (id) => (
   })
 )
 
-export const createServer = (server) => {
-  return $.ajax({
+export const createServer = async (server) => {
+
+  const create = await $.ajax({
     method: "POST",
     url: `api/servers`,
     data: {server: server}
   })
+  return create
 }
 
 export const updateServer = (server) => (

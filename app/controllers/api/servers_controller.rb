@@ -1,15 +1,20 @@
 class Api::ServersController < ApplicationController
 
   def index
-    @servers = Server.all
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+      @servers = @user.server_memberships
+      p @servers
+  else
+      @servers = Server.order("RANDOM()").limit(3).to_a.uniq
+  end
     render :index
   end
 
   def show
     @server = Server.find_by(id: params[:id])
     @memberships = Membership.where("server_id = ?", @server.id)
-    @members = User.where(id: @memberships)
-    p @members
+    @members = User.joins(:memberships).where(memberships: { server_id: @server.id })
     if @server
       render :show
     else
@@ -21,6 +26,7 @@ class Api::ServersController < ApplicationController
     @server = Server.new(server_params)
     
     if @server.save
+      Membership.create([user_id: @server.creator_id, server_id: @server.id])
       render :show
     else
       render @server.errors.full_messages

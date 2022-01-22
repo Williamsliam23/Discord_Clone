@@ -1,6 +1,6 @@
 
 json.set! "members" do
-  if !@members.empty?
+  if @members != nil
     @members.each do |user|
       json.set! user.id do
           json.extract! user, :id, :username, :email

@@ -9,26 +9,43 @@ import CreateServerContainer from "./create_server_container";
 class ServerIndex extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      server_id: "",
+      user_id: this.props.currentUser
+    }
+    this.updateInvite = this.updateInvite.bind(this)
+    this.checkSubmit = this.checkSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount(){
-    this.props.fetchServers()
+    this.props.fetchServers(this.props.currentUser)
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.servers.length !== this.props.servers.length){
-      this.props.fetchServers()
+      this.props.fetchServers(this.props.currentUser)
     }
   }
-  render() {
-    if(this.props.servers.length === 0){
-      return (
-        <h1>
-          Loading...
-        </h1>
-      )
-    }
 
+  checkSubmit(e){
+    if (e.charCode === 13){
+      this.handleSubmit(e)
+    }
+  }
+
+  handleSubmit(e){
+    e.preventDefault()
+    const membership = Object.assign({}, this.state)
+    this.props.createMembership(membership).then(
+    this.props.fetchServers(this.props.currentUser))
+  }
+
+  updateInvite(e){
+    this.setState({server_id: e.currentTarget.value})
+  }
+
+  render() {
     if(this.props.match.params.serverId === ":serverId"){
       return(
         <>
@@ -44,6 +61,13 @@ class ServerIndex extends React.Component {
             })}
             </ul>
             <CreateServerContainer />
+            <form className='joining' >
+              <input className='box' type='text' onKeyPress={this.checkSubmit} onChange={this.updateInvite} 
+              value={this.state.join_server} maxLength="50"
+              placeholder='Place your invite code!'>
+              </input>
+              <input className="join-server" type="submit" value="Join"/>
+            </form>
           </div>
           <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
@@ -72,6 +96,13 @@ class ServerIndex extends React.Component {
           })}
           <CreateServerContainer />
         </ul>
+        <form className='joining' >
+              <input className='box' type='text' onKeyPress={this.checkSubmit} onChange={this.updateInvite} 
+              value={this.state.join_server} maxLength="50"
+              placeholder='Place your invite code!'>
+              </input>
+              <input className="join-server" type="submit" value="Join"/>
+            </form>
       </div>
       <Channel />
       </>

@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { fetchServer, createServer, fetchServers } from "../../actions/server_actions";
-import { fetchChannels } from "../../actions/channel_actions";
+import { createMembership } from "../../actions/membership_action";
 import ServerIndex from "./server_index"
 import { logout } from "../../actions/session_actions";
 
@@ -14,9 +14,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   processCreate: server => dispatch(createServer(server)),
   urlServer: id => dispatch(fetchServer(id)),
-  fetchServers: () => dispatch(fetchServers()),
+  fetchServers: (user_id) => dispatch(fetchServers(user_id)),
   fetchChannels: () => dispatch(fetchServerChannels()),
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  createMembership: membership => dispatch(createMembership(membership))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ServerIndex)

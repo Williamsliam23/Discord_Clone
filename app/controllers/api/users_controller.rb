@@ -1,6 +1,7 @@
 class Api::UsersController < ApplicationController
   before_action :require_logged_in, only: [:index, :destroy]
   before_action :require_logged_out, only: [:create]
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -13,6 +14,9 @@ class Api::UsersController < ApplicationController
 
   def show
     @user = User.find_by( id: params[:id])
+    @memberships = Membership.where("user_id = ?", @user.id)
+    p @memberships
+    render :show
   end
 
   def index
@@ -36,11 +40,10 @@ class Api::UsersController < ApplicationController
 
   # def destroy
   #   @user = current_user
-  #   if @user
-  #     logout
+  #   if @user.delete
   #     render "api/users/show"
   #   else
-  #     render json: ["You are not signed in currently!"], status: 404
+  #     render json: ["You can't do that!"], status: 404
   #   end
   # end
 

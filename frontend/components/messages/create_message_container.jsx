@@ -5,7 +5,8 @@ import MessageForm from "./message_form"
 
 const mapStateToProps = state => ({
     currentUser: state.session.id,
-    formType: "create"
+    formType: "create",
+    // active: this.history.match.params.channelId
 })
 
 const mapDispatchToProps = dispatch => ({
