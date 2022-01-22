@@ -88,13 +88,36 @@ button {
   color: white;
 }
 
+.user-message{
+  padding: 5px;
+}
+
 .author{
+  position: relative;
   font-weight: bold;
   padding: 5px;
 }
 
-.user-message{
-  padding: 5px;
+.edit-pencil{
+  position: absolute;
+  background: gray;
+  opacity: .9;
+  border: 2px solid gray;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 5px;
+}
+
+.message-delete-svg{
+  position: absolute;
+  background: gray;
+  opacity: .9;
+  border: 2px solid gray;
+  width: 20px;
+  height: 20px;
+  top: 5px;
+  right: 30px;
 }
 
 .user-message:hover{

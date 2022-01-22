@@ -1352,9 +1352,11 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
-      this.setState({
-        body: e.currentTarget.value
-      });
+      if (this.props.activeChannel) {
+        this.setState({
+          body: e.currentTarget.value
+        });
+      }
     }
   }, {
     key: "render",
@@ -1439,15 +1441,24 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, MessageIndex);
 
     _this = _super.call(this, props);
+    _this.setSubscription = _this.setSubscription.bind(_assertThisInitialized(_this));
+    _this.unsub = _this.unsub.bind(_assertThisInitialized(_this));
     _this.state = {
       activeChannel: _this.props.match.params.channelId,
-      user: Object.values(_this.props.currentUser)[0].id
+      user: Object.values(_this.props.currentUser)[0].id,
+      subscribe: _this.setSubscription()
     };
-    _this.setSubscription = _this.setSubscription.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageIndex, [{
+    key: "unsub",
+    value: function unsub() {
+      this.setState({
+        subscribe: null
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUsers();
@@ -1458,6 +1469,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       if (prevProps.match.params.channelId !== this.props.match.params.channelId) {
+        this.unsub();
+        this.setSubscription();
         this.props.fetchUsers();
         this.props.fetchMessages(this.props.match.params.channelId);
       }
@@ -1586,6 +1599,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1610,6 +1624,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndexItem, _React$Component);
 
@@ -1624,30 +1639,61 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       author: _this.props.author[_this.props.message.author_id].username
     };
-    _this.deleteMessage = _this.deleteMessage.bind(_assertThisInitialized(_this));
     _this.allowChange = _this.allowChange.bind(_assertThisInitialized(_this));
+    _this.showOptions = _this.showOptions.bind(_assertThisInitialized(_this));
+    _this.hideOptions = _this.hideOptions.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(MessageIndexItem, [{
     key: "allowChange",
     value: function allowChange() {
-      if (this.props.message.author_id === this.props.userId) {}
+      if (this.props.message.author_id === this.props.userId) {
+        console.log("true");
+      }
     }
   }, {
-    key: "deleteMessage",
-    value: function deleteMessage() {
-      this.props.deleteMessage(this.props.message.id);
+    key: "showOptions",
+    value: function showOptions() {
+      if (this.props.message.author_id === this.props.userId) {
+        var el = document.getElementById("".concat(this.props.message.id)).getElementsByClassName('edit-pencil')[0];
+        el.style.visibility = "visible";
+        var el2 = document.getElementById("".concat(this.props.message.id)).getElementsByClassName('message-delete-svg')[0];
+        el2.style.visibility = "visible";
+      }
+    }
+  }, {
+    key: "hideOptions",
+    value: function hideOptions() {
+      var el = document.getElementById("".concat(this.props.message.id)).getElementsByClassName('edit-pencil')[0];
+      el.style.visibility = "hidden";
+      var el2 = document.getElementById("".concat(this.props.message.id)).getElementsByClassName('message-delete-svg')[0];
+      el2.style.visibility = "hidden";
     }
   }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-message",
+        id: "".concat(this.props.message.id),
+        onMouseEnter: this.showOptions,
+        onMouseLeave: this.hideOptions,
         onClick: this.allowChange
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "author"
-      }, this.state.author), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+      }, this.state.author, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "message-delete-svg",
+        src: "delete.svg",
+        style: {
+          visibility: "hidden"
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "edit-pencil",
+        src: "pencil.svg",
+        style: {
+          visibility: "hidden"
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
         className: "body"
       }, "\xA0\xA0\xA0\xA0", this.props.message.body));
     }

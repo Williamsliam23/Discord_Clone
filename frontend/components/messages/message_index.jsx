@@ -7,11 +7,17 @@ import CreateMessageContainer from "./create_message_container";
 class MessageIndex extends React.Component {
   constructor(props) {
     super(props)
+    this.setSubscription = this.setSubscription.bind(this)
+    this.unsub = this.unsub.bind(this)
     this.state={
       activeChannel: this.props.match.params.channelId,
-      user: Object.values(this.props.currentUser)[0].id
+      user: Object.values(this.props.currentUser)[0].id,
+      subscribe: this.setSubscription()
     }
-    this.setSubscription = this.setSubscription.bind(this)
+  }
+
+  unsub(){
+    this.setState({subscribe: null})
   }
 
   componentDidMount() {
@@ -22,6 +28,8 @@ class MessageIndex extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.match.params.channelId !== this.props.match.params.channelId){
+      this.unsub()
+      this.setSubscription()
       this.props.fetchUsers()
       this.props.fetchMessages(this.props.match.params.channelId)
     }
