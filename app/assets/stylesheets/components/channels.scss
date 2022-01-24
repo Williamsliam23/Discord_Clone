@@ -41,3 +41,77 @@
   border-right: none;
   text-decoration: underline;
 }
+
+.modal-create-channel > h2{
+  font-size: 30px;
+}
+
+.modal-create-channel{
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  left: 30vw;
+  top: 30vh;
+  z-index: 12;
+  height: 300px;
+  width: 400px;
+  background: #282b30;
+  border-radius: 5px;
+}
+
+.channel-name{
+  background: #424549;
+  border: 2px solid gray;
+}
+
+.submit-channel{
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  background: #404eed;
+  border-radius: 5px;
+  border: 2px solid gray;
+  height: 40px;
+  width: 70px;
+  align-self: flex-end;
+  justify-self: space-between;
+}
+
+.cancel-channel{
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  background: #404eed;
+  border-radius: 100%;
+  border: 2px solid gray;
+  height: 40px;
+  width: 40px;
+}
+
+.channel-buttons{
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.channel-create{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #282b30;
+}
+
+.channel-create > h2{
+  position: fixed;
+}
+
+.hidden {
+  display: none;
+}
+

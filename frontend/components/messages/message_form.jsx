@@ -34,7 +34,9 @@ class MessageForm extends React.Component {
       console.log(this.props)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateMessage = this.updateMessage.bind(this)
+      this.checkSubmit = this.checkSubmit.bind(this)
   }
+
   handleSubmit(e) {
     e.preventDefault()
       const message = Object.assign({}, this.state);
@@ -49,6 +51,12 @@ class MessageForm extends React.Component {
 
     }
   }
+
+  checkSubmit(e){
+    if (e.charCode === 13){
+      this.handleSubmit(e)
+    }
+  }
   
   updateMessage(e) {
     if(this.props.activeChannel){
@@ -60,9 +68,8 @@ class MessageForm extends React.Component {
     return(
       <form className='position-chat' onSubmit={this.handleSubmit}>
           <textarea className='box' type='text' onChange={this.updateMessage} value={this.state.body} maxLength="500"
-          placeholder='Get to chatting!'>
+          placeholder='Get to chatting!' onKeyPress={this.checkSubmit}>
           </textarea>
-          <input className="send-message" type="submit" value="Submit"/>
       </form>
     )
   }

@@ -5,8 +5,6 @@ class ServerIndexItem extends React.Component {
   constructor(props){
     super(props)
     this.setActiveServer = this.setActiveServer.bind(this)
-    this.showServerTitle = this.showServerTitle.bind(this)
-    this.hideServerTitle = this.hideServerTitle.bind(this)
   }
 
   setActiveServer(e){
@@ -15,18 +13,10 @@ class ServerIndexItem extends React.Component {
     this.props.setActiveChannel()
   }
 
-  showServerTitle(){
-    console.log("yes")
-  }
-
-  hideServerTitle(){
-    console.log("yes")
-  }
-
   render(){
     return (
-      <li onClick={this.setActiveServer} >
-        {this.props.server.title}
+      <li className="server-item" onClick={this.setActiveServer} >
+        <h3 className="the-server-title">{this.props.server.title[0].toUpperCase()}</h3>
       </li>
     )
   }

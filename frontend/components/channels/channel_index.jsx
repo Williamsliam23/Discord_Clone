@@ -11,8 +11,10 @@ class ChannelIndex extends React.Component {
     super(props)
     this.state = {
       server: this.props.match.params.serverId,
-      channels: this.props.channels
+      channels: this.props.channels,
+      creating: false
     }
+    this.creation = this.creation.bind(this)
   }
 
   componentDidMount(){
@@ -32,6 +34,12 @@ class ChannelIndex extends React.Component {
     }
   }
 
+  creation(){
+    $(function (){
+      $(".test").toggleClass("hidden")
+  })
+  }
+
   render() {
     if(this.props.match.params.serverId === ":serverId"){
       return (
@@ -39,7 +47,7 @@ class ChannelIndex extends React.Component {
         <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
           <h4 className="channels-header">Text Channels</h4>
-          <CreateChannelContainer server={this.props.match.params.serverId}/>
+            <CreateChannelContainer server={this.props.match.params.serverId}/>
         </div>
         <Chat />
         </>

@@ -15,7 +15,7 @@
   height: 100vh;
   width: 50%;
   color: white;
-  overflow-y: visible;
+  overflow-y: scroll;
   overflow-x: hidden;
   flex-grow: 3;
 }
@@ -54,24 +54,27 @@
 }
 
 .box {
+  border-radius: 5px;
+  font-size: 15px;
   color: white;
   background: #424549;
   outline: none;
-  height: 30px;
-  width: 92%;
+  height: 40px;
+  width: 100%;
   overflow-y: auto;
   resize: none;
+  padding-bottom: 5px;
 }
 
 .position-chat {
   position: sticky;
   display: flex;
   flex-wrap: nowrap;
-  bottom: 0;
+  bottom: 5px;
   background: #282b30;
   width: 100%;
-  z-index: 1;
-  height: 40px;
+  z-index: 12;
+  height: 45px;
 }
 button {
   padding: 0;
@@ -127,13 +130,15 @@ button {
 
 .message-channel-header{
   border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
   border-radius: 0;
-  height: 44px;
+  height: 42px;
   position: sticky;
   top: 0;
   background: #36393e;
   z-index: 4;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
+  padding-left: 5px;
 }
 
 .no-message-channel-header{

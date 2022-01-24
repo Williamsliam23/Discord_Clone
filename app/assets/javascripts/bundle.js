@@ -490,6 +490,8 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateChannel = _this.updateChannel.bind(_assertThisInitialized(_this));
+    _this.creation = _this.creation.bind(_assertThisInitialized(_this));
+    _this.cancel = _this.cancel.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -504,6 +506,7 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
         authorId: this.props.currentUser,
         serverId: this.props.server
       });
+      this.cancel();
     }
   }, {
     key: "updateChannel",
@@ -513,21 +516,52 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "cancel",
+    value: function cancel() {
+      this.setState({
+        title: ""
+      });
+      $(function () {
+        $(".modal-create-channel").toggleClass("hidden");
+      });
+    }
+  }, {
+    key: "creation",
+    value: function creation() {
+      $(function () {
+        $(".modal-create-channel").toggleClass("hidden");
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "position-chat",
+      var _this2 = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+        className: "create-channel-wrap",
+        onClick: function onClick() {
+          return _this2.creation();
+        }
+      }, "+ Create a Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-create-channel hidden"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "cancel-channel",
+        onClick: this.cancel
+      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Create a Text Channel"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "channel-create",
         onSubmit: this.handleSubmit
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, "Channel Title:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "channel-name",
         type: "text",
         value: this.state.title,
         onChange: this.updateChannel
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "create-channel",
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "channel-buttons"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "submit-channel",
         type: "submit",
-        value: "Submit"
-      }));
+        value: "Create"
+      })))));
     }
   }]);
 
@@ -599,8 +633,10 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       server: _this.props.match.params.serverId,
-      channels: _this.props.channels
+      channels: _this.props.channels,
+      creating: false
     };
+    _this.creation = _this.creation.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -623,6 +659,13 @@ var ChannelIndex = /*#__PURE__*/function (_React$Component) {
           this.props.fetchChannels(this.props.match.params.serverId);
         }
       }
+    }
+  }, {
+    key: "creation",
+    value: function creation() {
+      $(function () {
+        $(".test").toggleClass("hidden");
+      });
     }
   }, {
     key: "render",
@@ -1348,6 +1391,7 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     console.log(_this.props);
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
+    _this.checkSubmit = _this.checkSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1364,6 +1408,13 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
           authorId: this.props.currentUser
         });
       } else {}
+    }
+  }, {
+    key: "checkSubmit",
+    value: function checkSubmit(e) {
+      if (e.charCode === 13) {
+        this.handleSubmit(e);
+      }
     }
   }, {
     key: "updateMessage",
@@ -1386,11 +1437,8 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
         onChange: this.updateMessage,
         value: this.state.body,
         maxLength: "500",
-        placeholder: "Get to chatting!"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "send-message",
-        type: "submit",
-        value: "Submit"
+        placeholder: "Get to chatting!",
+        onKeyPress: this.checkSubmit
       }));
     }
   }]);
@@ -2237,8 +2285,6 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.setActiveServer = _this.setActiveServer.bind(_assertThisInitialized(_this));
-    _this.showServerTitle = _this.showServerTitle.bind(_assertThisInitialized(_this));
-    _this.hideServerTitle = _this.hideServerTitle.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -2250,21 +2296,14 @@ var ServerIndexItem = /*#__PURE__*/function (_React$Component) {
       this.props.setActiveChannel();
     }
   }, {
-    key: "showServerTitle",
-    value: function showServerTitle() {
-      console.log("yes");
-    }
-  }, {
-    key: "hideServerTitle",
-    value: function hideServerTitle() {
-      console.log("yes");
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "server-item",
         onClick: this.setActiveServer
-      }, this.props.server.title);
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+        className: "the-server-title"
+      }, this.props.server.title[0].toUpperCase()));
     }
   }]);
 
