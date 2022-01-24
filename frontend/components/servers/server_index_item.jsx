@@ -5,11 +5,22 @@ class ServerIndexItem extends React.Component {
   constructor(props){
     super(props)
     this.setActiveServer = this.setActiveServer.bind(this)
+    this.showServerTitle = this.showServerTitle.bind(this)
+    this.hideServerTitle = this.hideServerTitle.bind(this)
   }
 
   setActiveServer(e){
     this.props.history.push(`/servers/${this.props.server.id}`)
     this.props.urlServer(this.props.server.id)
+    this.props.setActiveChannel()
+  }
+
+  showServerTitle(){
+    console.log("yes")
+  }
+
+  hideServerTitle(){
+    console.log("yes")
   }
 
   render(){

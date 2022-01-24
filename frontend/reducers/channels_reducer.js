@@ -8,7 +8,7 @@ const channelsReducer = (state={}, action) => {
     case RECEIVE_CHANNELS:
       return action.channels;
     case RECEIVE_CHANNEL:
-      nextState[action.channel.id] = action.channel
+      nextState = action.channel
       return nextState;
     default:
       return state;

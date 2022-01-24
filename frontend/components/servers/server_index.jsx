@@ -46,6 +46,9 @@ class ServerIndex extends React.Component {
   }
 
   render() {
+    if(this.props.servers.length === 0){
+      return null
+    }
     if(this.props.match.params.serverId === ":serverId"){
       return(
         <>
@@ -57,6 +60,7 @@ class ServerIndex extends React.Component {
                 key={server.id}
                 server={server}
                 urlServer={this.props.urlServer}
+                setActiveChannel={this.props.setActiveChannel}
               />
             })}
             </ul>
@@ -71,6 +75,7 @@ class ServerIndex extends React.Component {
           </div>
           <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
+          <h4 className="channels-header">Text Channels</h4>
           <CreateChannelContainer server={this.props.match.params.serverId}/>
           </div>
           <Chat />
@@ -92,6 +97,7 @@ class ServerIndex extends React.Component {
               key={server.id}
               server={server}
               urlServer={this.props.urlServer}
+              setActiveChannel={this.props.setActiveChannel}
             />
           })}
           <CreateServerContainer />

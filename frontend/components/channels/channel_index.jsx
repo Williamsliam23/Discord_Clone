@@ -38,6 +38,7 @@ class ChannelIndex extends React.Component {
         <>
         <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
+          <h4 className="channels-header">Text Channels</h4>
           <CreateChannelContainer server={this.props.match.params.serverId}/>
         </div>
         <Chat />
@@ -49,6 +50,7 @@ class ChannelIndex extends React.Component {
         <>
         <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
+          <h4 className="channels-header">Text Channels</h4>
           <CreateChannelContainer server={this.props.match.params.serverId}/>
         </div>
         <Chat />
@@ -60,6 +62,7 @@ class ChannelIndex extends React.Component {
         <>
         <div className='channel-wrap'>
           <h3 className="selected-server">{this.props.activeServer.title}</h3>
+          <h4 className="channels-header">Text Channels</h4>
           <CreateChannelContainer server={this.props.match.params.serverId}/>
         </div>
         <Chat />
@@ -67,7 +70,6 @@ class ChannelIndex extends React.Component {
         </>
       )
     }
-    console.log("?")
     return (
       <>
       <div className='channel-wrap'>
@@ -80,6 +82,7 @@ class ChannelIndex extends React.Component {
               channel={channel}
               server={this.props.match.params.serverId}
               className="channel-list-item"
+              active={this.props.setActiveChannel}
             />  
           })}
           <br />

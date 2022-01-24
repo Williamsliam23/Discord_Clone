@@ -14,6 +14,7 @@ class MessageIndex extends React.Component {
       user: Object.values(this.props.currentUser)[0].id,
       subscribe: this.setSubscription()
     }
+    this.checkChannel.bind(this)
   }
 
   unsub(){
@@ -33,6 +34,7 @@ class MessageIndex extends React.Component {
       this.props.fetchUsers()
       this.props.fetchMessages(this.props.match.params.channelId)
     }
+    console.log(this.props.activeChannel)
   }
 
 
@@ -51,40 +53,53 @@ class MessageIndex extends React.Component {
     )
   }
 
+  checkChannel(){
+    if(this.props.activeChannel["0"]){
+      return this.props.activeChannel["0"].title
+    }
+  }
+
 
   render () {
     if(this.props.messages.length === 0){
       return (
-        <div className="no-messages">
-        <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
-        </div>
+        <>
+          <h3 className="no-message-channel-header">{this.checkChannel()}</h3>
+          <div className="no-messages">
+            <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+          </div>
+        </>
       )
     }
     if(this.props.members.length === 0){
       return (
-        <div className="no-messages">
-        <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
-        </div>
+        <>
+          <h3 className="no-message-channel-header">{this.checkChannel()}</h3>
+          <div className="no-messages">
+            <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+          </div>
+        </>
       )
     }
     return(
       <>
-      <div className="message-holder">
-        <ul className='message-list'>
-          {this.props.messages.map((message) => (
-            
-            <MessageIndexItem 
-              key={message.id}
-              message={message}
-              author={Object.assign({}, this.props.members)}
-              userId={this.state.user}
-            />
-            
-          ))}
-        </ul>
-        <AlwaysScrollToBottom />
-      </div>
-      <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
+        <h3 className="message-channel-header">{this.checkChannel()}</h3>
+        <div className="message-holder">
+          <ul className='message-list'>
+            {this.props.messages.map((message) => (
+              
+              <MessageIndexItem 
+                key={`${message.id}`+`${message.body}`}
+                message={message}
+                author={Object.assign({}, this.props.members)}
+                userId={this.state.user}
+              />
+              
+            ))}
+          </ul>
+          <AlwaysScrollToBottom />
+        </div>
+        <CreateMessageContainer activeChannel={this.props.match.params.channelId}/>
       </>
     )
   }

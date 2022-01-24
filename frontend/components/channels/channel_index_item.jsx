@@ -9,7 +9,7 @@ class ChannelIndexItem extends React.Component {
 
   setActiveChannel(e) {
     this.props.history.push(`/servers/${this.props.match.params.serverId}/channels/${e.target.value}`)
-
+    this.props.active(e.target.value)
   }
 
 

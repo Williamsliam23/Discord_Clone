@@ -45,8 +45,6 @@
 }
 
 .message-holder{
-  padding-top: 30px;
-  padding-left: 5px;
   margin-top: auto;
   height: fit-content;
 }
@@ -125,4 +123,29 @@ button {
   transition: 0.3s;
   opacity: .9;
   border: 2px;
+}
+
+.message-channel-header{
+  border-left: 2px solid gray;
+  border-radius: 0;
+  height: 44px;
+  position: sticky;
+  top: 0;
+  background: #36393e;
+  z-index: 4;
+  padding-bottom: 12px;
+}
+
+.no-message-channel-header{
+  border-left: 2px solid gray;
+  border-radius: 0;
+  height: 44px;
+  position: relative;
+  top: 0;
+  background: #36393e;
+  z-index: 4;
+}
+
+.message-list{
+  padding-left: 5px;
 }

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   messages: Object.values(state.entities.messages),
   currentUser: state.entities.users,
   members: state.entities.members,
-  activeChannel: state.entities.activeChannel.id,
+  activeChannel: Object.values(state.entities.activeChannel),
   channels: state.entities.channels
 })
 

@@ -17,12 +17,13 @@ export const fetchServerChannels = async (serverId) => {
   return Object.values(channels)
 }
 
-export const fetchChannel = (id) => (
-  $.ajax({
+export const fetchChannel = async (id) => {
+  if(!id){return {}}
+  return $.ajax({
     method: "GET",
     url: `api/channels/${id}`
   })
-)
+}
 
 export const createChannel = (channel) => {
   return $.ajax({
