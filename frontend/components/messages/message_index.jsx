@@ -34,7 +34,6 @@ class MessageIndex extends React.Component {
       this.props.fetchUsers()
       this.props.fetchMessages(this.props.match.params.channelId)
     }
-    console.log(this.props.activeChannel)
   }
 
 

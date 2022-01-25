@@ -31,7 +31,6 @@ class MessageForm extends React.Component {
           authorId: setAuthor,
           channelId: setChannel
       }
-      console.log(this.props)
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateMessage = this.updateMessage.bind(this)
       this.checkSubmit = this.checkSubmit.bind(this)

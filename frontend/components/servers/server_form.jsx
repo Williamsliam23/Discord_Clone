@@ -9,7 +9,6 @@ class ServerForm extends React.Component {
       creator_id: this.props.currentUser,
       server_id: ""
     }
-    console.log(this.props)
     this.updateInvite = this.updateInvite.bind(this)
     this.submitServer = this.submitServer.bind(this)
     this.updateServer = this.updateServer.bind(this)
