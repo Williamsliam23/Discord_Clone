@@ -1,20 +1,15 @@
-// export const fetchChannels = () => (
-//   $.ajax({
-//     method: "GET",
-//     url: "api/channels"
-//   })
-// )
+
 import regeneratorRuntime from "regenerator-runtime";
 
 export const fetchServerChannels = async (serverId) => {
   if(!serverId) {
-    return []
+    return {}
   }
   const channels = await $.ajax({
     method: "GET",
     url: `api/servers/${serverId}/channels`
   })
-  return Object.values(channels)
+  return channels
 }
 
 export const fetchChannel = async (id) => {

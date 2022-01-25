@@ -65,6 +65,7 @@
 
 .channel-name{
   background: #424549;
+  color: white;
   border: 2px solid gray;
 }
 
@@ -87,12 +88,12 @@
   right: -10px;
   text-align: center;
   color: white;
-  font-size: 20px;
+  font-size: 10px;
   background: #404eed;
   border-radius: 100%;
   border: 2px solid gray;
-  height: 40px;
-  width: 40px;
+  height: 20px;
+  width: 20px;
 }
 
 .channel-buttons{
@@ -110,6 +111,19 @@
 
 .channel-create > h2{
   position: fixed;
+}
+
+.toggle-channel-buttons{
+  position: relative;
+}
+
+.channel-delete-svg{
+  position: absolute;
+  background: gray;
+  top: 5px;
+  right: 0;
+  height: 20px;
+  width: 20px;
 }
 
 .hidden {

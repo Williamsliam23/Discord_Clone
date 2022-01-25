@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchChannelMessages, createMessage } from "../../actions/message_actions";
+import { fetchChannelMessages, createMessage, deleteMessage } from "../../actions/message_actions";
 import { fetchUsers } from "../../actions/membership_action";
 import MessagesIndex from "./message_index"
 
@@ -16,6 +16,7 @@ const mapDispatchToProps = dispatch => ({
   processUpdate: message => dispatch(updateMessage(message)),
   processCreate: message => dispatch(createMessage(message)),
   fetchMessages: (id) => dispatch(fetchChannelMessages(id)),
+  deleteMessage: id => dispatch(deleteMessage(id)),
   fetchUsers: () => dispatch(fetchUsers())
 })
 

@@ -17,9 +17,9 @@ export const receiveActiveChannel = channel => ({
   type: RECEIVE_ACTIVE_CHANNEL,
   channel
 })
-export const removeChannels = channelId => ({
+export const removeChannel = channel => ({
   type: REMOVE_CHANNEL,
-  channelId
+  channel
 })
 
 export const fetchServerChannels = (serverId) => dispatch => (

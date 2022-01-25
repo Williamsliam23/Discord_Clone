@@ -40,7 +40,7 @@ class Api::MessagesController < ApplicationController
 
     if message.update(message_params)
       render :show
-      # action cable code
+      ChatChannel.broadcast_to(@channel, Api::MessagesController.render( :show, locals: {message: @message}))
     else
       render @message.errors.full_messages
     end
@@ -51,7 +51,7 @@ class Api::MessagesController < ApplicationController
     
     @message = Message.find_by(id: params[:id])
     @message.destroy
-    render :show
+    ChatChannel.broadcast_to(@channel, Api::MessagesController.render( :show, locals: {message: @message}))
 
   end
 

@@ -11,15 +11,8 @@ class MessageIndexItem extends React.Component {
     this.state = {
       author: this.props.author[this.props.message.author_id].username
     }
-    this.allowChange = this.allowChange.bind(this)
     this.showOptions = this.showOptions.bind(this)
     this.hideOptions = this.hideOptions.bind(this)
-  }
-
-  allowChange(){
-    if (this.props.message.author_id === this.props.userId){
-      console.log("true")
-    }
   }
 
   showOptions(){
@@ -47,7 +40,7 @@ class MessageIndexItem extends React.Component {
       onMouseEnter={this.showOptions} onMouseLeave={this.hideOptions} onClick={this.allowChange}>
       <li className="author" >
         {this.state.author} 
-        <img className="message-delete-svg" src="delete.svg" style={{visibility: "hidden"}}/> 
+        <img onClick={() => this.props.deleteMessage(this.props.message)} className="message-delete-svg" src="delete.svg" style={{visibility: "hidden"}}/> 
         <img className="edit-pencil" src="pencil.svg" style={{visibility: "hidden"}}/>
         </li>
         <li className="body">

@@ -93,6 +93,7 @@ class MessageIndex extends React.Component {
                 message={message}
                 author={Object.assign({}, this.props.members)}
                 userId={this.state.user}
+                deleteMessage={this.props.deleteMessage}
               />
               
             ))}

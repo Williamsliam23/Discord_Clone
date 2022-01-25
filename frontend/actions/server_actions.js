@@ -2,6 +2,7 @@ import * as APIUtil from "../util/server_api_util"
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS"
 export const RECEIVE_SERVER = "RECEIVE_SERVER"
+export const REMOVE_SERVER = "REMOVE_SERVER"
 export const RECEIVE_NEW_SERVER = "RECEIVE_NEW_SERVER"
 
 export const receiveServers = servers => ({
@@ -11,6 +12,10 @@ export const receiveServers = servers => ({
 
 export const receiveServer = server => ({
   type: RECEIVE_SERVER,
+  server
+})
+export const removeServer = server => ({
+  type: REMOVE_SERVER,
   server
 })
 export const receiveNewServer = server => ({
@@ -26,4 +31,7 @@ export const fetchServer = id => dispatch => (
 )
 export const createServer = server => dispatch => (
   APIUtil.createServer(server).then(server => dispatch(receiveNewServer(server)))
+)
+export const deleteServer = id => dispatch => (
+  APIUtil.deleteServer(id).then(id => dispatch(removeServer(id)))
 )

@@ -27,7 +27,6 @@ class Api::MembershipsController < ApplicationController
   end
 
   def find_server
-    debugger
     if params[:membership][:server_id]
       @server = Server.find_by(invite_code: params[:membership][:server_id])
       params[:membership][:server_id] = @server.id

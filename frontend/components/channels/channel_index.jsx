@@ -32,6 +32,9 @@ class ChannelIndex extends React.Component {
       this.props.fetchChannels(this.props.match.params.serverId);
       }
     }
+    if(prevProps.channels.length !== this.props.channels.length){
+      this.props.fetchChannels(this.props.match.params.serverId);
+    }
   }
 
   creation(){
@@ -91,6 +94,9 @@ class ChannelIndex extends React.Component {
               server={this.props.match.params.serverId}
               className="channel-list-item"
               active={this.props.setActiveChannel}
+              deleteChannel={this.props.deleteChannel}
+              fetchChannels={this.props.fetchChannels}
+              channels={this.props.channels}
             />  
           })}
           <br />

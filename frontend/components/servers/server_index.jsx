@@ -2,7 +2,6 @@ import React from "react";
 import ServerIndexItem from "./server_index_item"
 import Channel from "../channels/Channel"
 import Chat from "../messages/chat"
-import CreateChannelContainer from "../channels/create_channel_container";
 import { withRouter } from "react-router-dom"
 import CreateServerContainer from "./create_server_container";
 
@@ -53,7 +52,6 @@ class ServerIndex extends React.Component {
       return(
         <>
           <div className='server-wrap'>
-            <h3>Servers</h3>
             <ul>
             {Object.values(this.props.servers).map((server) => {
               return <ServerIndexItem
@@ -64,19 +62,12 @@ class ServerIndex extends React.Component {
               />
             })}
             </ul>
-            <CreateServerContainer />
-            <form className='joining' >
-              <input className='box' type='text' onKeyPress={this.checkSubmit} onChange={this.updateInvite} 
-              value={this.state.join_server} maxLength="50"
-              placeholder='Place your invite code!'>
-              </input>
-              <input className="join-server" type="submit" value="Join"/>
-            </form>
+            <CreateServerContainer currentUser={this.props.currentUser} 
+            createMembership={this.props.createMembership}/>
           </div>
           <div className='channel-wrap'>
           <h3 className="selected-server">Select a Server</h3>
           <h4 className="channels-header">Text Channels</h4>
-          <CreateChannelContainer server={this.props.match.params.serverId}/>
           </div>
           <Chat />
           <div className="user-wrap">
@@ -90,7 +81,6 @@ class ServerIndex extends React.Component {
     return (
       <>
       <div className='server-wrap'>
-        <h3>Servers</h3>
         <ul>
           {Object.values(this.props.servers).map((server) => {
             return <ServerIndexItem
@@ -102,13 +92,6 @@ class ServerIndex extends React.Component {
           })}
           <CreateServerContainer />
         </ul>
-        <form className='joining' >
-              <input className='box' type='text' onKeyPress={this.checkSubmit} onChange={this.updateInvite} 
-              value={this.state.join_server} maxLength="50"
-              placeholder='Place your invite code!'>
-              </input>
-              <input className="join-server" type="submit" value="Join"/>
-            </form>
       </div>
       <Channel />
       </>

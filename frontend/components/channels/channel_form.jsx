@@ -58,14 +58,14 @@ class ChannelForm extends React.Component {
     return(
       <>
       <h4 className="create-channel-wrap" onClick={() => this.creation()}>+ Create a Channel</h4>
-      <div className="modal-create-channel hidden">
+      <div className="modal-create-channel hidden" >
       <button className="cancel-channel" onClick={this.cancel}>X</button>
       <h2>Create a Text Channel</h2>
       <form className='channel-create' onSubmit={this.handleSubmit}>
-        <label>Channel Title:
+        <label>Channel Title:</label>
           <input className="channel-name" type="text" value={this.state.title}
            onChange={this.updateChannel} onKeyPress={this.checkSubmit}/>
-        </label>
+        
         <label className="channel-buttons">
           <input className="submit-channel" type="submit" value="Create" />
         </label>
