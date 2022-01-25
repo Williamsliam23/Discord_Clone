@@ -31,10 +31,15 @@ class ServerForm extends React.Component {
 
   render() {
     return(
-      <form >
-        <input className="server-name" type="text" value={this.state.title} onChange={this.updateServer}/>
-        <input className="create-server" type="submit" value="Submit" onClick={this.submitServer}/>
-      </form>
+      <>
+      <h2 className="create-new-server">+</h2>
+      <div className="modal-create-server">
+        <form >
+          <input className="server-name" type="text" value={this.state.title} onChange={this.updateServer}/>
+          <input className="create-server" type="submit" value="Submit" onClick={this.submitServer}/>
+        </form>
+      </div>
+      </>
     )
   }
 }

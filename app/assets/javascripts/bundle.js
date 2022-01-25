@@ -509,6 +509,13 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
       this.cancel();
     }
   }, {
+    key: "checkSubmit",
+    value: function checkSubmit(e) {
+      if (e.charCode === 13) {
+        this.handleSubmit(e);
+      }
+    }
+  }, {
     key: "updateChannel",
     value: function updateChannel(e) {
       this.setState({
@@ -554,7 +561,8 @@ var ChannelForm = /*#__PURE__*/function (_React$Component) {
         className: "channel-name",
         type: "text",
         value: this.state.title,
-        onChange: this.updateChannel
+        onChange: this.updateChannel,
+        onKeyPress: this.checkSubmit
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "channel-buttons"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
@@ -1965,7 +1973,11 @@ var ServerForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", {
+        className: "create-new-server"
+      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "modal-create-server"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "server-name",
         type: "text",
         value: this.state.title,
@@ -1975,7 +1987,7 @@ var ServerForm = /*#__PURE__*/function (_React$Component) {
         type: "submit",
         value: "Submit",
         onClick: this.submitServer
-      }));
+      }))));
     }
   }]);
 

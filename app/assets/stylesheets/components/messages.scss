@@ -132,7 +132,7 @@ button {
   border-left: 2px solid gray;
   border-bottom: 2px solid gray;
   border-radius: 0;
-  height: 42px;
+  height: 32px;
   position: sticky;
   top: 0;
   background: #36393e;
@@ -143,12 +143,15 @@ button {
 
 .no-message-channel-header{
   border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
   border-radius: 0;
-  height: 44px;
-  position: relative;
+  height: 32px;
+  position: sticky;
   top: 0;
   background: #36393e;
   z-index: 4;
+  padding-bottom: 10px;
+  padding-left: 5px;
 }
 
 .message-list{

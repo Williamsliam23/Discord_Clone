@@ -18,6 +18,7 @@ class ChannelForm extends React.Component {
       this.creation = this.creation.bind(this)
       this.cancel = this.cancel.bind(this)
   }
+
   handleSubmit(e) {
     e.preventDefault()
     const channel = Object.assign({}, this.state);
@@ -28,6 +29,12 @@ class ChannelForm extends React.Component {
       serverId: this.props.server
     })
     this.cancel()
+  }
+
+  checkSubmit(e){
+    if (e.charCode === 13){
+      this.handleSubmit(e)
+    }
   }
   
   updateChannel(e) {
@@ -56,7 +63,8 @@ class ChannelForm extends React.Component {
       <h2>Create a Text Channel</h2>
       <form className='channel-create' onSubmit={this.handleSubmit}>
         <label>Channel Title:
-          <input className="channel-name" type="text" value={this.state.title} onChange={this.updateChannel}/>
+          <input className="channel-name" type="text" value={this.state.title}
+           onChange={this.updateChannel} onKeyPress={this.checkSubmit}/>
         </label>
         <label className="channel-buttons">
           <input className="submit-channel" type="submit" value="Create" />
