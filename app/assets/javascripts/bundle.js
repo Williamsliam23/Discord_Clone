@@ -190,10 +190,7 @@ var fetchChannelMessages = function fetchChannelMessages(channelId) {
       return dispatch(receiveMessages(messages));
     });
   };
-}; // export const fetchMessages = () => dispatch => (
-//   APIUtil.fetchMessages().then(messages => dispatch(receiveMessages(messages)))
-// )
-
+};
 var fetchMessage = function fetchMessage(id) {
   return function (dispatch) {
     return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id) //.then(message => dispatch(receiveMessage(message)))
@@ -208,8 +205,7 @@ var updateMessage = function updateMessage(message) {
 };
 var createMessage = function createMessage(message) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannelMessage(message) //.then(message => {
-    //dispatch(receiveMessage(message))})
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.createChannelMessage(message) //.then(message => {dispatch(receiveMessage(message))})
     ;
   };
 };
@@ -1463,10 +1459,10 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
       authorId: setAuthor,
       channelId: setChannel
     };
-    console.log(_this.props);
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
     _this.checkSubmit = _this.checkSubmit.bind(_assertThisInitialized(_this));
+    console.log(_this.props);
     return _this;
   }
 
@@ -1475,14 +1471,20 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var message = Object.assign({}, this.state);
-      this.props.processCreate(message);
 
       if (this.props.formType === 'create') {
+        this.props.processCreate(message);
         this.setState({
           body: "",
           authorId: this.props.currentUser
         });
-      } else {}
+      } else {
+        this.props.processUpdate(message);
+        this.setState({
+          body: "",
+          authorId: this.props.currentUser
+        });
+      }
     }
   }, {
     key: "checkSubmit",
@@ -1616,8 +1618,6 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
         this.props.fetchUsers();
         this.props.fetchMessages(this.props.match.params.channelId);
       }
-
-      console.log(this.props.activeChannel);
     }
   }, {
     key: "setSubscription",
@@ -1677,7 +1677,8 @@ var MessageIndex = /*#__PURE__*/function (_React$Component) {
           message: message,
           author: Object.assign({}, _this3.props.members),
           userId: _this3.state.user,
-          deleteMessage: _this3.props.deleteMessage
+          deleteMessage: _this3.props.deleteMessage,
+          activeChannel: _this3.props.match.params.channelId
         });
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ChatScroll__WEBPACK_IMPORTED_MODULE_2__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_message_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
         activeChannel: this.props.match.params.channelId
@@ -1761,6 +1762,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _update_message_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./update_message_container */ "./frontend/components/messages/update_message_container.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1786,6 +1788,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(MessageIndexItem, _React$Component);
 
@@ -1798,10 +1801,13 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      author: _this.props.author[_this.props.message.author_id].username
+      author: _this.props.author[_this.props.message.author_id].username,
+      updating: false
     };
+    _this.updating = _this.updating.bind(_assertThisInitialized(_this));
     _this.showOptions = _this.showOptions.bind(_assertThisInitialized(_this));
     _this.hideOptions = _this.hideOptions.bind(_assertThisInitialized(_this));
+    console.log(_this.props);
     return _this;
   }
 
@@ -1824,9 +1830,23 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
       el2.style.visibility = "hidden";
     }
   }, {
+    key: "updating",
+    value: function updating() {
+      this.setState({
+        updating: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
+
+      if (this.state.updating === true) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_update_message_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          message: this.props.message,
+          activeChannel: this.props.activeChannel
+        });
+      }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-message",
@@ -1847,6 +1867,7 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "edit-pencil",
+        onClick: this.updating,
         src: "pencil.svg",
         style: {
           visibility: "hidden"
@@ -1861,6 +1882,43 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MessageIndexItem);
+
+/***/ }),
+
+/***/ "./frontend/components/messages/update_message_container.jsx":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/messages/update_message_container.jsx ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_message_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/message_actions */ "./frontend/actions/message_actions.js");
+/* harmony import */ var _message_form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./message_form */ "./frontend/components/messages/message_form.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: state.session.id,
+    formType: "update"
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    processUpdate: function processUpdate(message) {
+      return dispatch((0,_actions_message_actions__WEBPACK_IMPORTED_MODULE_1__.updateMessage)(message));
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_message_form__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -2016,7 +2074,6 @@ var ServerForm = /*#__PURE__*/function (_React$Component) {
       creator_id: _this.props.currentUser,
       server_id: ""
     };
-    console.log(_this.props);
     _this.updateInvite = _this.updateInvite.bind(_assertThisInitialized(_this));
     _this.submitServer = _this.submitServer.bind(_assertThisInitialized(_this));
     _this.updateServer = _this.updateServer.bind(_assertThisInitialized(_this));
@@ -3082,11 +3139,6 @@ var channelsReducer = function channelsReducer() {
       return nextState;
 
     case _actions_channel_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_CHANNEL:
-      console.log(action);
-      console.log(state);
-      console.log(action.channel);
-      console.log(action.channel["id"]);
-      debugger;
       delete nextState[action.channel["id"]];
       return nextState;
 
@@ -3220,9 +3272,10 @@ var messagesReducer = function messagesReducer() {
     case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_MESSAGE:
       nextState[action.message.id] = action.message;
       return nextState;
-    // case REMOVE_MESSAGE:
-    //     delete nextState[action.messageId]
-    //     return nextState
+
+    case _actions_message_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_MESSAGE:
+      delete nextState[action.message.id];
+      return nextState;
 
     default:
       return state;
@@ -3656,7 +3709,7 @@ var fetchMessage = function fetchMessage(id) {
 var updateMessage = function updateMessage(message) {
   return $.ajax({
     method: "PATCH",
-    url: "api/messages/".concat(message.id),
+    url: "api/channels/".concat(message.channelId, "/messages/").concat(message.id),
     data: {
       message: message
     }
@@ -3699,7 +3752,7 @@ var fetchChannelMessages = /*#__PURE__*/function () {
 
           case 6:
             messages = _context.sent;
-            return _context.abrupt("return", Object.values(messages));
+            return _context.abrupt("return", messages);
 
           case 8:
           case "end":

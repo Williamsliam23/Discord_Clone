@@ -10,7 +10,7 @@ export const fetchMessage = (id) => (
 export const updateMessage = (message) => (
   $.ajax({
     method: "PATCH",
-    url: `api/messages/${message.id}`,
+    url: `api/channels/${message.channelId}/messages/${message.id}`,
     data: {message: message}
   })
 )
@@ -31,7 +31,7 @@ export const fetchChannelMessages = async (channelId) => {
       method: "GET",
       url: `api/channels/${channelId}/messages`
     })
-    return Object.values(messages)
+    return messages
     
 }
 export const createChannelMessage = (message) => {

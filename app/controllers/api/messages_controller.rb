@@ -38,8 +38,7 @@ class Api::MessagesController < ApplicationController
       render json: ["There is no message"]
     end
 
-    if message.update(message_params)
-      render :show
+    if @message.update(message_params)
       ChatChannel.broadcast_to(@channel, Api::MessagesController.render( :show, locals: {message: @message}))
     else
       render @message.errors.full_messages

@@ -34,20 +34,25 @@ class MessageForm extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateMessage = this.updateMessage.bind(this)
       this.checkSubmit = this.checkSubmit.bind(this)
+      console.log(this.props)
   }
 
   handleSubmit(e) {
     e.preventDefault()
-      const message = Object.assign({}, this.state);
+    const message = Object.assign({}, this.state);
+    
+    if (this.props.formType === 'create') {
       this.props.processCreate(message)
-      
-      if (this.props.formType === 'create') {
-        this.setState({
-          body: "",
-          authorId: this.props.currentUser
-        })
-      } else {
-
+      this.setState({
+        body: "",
+        authorId: this.props.currentUser
+      })
+    } else {
+      this.props.processUpdate(message)
+      this.setState({
+        body: "",
+        authorId: this.props.currentUser
+      })
     }
   }
 
