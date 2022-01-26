@@ -2950,7 +2950,10 @@ var UserList = /*#__PURE__*/function (_React$Component) {
         className: "user-wrap"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Members"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         onClick: this.leaveServer
-      }, "x"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, mem.map(function (user) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "leave-server",
+        src: "leave door.png"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, mem.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
           user: user

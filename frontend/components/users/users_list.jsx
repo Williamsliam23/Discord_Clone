@@ -60,7 +60,7 @@ class UserList extends React.Component {
     return(
       <>
       <div className='user-wrap'>
-        <h3>Members</h3><span onClick={this.leaveServer}>x</span>
+        <h3>Members</h3><span onClick={this.leaveServer}><img className="leave-server" src="leave door.png"/></span>
         <ul>
           {mem.map((user) => (
             <UserListItem
