@@ -13,12 +13,16 @@ export const fetchServers = async (user_id) => {
   return noUser
 }
 
-export const fetchServer = (id) => (
-  $.ajax({
+export const fetchServer = async (id) => {
+  if(id){
+  return $.ajax({
     method: "GET",
     url: `api/servers/${id}`
   })
-)
+  } else {
+    return {}
+  }
+}
 
 export const createServer = async (server) => {
 

@@ -15,9 +15,15 @@ class Api::MembershipsController < ApplicationController
   end
 
   def destroy
-    @membership = Membership.find_by(id: params[:id])
-    @membership.destroy
-    render json: ["Bye"]
+    @membership = Membership.where(user_id: params[:user_id]).where(server_id: params[:server_id])
+    @membership.first.destroy
+    if @membership.where(server_id: params[:server_id]).length > 0
+      render json: ["Bye"]
+    else
+      @server = Server.find_by(id: params[:server_id])
+      @server.destroy
+      render json: {id: @server.id}
+    end
   end
 
   private

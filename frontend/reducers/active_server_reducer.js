@@ -1,4 +1,4 @@
-import { RECEIVE_SERVER } from "../actions/server_actions";
+import { RECEIVE_SERVER, REMOVE_SERVER } from "../actions/server_actions";
 
 const activeServerReducer = (state={}, action) => {
   Object.freeze(state)
@@ -8,6 +8,8 @@ const activeServerReducer = (state={}, action) => {
     case RECEIVE_SERVER:
       nextState = action.server
       return nextState
+    case REMOVE_SERVER:
+      delete nextState[action.server.id]
     default:
       return state;
   }

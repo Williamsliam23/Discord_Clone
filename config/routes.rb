@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :destroy, :show, :index]
 
-    resources :memberships, only: [:create, :destroy]
+    resources :memberships, only: [:create]
+    delete 'memberships/:user_id/:server_id', to: 'memberships#destroy'
 
     resource :session, only: [:create, :destroy, :show]
 

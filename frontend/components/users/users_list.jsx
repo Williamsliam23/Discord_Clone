@@ -1,5 +1,6 @@
 import React from "react";
 import UserListItem from "./users_list_item";
+import { withRouter } from "react-router-dom";
 
 class UserList extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class UserList extends React.Component {
       inviting: false
     }
     this.toggleInvite = this.toggleInvite.bind(this)
+    this.leaveServer = this.leaveServer.bind(this)
   }
 
   invite(){
@@ -24,6 +26,13 @@ class UserList extends React.Component {
   toggleInvite(){
     navigator.clipboard.writeText(this.props.server.invite_code)
     this.setState({ inviting: this.state.inviting ? false : true })
+  }
+
+  leaveServer(){
+    let membership = Object.assign({}, {user_id: this.props.currentUser, server_id: this.props.server.id})
+    this.props.deleteMembership(membership)
+    this.props.history.push(`/servers/:serverId`)
+    this.props.activeServer()
   }
 
   shouldComponentUpdate(){
@@ -51,7 +60,7 @@ class UserList extends React.Component {
     return(
       <>
       <div className='user-wrap'>
-        <h3>Members</h3>
+        <h3>Members</h3><span onClick={this.leaveServer}>x</span>
         <ul>
           {mem.map((user) => (
             <UserListItem
@@ -68,4 +77,4 @@ class UserList extends React.Component {
   }
 }
 
-export default UserList
+export default withRouter(UserList)

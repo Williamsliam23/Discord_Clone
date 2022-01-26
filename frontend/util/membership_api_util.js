@@ -22,3 +22,10 @@ export const createMembership = async (membership) => {
     data: {membership}
   })
 }
+
+export const deleteMembership = (membership) => (
+  $.ajax({
+    method: "DELETE",
+    url: `api/memberships/${membership.user_id}/${membership.server_id}`,
+  })
+)
