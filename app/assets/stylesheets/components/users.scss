@@ -3,12 +3,19 @@
 }
 .user-wrap{
   padding-left: 5px;
+  min-width: 180px;
 }
 
 .code {
   margin-top: auto;
   border: 2px solid gray;
-  color: white
+  color: white;
+  height: 40px;
+  text-align: center;
+}
+
+.copied{
+  padding-top: 5px;
 }
 
 .code:hover{
@@ -21,4 +28,9 @@
 .leave-server{
   width: 20px;
   background: white;
+  margin: 10px;
+}
+
+.align-leave{
+  display: flex;
 }

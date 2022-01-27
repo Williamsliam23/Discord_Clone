@@ -2948,7 +2948,7 @@ var UserList = /*#__PURE__*/function (_React$Component) {
     value: function invite() {
       if (this.state.inviting === true) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-          className: "code",
+          className: "code copied",
           onClick: this.toggleInvite
         }, "Invite Code Copied! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), " ", this.props.server.invite_code);
       }
@@ -2997,12 +2997,14 @@ var UserList = /*#__PURE__*/function (_React$Component) {
       var mem = Object.values(this.props.server.members);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "user-wrap"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "align-leave"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Members"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
         onClick: this.leaveServer
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "leave-server",
         src: "leave door.png"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, mem.map(function (user) {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, mem.map(function (user) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_users_list_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: user.id,
           user: user

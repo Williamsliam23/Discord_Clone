@@ -15,7 +15,7 @@ class UserList extends React.Component {
   invite(){
     if(this.state.inviting === true){
     return (
-      <span className="code" onClick={this.toggleInvite}>Invite Code Copied! <br/> {this.props.server.invite_code}</span>
+      <span className="code copied" onClick={this.toggleInvite}>Invite Code Copied! <br/> {this.props.server.invite_code}</span>
     )
     }
     return (
@@ -60,7 +60,9 @@ class UserList extends React.Component {
     return(
       <>
       <div className='user-wrap'>
-        <h3>Members</h3><span onClick={this.leaveServer}><img className="leave-server" src="leave door.png"/></span>
+        <div className="align-leave">
+          <h3>Members</h3><span onClick={this.leaveServer}><img className="leave-server" src="leave door.png"/></span>
+        </div>
         <ul>
           {mem.map((user) => (
             <UserListItem
