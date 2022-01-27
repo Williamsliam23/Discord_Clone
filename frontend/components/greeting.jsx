@@ -9,8 +9,8 @@ const Greet = () => (
       <li color="white" className="link-item"><Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</Link></li>
       <li className="link-item"> </li>
       <li className="link-item"><Link color="white" to="/signup" style={{ textDecoration: 'none', color: 'white' }}>Sign Up</Link></li>
-      <li className="link-item"><a href='https://github.com/Williamsliam23/Discord_Clone'><img className='image-link' src="Octocat.png" alt='Github' /></a> </li>
-      <li className="link-item"><a href='https://www.linkedin.com/in/liam-williams-76035613a/'><img className='image-link' src="Li-In-Bug.png" /></a></li>
+      <li className="link-item"><a href='https://github.com/Williamsliam23/Discord_Clone' target="_blank"><img className='image-link' src="Octocat.png" alt='Github' /></a> </li>
+      <li className="link-item"><a href='https://www.linkedin.com/in/liam-williams-76035613a/' target="_blank"><img className='image-link' src="Li-In-Bug.png" /></a></li>
       <h1 className="welcome">Welcome to Dischannel</h1>
     </ul>
     </div>
