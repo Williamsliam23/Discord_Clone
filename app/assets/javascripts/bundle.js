@@ -1049,7 +1049,8 @@ var Greet = function Greet() {
   }, "Sign Up")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "link-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "https://github.com/Williamsliam23/Discord_Clone"
+    href: "https://github.com/Williamsliam23/Discord_Clone",
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "image-link",
     src: "Octocat.png",
@@ -1057,7 +1058,8 @@ var Greet = function Greet() {
   })), " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
     className: "link-item"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "https://www.linkedin.com/in/liam-williams-76035613a/"
+    href: "https://www.linkedin.com/in/liam-williams-76035613a/",
+    target: "_blank"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
     className: "image-link",
     src: "Li-In-Bug.png"
