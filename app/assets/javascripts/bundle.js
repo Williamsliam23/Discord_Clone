@@ -1380,10 +1380,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     currentUser: state.session.id,
-    formType: "create"
+    formType: "create",
+    test: ownProps
   };
 };
 
@@ -1482,10 +1483,16 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
     _this.checkSubmit = _this.checkSubmit.bind(_assertThisInitialized(_this));
     console.log(_this.props);
+    console.log(_this.props.activeChannel);
     return _this;
   }
 
   _createClass(MessageForm, [{
+    key: "shouldComponentUpdate",
+    value: function shouldComponentUpdate(nextState, nextProps) {
+      return this.props.activeChannel !== nextProps.activeChannel;
+    }
+  }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
@@ -1515,9 +1522,12 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
+      console.log(this.props.activeChannel);
+
       if (this.props.activeChannel) {
         this.setState({
-          body: e.currentTarget.value
+          body: e.currentTarget.value,
+          channelId: this.props.activeChannel
         });
       }
     }
@@ -2344,7 +2354,23 @@ var ServerIndex = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       if (this.props.servers.length === 0) {
-        return null;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "server-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_create_server_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          currentUser: this.props.currentUser,
+          createMembership: this.props.createMembership
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "channel-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+          className: "selected-server"
+        }, "Select a Server"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+          className: "channels-header"
+        }, "Text Channels")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_messages_chat__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "user-wrap"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", null, "Welcome to Dischannel!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "Select a Server to get chatting!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          onClick: this.props.logout,
+          className: "logout"
+        }, "Logout")));
       }
 
       if (this.props.match.params.serverId === ":serverId") {
@@ -2986,8 +3012,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_membership_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/membership_action */ "./frontend/actions/membership_action.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _users_list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./users_list */ "./frontend/components/users/users_list.jsx");
+/* harmony import */ var _actions_server_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/server_actions */ "./frontend/actions/server_actions.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _users_list__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./users_list */ "./frontend/components/users/users_list.jsx");
+
 
 
 
@@ -3010,18 +3038,18 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0,_actions_membership_action__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
     },
     logout: function logout() {
-      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_3__.logout)());
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_4__.logout)());
     },
     deleteMembership: function deleteMembership(membership) {
       return dispatch((0,_actions_membership_action__WEBPACK_IMPORTED_MODULE_2__.deleteMembership)(membership));
     },
     activeServer: function activeServer(id) {
-      return dispatch(fetchServer(id));
+      return dispatch((0,_actions_server_actions__WEBPACK_IMPORTED_MODULE_3__.fetchServer)(id));
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_users_list__WEBPACK_IMPORTED_MODULE_4__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_users_list__WEBPACK_IMPORTED_MODULE_5__["default"]));
 
 /***/ }),
 

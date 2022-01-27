@@ -46,7 +46,26 @@ class ServerIndex extends React.Component {
 
   render() {
     if(this.props.servers.length === 0){
-      return null
+      return(
+        <>
+          <div className='server-wrap'>
+            <ul>
+            </ul>
+            <CreateServerContainer currentUser={this.props.currentUser} 
+            createMembership={this.props.createMembership}/>
+          </div>
+          <div className='channel-wrap'>
+          <h3 className="selected-server">Select a Server</h3>
+          <h4 className="channels-header">Text Channels</h4>
+          </div>
+          <Chat />
+          <div className="user-wrap">
+            <h3>Welcome to Dischannel!</h3>
+            <span>Select a Server to get chatting!</span>
+            <button onClick={this.props.logout} className='logout'>Logout</button>
+          </div>
+        </>
+      )
     }
     if(this.props.match.params.serverId === ":serverId"){
       return(

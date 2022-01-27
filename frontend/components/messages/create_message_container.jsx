@@ -3,9 +3,10 @@ import { createMessage } from "../../actions/message_actions"
 import MessageForm from "./message_form"
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
     currentUser: state.session.id,
     formType: "create",
+    test: ownProps
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { deleteMembership, fetchUsers } from "../../actions/membership_action";
+import { fetchServer } from "../../actions/server_actions";
 import { logout } from "../../actions/session_actions"
 import UserList from "./users_list";
 
