@@ -212,8 +212,9 @@ var fetchChannelMessages = function fetchChannelMessages(channelId) {
 };
 var fetchMessage = function fetchMessage(id) {
   return function (dispatch) {
-    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id) //.then(message => dispatch(receiveMessage(message)))
-    ;
+    return _util_message_api_util__WEBPACK_IMPORTED_MODULE_0__.fetchMessage(id).then(function (message) {
+      return dispatch(receiveMessage(message));
+    });
   };
 };
 var updateMessage = function updateMessage(message) {
@@ -1498,8 +1499,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.updateMessage = _this.updateMessage.bind(_assertThisInitialized(_this));
     _this.checkSubmit = _this.checkSubmit.bind(_assertThisInitialized(_this));
-    console.log(_this.props);
-    console.log(_this.props.activeChannel);
     return _this;
   }
 
@@ -1538,8 +1537,6 @@ var MessageForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateMessage",
     value: function updateMessage(e) {
-      console.log(this.props.activeChannel);
-
       if (this.props.activeChannel) {
         this.setState({
           body: e.currentTarget.value,
@@ -1852,7 +1849,6 @@ var MessageIndexItem = /*#__PURE__*/function (_React$Component) {
     _this.updating = _this.updating.bind(_assertThisInitialized(_this));
     _this.showOptions = _this.showOptions.bind(_assertThisInitialized(_this));
     _this.hideOptions = _this.hideOptions.bind(_assertThisInitialized(_this));
-    console.log(_this.props);
     return _this;
   }
 

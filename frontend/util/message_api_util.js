@@ -38,6 +38,6 @@ export const createChannelMessage = (message) => {
   return $.ajax({
     method: "POST",
     url: `api/channels/${message.channelId}/messages`,
-    data: {message: message}
+    data: {message}
   })
 }

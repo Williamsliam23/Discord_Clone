@@ -22,7 +22,7 @@ export const fetchChannelMessages = (channelId) => dispatch => (
 )
 
 export const fetchMessage = id => dispatch => (
-  APIUtil.fetchMessage(id)//.then(message => dispatch(receiveMessage(message)))
+  APIUtil.fetchMessage(id).then(message => dispatch(receiveMessage(message)))
 )
 
 export const updateMessage = message => dispatch => (
