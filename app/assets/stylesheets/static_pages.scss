@@ -90,3 +90,16 @@ p {
   box-shadow: none;
   outline: none;
 }
+
+.error-modal{
+  background: #36393e;
+  position: absolute;
+  top: 30vh;
+  left: 30vw;
+  width: 300px;
+  height: 100px;
+}
+
+.hidden{
+  display: none;
+}

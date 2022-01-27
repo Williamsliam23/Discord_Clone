@@ -333,9 +333,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RECEIVE_CURRENT_USER": () => (/* binding */ RECEIVE_CURRENT_USER),
 /* harmony export */   "LOGOUT_CURRENT_USER": () => (/* binding */ LOGOUT_CURRENT_USER),
 /* harmony export */   "RECEIVE_SESSION_ERRORS": () => (/* binding */ RECEIVE_SESSION_ERRORS),
+/* harmony export */   "REMOVE_SESSION_ERRORS": () => (/* binding */ REMOVE_SESSION_ERRORS),
 /* harmony export */   "receiveCurrentUser": () => (/* binding */ receiveCurrentUser),
 /* harmony export */   "logoutCurrentUser": () => (/* binding */ logoutCurrentUser),
 /* harmony export */   "receiveErrors": () => (/* binding */ receiveErrors),
+/* harmony export */   "removeErrors": () => (/* binding */ removeErrors),
+/* harmony export */   "clearErrors": () => (/* binding */ clearErrors),
 /* harmony export */   "signup": () => (/* binding */ signup),
 /* harmony export */   "login": () => (/* binding */ login),
 /* harmony export */   "logout": () => (/* binding */ logout)
@@ -345,6 +348,7 @@ __webpack_require__.r(__webpack_exports__);
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_SESSION_ERRORS = 'RECEIVE_SESSION_ERRORS';
+var REMOVE_SESSION_ERRORS = 'REMOVE_SESSION_ERRORS';
 var receiveCurrentUser = function receiveCurrentUser(currentUser) {
   return {
     type: RECEIVE_CURRENT_USER,
@@ -362,12 +366,22 @@ var receiveErrors = function receiveErrors(errors) {
     errors: errors
   };
 };
+var removeErrors = function removeErrors() {
+  return {
+    type: REMOVE_SESSION_ERRORS
+  };
+};
+var clearErrors = function clearErrors() {
+  return function (dispatch) {
+    return dispatch(removeErrors());
+  };
+};
 var signup = function signup(user) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.signup(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
-    }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+    }, function (error) {
+      return dispatch(receiveErrors(error.responseJSON));
     });
   };
 };
@@ -375,8 +389,8 @@ var login = function login(user) {
   return function (dispatch) {
     return _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__.login(user).then(function (user) {
       return dispatch(receiveCurrentUser(user));
-    }, function (err) {
-      return dispatch(receiveErrors(err.responseJSON));
+    }, function (error) {
+      return dispatch(receiveErrors(error.responseJSON));
     });
   };
 };
@@ -2606,6 +2620,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     processForm: function processForm(user) {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.login)(user));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.removeErrors)());
     }
   };
 };
@@ -2674,6 +2691,11 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SessionForm, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      this.props.removeErrors();
+    }
+  }, {
     key: "loginOrSignup",
     value: function loginOrSignup() {
       if (this.props.formType === 'Sign up') {
@@ -2761,7 +2783,7 @@ var SessionForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, this.props.errors.map(function (error, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
           key: "error-".concat(i)
-        }, error);
+        }, error, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null));
       }));
     }
   }, {
@@ -2831,6 +2853,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     processForm: function processForm(user) {
       return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.signup)(user));
+    },
+    removeErrors: function removeErrors() {
+      return dispatch((0,_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__.removeErrors)());
     }
   };
 };
@@ -3457,6 +3482,9 @@ var sessionErrorsReducer = function sessionErrorsReducer() {
       return action.errors;
 
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.RECEIVE_CURRENT_USER:
+      return [];
+
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_SESSION_ERRORS:
       return [];
 
     default:

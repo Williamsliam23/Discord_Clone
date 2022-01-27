@@ -1,10 +1,20 @@
+class EmailValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    unless value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+      record.errors.add attribute, (options[:message] || "is not a valid email")
+    end
+  end
+end
+
 class User < ApplicationRecord
 
   attr_reader :password
 
-  validates :username, :password_digest, :session_token, presence: true
-  validates :username, uniqueness: true
-  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :password_digest, :session_token, presence: true
+  validates :email, uniqueness: true, email: true
+
+  validates :password, length: { in: 6..20, allow_nil: true }
+  validates :username, length: { maximum: 20, allow_nil: true }, uniqueness: true, presence: true
 
   has_many :messages,
     foreign_key: :author_id,

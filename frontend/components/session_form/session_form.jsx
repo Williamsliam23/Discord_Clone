@@ -12,6 +12,10 @@ class SessionForm extends React.Component {
     this.demoLogin = this.demoLogin.bind(this)
   }
 
+  componentWillUnmount(){
+    this.props.removeErrors()
+  }
+
   loginOrSignup() {
     if (this.props.formType === 'Sign up') {
       return (
@@ -95,13 +99,14 @@ class SessionForm extends React.Component {
 
   renderErrors() {
     return(
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
+        <ul>
+          {this.props.errors.map((error, i) => (
+            <li key={`error-${i}`}>
+              {error}
+              <br />
+            </li>
+          ))}
+        </ul>
     );
   }
 
