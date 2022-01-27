@@ -40,7 +40,7 @@ class ChannelIndex extends React.Component {
   creation(){
     $(function (){
       $(".test").toggleClass("hidden")
-  })
+    })
   }
 
   render() {

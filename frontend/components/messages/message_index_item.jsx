@@ -16,7 +16,6 @@ class MessageIndexItem extends React.Component {
     this.updating = this.updating.bind(this)
     this.showOptions = this.showOptions.bind(this)
     this.hideOptions = this.hideOptions.bind(this)
-    console.log(this.props)
   }
 
   showOptions(){

@@ -34,8 +34,6 @@ class MessageForm extends React.Component {
       this.handleSubmit = this.handleSubmit.bind(this)
       this.updateMessage = this.updateMessage.bind(this)
       this.checkSubmit = this.checkSubmit.bind(this)
-      console.log(this.props)
-      console.log(this.props.activeChannel)
   }
 
   shouldComponentUpdate(nextState, nextProps){
@@ -68,7 +66,6 @@ class MessageForm extends React.Component {
   }
   
   updateMessage(e) {
-    console.log(this.props.activeChannel)
     if(this.props.activeChannel){
     this.setState({body: e.currentTarget.value, channelId: this.props.activeChannel})
     }
